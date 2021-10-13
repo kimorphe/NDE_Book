@@ -10,6 +10,7 @@ git add Codes/Diary.txt
 git add Figs/*.svgz
 git add *.txt
 git add *.tex
+git add makefile
 
 git commit
 git push -u origin master
