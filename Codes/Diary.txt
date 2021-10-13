@@ -1,0 +1,21 @@
+
+
+# Linear Harmonic Oscilator (single degree of freedom system, mass-spring, no dumper)
+	sdof.cpp --> sdof(Nt).out ( Nt: total time steps)
+
+	sdof.py --> sdof.png (show graphs of sdof50. sdof100, sdof200.out, and the exact) 
+
+# ODE f'(x)=f(x), f(0)=1
+	fdexp.cpp
+		--> order1.out (1st order scheme)
+		--> order2.out (2nd order scheme)
+	fdexp.py
+		plot log-log graph (error vs h=dx)
+		--> err.png
+
+
+	2nd order results slightly fluctuate, because the first FDM step
+	is only first order accuracy.
+
+	If correct data is given for f(-h), the graph is straightened nicely!
+	
