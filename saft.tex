@@ -99,7 +99,7 @@ $\fat{y}_j$にあるポイントレシーバで受信したAスキャン波形�
 \end{equation}
 ここに、$c$は位相速度を表し、
 \begin{equation}
-	t_{ij}(\fat{x}=\frac{r_i(\fat{x})+r_j(\fat{x})}{c}, \ \ r_i:=\left| \fat{x} -\fat{y}_i\right|
+	t_{ij}(\fat{x})=\frac{r_i(\fat{x})+r_j(\fat{x})}{c}, \ \ r_i:=\left| \fat{x} -\fat{y}_i\right|
 	\label{eqn:}
 \end{equation}
 である。なお、和の記号$\sum_{\cal D}(\cdot)$はデータ$\cal D$についての和を取ることを意味する。
@@ -312,15 +312,70 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 \end{equation}
 として、観測波形データ$u^{sc}$を用いて書くと式(\ref{eqn:Vx})は
 \begin{equation}
-	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} u^{sc}(\fat{y})
-	e^{i\fat{k}\cdot \fat{x}-iky}d^3\fat{k}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} yu^{sc}(\fat{y})
+	e^{i\fat{k}\cdot \fat{x}-iky}d^3\fat{k}, 
+	\ \ (\fat{k}=k(\hat{\fat{y}}-\fat{p}))
 	\label{eqn:Vx}
 \end{equation}
 となる。
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.6\linewidth]{Figs/setup.eps} 
+	\end{center}
+	\caption{無限領域におけるスカラー波の散乱問題.} 
+	\label{fig:}
+\end{figure}
 \subsection{時間領域における再構成式}
 \begin{equation}
 	u^{in}(\fat{x})= F(\omega) e^{ik_0\fat{p}\cdot(\fat{x}-\fat{z})}
 	\label{eqn:}
 \end{equation}
 を入射する場合について考える。
+このとき、散乱場は
+\begin{equation}
+	u^{\rm sc}(\fat{y})= \frac{e^{ik(y-\fat{p}\cdot \fat{z})}}{4\pi y }F(\omega)U(\hat{\fat{y}};\fat{p}) 
+	\label{eqn:}
+\end{equation}
+と書くことができるので、散乱ポテンシャルは
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} \frac{u^{sc}(\fat{y})}{F(\omega)}
+	e^{i\fat{k}\cdot \fat{x}-iky+ik\fat{p}\cdot\fat{z}}d^3\fat{k}
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	a(\fat{y},t):=\frac{1}{2\pi} \int \frac{u^{sc}(\fat{y})}{F(\omega)}e^{-i\omega t}d\omega
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2} y\int a\left(\fat{y}, t_{in}+t_{sc} \right) d\Omega
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\fat{k}=k(\hat{\fat{y}}-\fat{p}) 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\hat{\fat{y}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	d^3\fat{k}=k^2\sin\theta (1-\hat{\fat{y}}\cdot\fat{p})dkd\theta d\phi
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\hat{\fat{k}}= \frac{\fat{k}}{\left| \fat{k}\right|}
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	d^3\fat{k}=2k^2\sin\theta\sin\frac{\delta}{2} dkd\theta d\phi\\
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\hat{\fat{k}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\cos\delta=\hat{\fat{y}}\cdot\fat{p}
+	\label{eqn:}
+\end{equation}
 \end{document}
