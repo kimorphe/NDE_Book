@@ -1,7 +1,7 @@
 all: fdm.pdf saft.pdf
 saft.pdf: saft.dvi
 	dvipdfmx -p a4 saft.dvi
-saft.dvi: saft.tex setup.eps
+saft.dvi: saft.tex setup.eps Evald.eps
 	platex saft.tex
 
 fdm.pdf: fdm.dvi
@@ -18,5 +18,7 @@ fig2.eps: Figs/fig2.svgz
 
 setup.eps: Figs/setup.svgz
 	inkscape -z -f Figs/setup.svgz -E Figs/setup.eps 
+Evald.eps: Figs/Evald.svgz
+	inkscape -z -f Figs/Evald.svgz -E Figs/Evald.eps 
 
 
