@@ -263,7 +263,8 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 とすることで、散乱場を表面散乱体の場合と同じ形式に表すことができる。
 %
 \subsection{線形化逆散乱解析}
-散乱体$D$に平面波:
+はじめに、式(\ref{eqn:LS})に基づき，散乱ポテンシャル$V(\fat{x}$を推定することで
+介在物の形状を再構成する方法を示す．いま，散乱体$D$に平面波:
 \begin{equation}
 	u^{in}(\fat{x})= e^{ik_0\fat{p}\cdot\fat{x}}
 	\label{eqn:}
@@ -313,26 +314,37 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 \end{equation}
 は、角周波数$\omega$, 観測方向$\hat{\fat{y}}$と入射方向$\fat{p}$の関数である。
 いま、$\omega$と$\fat{p}$を固定し、観測方向だけを自由に取ることができる場合を
-考えると、$\fat{k}$は波数空間で、図**に示したような半径$k$球を描き、
+考えると、$\fat{k}$は波数空間で、図\ref{fig:Evald}に実線で示したような半径$k$球を描き、
 これをEvald球と呼ぶ。つまり、観測方向だけを変化させて観測した場合、
-散乱ポテンシャルのEvald球状の成分だけしか得られない。一方、
-観測方向に加えて、入射方向も任意に選べる場合は、Evald球は、原点を中心として
-半径$2k$の球表面と内部を履き、これをEvald limitting sphere(Evald限界球)と呼ぶ。
-従って、任意に\\
+散乱ポテンシャルのEvald球状の成分だけしか得られない。一方、観測方向$\hat{\fat{y}}$に加え、
+入射方向$\fat{p}$も任意に選べる場合、Evald球は原点を中心として半径$2k$の球表面と内部を履く．
+このような波数空間の球領域をEvald limitting sphere(Evald限界球)と呼ぶ。
+全ての送受信方向で観測を行うことができれば、Evald限界球内部の
+波数成分全ての情報が得られるため、波数の大きさが十分に大きければ、単一の波数成分
+のデータだけで、散乱ポテンシャルの十分な情報が得られることになる。
+しかしながら、現実には、送受信方向には制約が強く、限られた方向からの送受信しか
+行うことができず、Evald限界球内の一部のデータしか得られない。
+一方で、送受信することのできる周波数帯域はパルス波に対する応答を計測することで
+ある程度確保することができる。このときには、波数$k$が$k\in \left(k_{min},k_{max} \right)$
+の範囲にあるEvald球の一部が掃く領域が単一周波数(monochromatic)での
+検査に比べて広くとることができ，散乱ポテンシャルに関するより多くの情報を得ることができる。
+\\
 
 ここで,散乱振幅を
 \begin{equation}
 	u^{\infty}(\hat{\fat{y}};\fat{p})=4\pi ye^{-iky} u^{sc}(\fat{y})
 	\label{eqn:}
 \end{equation}
-として、観測波形データ$u^{sc}$を用いて書くと式(\ref{eqn:Vx})は
+として、観測波形データ$u^{sc}$を用いて式(\ref{eqn:Vx})を書き直すと
 \begin{equation}
 	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} yu^{sc}(\fat{y})
 	e^{i\fat{k}\cdot \fat{x}-iky}d^3\fat{k}, 
 	\ \ (\fat{k}=k(\hat{\fat{y}}-\fat{p}))
 	\label{eqn:Vx}
 \end{equation}
-となる。
+となる。この再構成式がどのような意味を持つかは、次節で述べるように、
+周波数$\omega$に関する積分を行い時間領域における再構成式に直すことで
+明らかになる。
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.6\linewidth]{Figs/setup.eps} 
@@ -358,20 +370,30 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 	u^{\rm sc}(\fat{y})= \frac{e^{ik(y-\fat{p}\cdot \fat{z})}}{4\pi y }F(\omega)U(\hat{\fat{y}};\fat{p}) 
 	\label{eqn:}
 \end{equation}
-と書くことができるので、散乱ポテンシャルは
+と書くことができる．よって、散乱ポテンシャルは観測データとして得られる
+散乱場を使って次のように表される．
 \begin{equation}
 	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} \frac{u^{sc}(\fat{y})}{F(\omega)}
 	e^{i\fat{k}\cdot \fat{x}-iky+ik\fat{p}\cdot\fat{z}}d^3\fat{k}
 	\label{eqn:}
 \end{equation}
+ここで、角周波数$\omega$に関するフーリエ変換
 \begin{equation}
 	a(\fat{y},t):=\frac{1}{2\pi} \int \frac{u^{sc}(\fat{y})}{F(\omega)}e^{-i\omega t}d\omega
 	\label{eqn:}
 \end{equation}
+で得られる時間波形を用いると、散乱ポテンシャルを
 \begin{equation}
 	V(\fat{x}) =\frac{1}{2\pi^2} y\int a\left(\fat{y}, t_{in}+t_{sc} \right) d\Omega
 	\label{eqn:}
 \end{equation}
+と表される。ただし、$t_{in},t_{sc}$はそれぞれ
+\begin{equation}
+	t_{in}=\frac{\fat{p}\cdot \left( \fat{x}-\fat{z}\right)}{c}, \ \ 
+	t_{sc}=\frac{\left|\fat{y}-\fat{x}\right|}{c}, \ \ 
+	\label{eqn:}
+\end{equation}
+で、入射波と散乱波の伝播時間を意味する。
 \begin{equation}
 	\fat{k}=k(\hat{\fat{y}}-\fat{p}) 
 	\label{eqn:}
