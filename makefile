@@ -1,7 +1,7 @@
 all: fdm.pdf saft.pdf
 saft.pdf: saft.dvi
 	dvipdfmx -p a4 saft.dvi
-saft.dvi: saft.tex setup.eps Evald.eps
+saft.dvi: saft.tex setup.eps Evald.eps pulse_echo.eps
 	platex saft.tex
 
 fdm.pdf: fdm.dvi
@@ -20,5 +20,7 @@ setup.eps: Figs/setup.svgz
 	inkscape -z -f Figs/setup.svgz -E Figs/setup.eps 
 Evald.eps: Figs/Evald.svgz
 	inkscape -z -f Figs/Evald.svgz -E Figs/Evald.eps 
+pulse_echo.eps: Figs/pulse_echo.svgz
+	inkscape -z -f Figs/pulse_echo.svgz -E Figs/pulse_echo.eps 
 
 

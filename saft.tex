@@ -2,7 +2,7 @@
 %\usepackage{graphicx,wrapfig}
 \usepackage{graphicx}
 \usepackage{pdfpages}
-\usepackage{showkeys}
+%\usepackage{showkeys}
 \setlength{\topmargin}{-1.5cm}
 %\setlength{\textwidth}{16.5cm}
 \setlength{\textheight}{25.2cm}
@@ -131,15 +131,15 @@ $u(\fat{x})$は、ヘルムホルツ方程式を満足する．
 	\label{eqn:}
 \end{equation}
 を満足する場合について考える．
-散乱場を$u^{sc}(\fat{x})$，入射波$u^{in}(\fat{x})$とすると，全波動場は
+散乱場を$u^{\rm sc}(\fat{x})$，入射波$u^{in}(\fat{x})$とすると，全波動場は
 \begin{equation}
-	u(\fat{x})=u^{in}(\fat{x})+ u^{sc}(\fat{x})
+	u(\fat{x})=u^{in}(\fat{x})+ u^{\rm sc}(\fat{x})
 	\label{eqn:}
 \end{equation}
 と表される。散乱場は放射条件を満足するものとすれば、
-$u^{sc}(\fat{x})$は次のように積分表現することができる．
+$u^{\rm sc}(\fat{x})$は次のように積分表現することができる．
 \begin{equation}
-	u^{sc}(\fat{y}) = \int _{\partial D} 
+	u^{\rm sc}(\fat{y}) = \int _{\partial D} 
 	\left\{
 		G(\fat{x},\fat{y})t(\fat{x})
 	-
@@ -166,12 +166,12 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 とした。
 ここで、$y=\left|\fat{y}\right|\gg \left| \fat{x} \right|$のとき、幾何光学近似
 \begin{equation}
-	r\sim  \fat{y}  -\hat{\fat{y}}\cdot \fat{x}, \ \ (y\rightarrow \infty)
+	r\sim  y  -\hat{\fat{y}}\cdot \fat{x}, \ \ (y\rightarrow \infty)
 	\label{eqn:para}
 \end{equation}
-を用いると、散乱場の積分表現は、Dirichlet問題，Newmann問題、それぞれの場合について
+を用いると、散乱場の積分表現は、ディリクレ問題，ノイマン問題、それぞれの場合について
 \begin{equation}
-	u^{sc}(\fat{y}) \sim \frac{e^{iky}}{4\pi y} U(\hat{\fat{y}};s)  
+	u^{\rm sc}(\fat{y}) \sim \frac{e^{iky}}{4\pi y} U(\hat{\fat{y}};s)  
 	\label{eqn:}
 \end{equation}
 \begin{equation}
@@ -181,7 +181,7 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 \end{equation}
 \begin{equation}
 	U(\hat{\fat{y}};s)  =-\int _{\partial D} u(\fat{x};s)e^{-ik\hat{\fat{y}}\cdot \fat{x}} dS_x
-	, \ \ ({\rm Newmann})
+	, \ \ ({\rm Neumann})
 	\label{eqn:}
 \end{equation}
 なお、$;$に続く$s$は入射波を指定するパラメータを表し，このように表記すること
@@ -199,7 +199,7 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 \end{equation}
 \begin{equation}
 	U(\hat{\fat{y}};s)  =-\int \gamma_D(\fat{x})u(\fat{x};s)e^{-ik\hat{\fat{y}}\cdot \fat{x}} dS_x
-	, \ \ ({\rm Newmann})
+	, \ \ ({\rm Neumann})
 	\label{eqn:}
 \end{equation}
 と、フーリエ積分の形式で表すことができる。
@@ -234,7 +234,7 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 と、形式上、非斉次のHelmholtz方程式の形に書き直すことができる。
 従って、右辺の非斉次項を物体力項として扱えば、散乱場を次のように積分表示することができる。
 \begin{equation}
-	u^{sc}(\fat{y})=u(\fat{y})-u^{in}(\fat{y}) = k_0^2\int G_0(\fat{x},\fat{y})V(\fat{x})u(\fat{x}) d^3\fat{x}
+	u^{\rm sc}(\fat{y})=u(\fat{y})-u^{in}(\fat{y}) = k_0^2\int G_0(\fat{x},\fat{y})V(\fat{x})u(\fat{x}) d^3\fat{x}
 	\label{eqn:LS}
 \end{equation}
 ここで$G_0(\fat{x},\fat{y})$は波数$k_0$をもつ均質な無限媒体に対するグリーン関数で、
@@ -245,7 +245,7 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 最後に、$G_0(\fat{x},\fat{y})$に幾何光学近似(\ref{eqn:para})を用いれば、
 式(\ref{eqn:LS})は
 \begin{equation}
-	u^{sc}(\fat{y})
+	u^{\rm sc}(\fat{y})
 	=
 	\frac{e^{ik_0y}}{4\pi y}
 	\int
@@ -276,8 +276,8 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 \end{equation}
 と表し、これを散乱振幅と呼ぶ．
 ここで、$\fat{p}$は入射平面波の伝播方向を表す単位ベクトルを意味する。
-このとき、式(\ref{eqn:U_vol})にBorn近似を用いると、$u(\fat{x})\simeq u^{in}(\fat{x})$
-として、散乱振幅は
+このとき、式(\ref{eqn:U_vol})にボルン近似を用い、$u(\fat{x})\simeq u^{in}(\fat{x})$
+とすれば，散乱振幅は
 \begin{equation}
 	u^{\infty}(\hat{\fat{y}},\fat{p})
 	=
@@ -285,47 +285,49 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 	k_0^2 V(\fat{x}) e^{-ik(\hat{\fat{y}}-\fat{p} )\cdot \fat{x}}d^3\fat{x}
 	\label{eqn:U_Born}
 \end{equation}
-となる。散乱ポテンシャル$V(\fat{x})$のフーリエ変換を
+と書ける。そこで，散乱ポテンシャル$V(\fat{x})$のフーリエ変換を
 \begin{equation}
 	\tilde V(\fat{k}) = \int V(\fat{x}) e^{i\fat{k}\cdot \fat{x}} d^3\fat{x}
 	\label{eqn:Vk}
 \end{equation}
-とすれば、式$\ref{eqn:U_Born}$は
+とすれば、式(\ref{eqn:U_Born})は
 \begin{equation}
 	u^{\infty}(\hat{\fat{y}},\fat{p}) =k_0^2 \tilde V (
 	k(\hat{\fat{y}}-\fat{p} )
 	)
 	\label{eqn:}
 \end{equation}
-となることから、散乱振幅は散乱ポテンシャルの波数ベクトル$k(\hat{\fat{y}}-\fat{x})$
-のスペクトル成分であることが分かる．
-従って、送受信条件や周波数帯域を適切に設定して波数スペクトル一定の範囲と密度でサンプリング
-して逆フーリエ変換
+となることから、散乱振幅が散乱ポテンシャルの波数ベクトル$k(\hat{\fat{y}}-\fat{x})$
+でのスペクトル成分であることが分かる．
+従って、送受信条件や周波数帯域を適切に設定し，十分な範囲と密度で波数スペクトル成分を
+得ることができれば，逆フーリエ変換
 \begin{equation}
 	V(\fat{x}) =\frac{1}{(2\pi)^3} \int k_0^{-2} u^{\infty}(\hat{\fat{y}};\fat{p}) 
 	e^{i\fat{k}\cdot \fat{x}}d^3\fat{k}
 	\label{eqn:Vx}
 \end{equation}
-を評価すれば、散乱ポテンシャルを再構成することができる。
-式(\ref{eqn:Vk})における波数ベクトル$\fat{k}$が
+によって散乱ポテンシャル$V(\fat{x})$を再構成できる。
+ここに，式(\ref{eqn:Vx})における波数ベクトル$\fat{k}$は
 \begin{equation}
 	\fat{k}=k(\hat{\fat{y}}-\fat{p})
 	\label{eqn:}
 \end{equation}
-は、角周波数$\omega$, 観測方向$\hat{\fat{y}}$と入射方向$\fat{p}$の関数である。
-いま、$\omega$と$\fat{p}$を固定し、観測方向だけを自由に取ることができる場合を
-考えると、$\fat{k}$は波数空間で、図\ref{fig:Evald}に実線で示したような半径$k$球を描き、
+だから，フーリエ積分の評価に用いることのできる波数ベクトル成分は，角周波数$\omega$,
+観測方向$\hat{\fat{y}}$，入射方向$\fat{p}$に依って決まる．
+いま、$\omega$と$\fat{p}$を固定し、観測方向だけを自由に取ることができる場合を考えると、
+$\fat{k}$は波数空間で、図\ref{fig:Evald}に実線で示したような半径$k$球を描き、
 これをEvald球と呼ぶ。つまり、観測方向だけを変化させて観測した場合、
 散乱ポテンシャルのEvald球状の成分だけしか得られない。一方、観測方向$\hat{\fat{y}}$に加え、
 入射方向$\fat{p}$も任意に選べる場合、Evald球は原点を中心として半径$2k$の球表面と内部を履く．
-このような波数空間の球領域をEvald limitting sphere(Evald限界球)と呼ぶ。
+このような波数空間の球領域はEvald limitting sphere(Evald限界球)と呼ばれる．
 全ての送受信方向で観測を行うことができれば、Evald限界球内部の
-波数成分全ての情報が得られるため、波数の大きさが十分に大きければ、単一の波数成分
-のデータだけで、散乱ポテンシャルの十分な情報が得られることになる。
-しかしながら、現実には、送受信方向には制約が強く、限られた方向からの送受信しか
-行うことができず、Evald限界球内の一部のデータしか得られない。
-一方で、送受信することのできる周波数帯域はパルス波に対する応答を計測することで
-ある程度確保することができる。このときには、波数$k$が$k\in \left(k_{min},k_{max} \right)$
+波数成分全ての情報が得られるため、波数$k$十分に大きければ、単一の波数成分
+のデータだけで、散乱ポテンシャルの十分な情報が得られる。
+しかしながら、例えば超音波探傷試験では、送受信方向は制約が厳しく、
+ごく限られた方向からの送受信しか行うことができないために、Evald限界球内の
+一部のデータしか得られない。
+一方で、送受信することのできる周波数帯域はパルスやチャープ波を用いることで
+ある程度広くとることができる。このときには、波数$k$が$k\in \left(k_{min},k_{max} \right)$
 の範囲にあるEvald球の一部が掃く領域が単一周波数(monochromatic)での
 検査に比べて広くとることができ，散乱ポテンシャルに関するより多くの情報を得ることができる。
 \\
@@ -340,14 +342,14 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} yu^{sc}(\fat{y})
 	e^{i\fat{k}\cdot \fat{x}-iky}d^3\fat{k}, 
 	\ \ (\fat{k}=k(\hat{\fat{y}}-\fat{p}))
-	\label{eqn:Vx}
+	\label{eqn:Vx_usc}
 \end{equation}
-となる。この再構成式がどのような意味を持つかは、次節で述べるように、
+となる。この再構成式がどのような操作を意味するかは、次節で述べるように、
 周波数$\omega$に関する積分を行い時間領域における再構成式に直すことで
 明らかになる。
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.6\linewidth]{Figs/setup.eps} 
+	\includegraphics[width=0.5\linewidth]{Figs/setup.eps} 
 	\end{center}
 	\caption{無限領域におけるスカラー波の散乱問題.} 
 	\label{fig:}
@@ -360,66 +362,146 @@ $u^{sc}(\fat{x})$は次のように積分表現することができる．
 	\label{fig:Evald}
 \end{figure}
 \subsection{時間領域における再構成式}
+式(\ref{eqn:Vx})の積分を評価するにあたり，微小体積要素$d^3\fat{k}$を 
+$\fat{p}$，$\hat{\fat{y}}$, $k$を用いて表す必要がある．
+%波数ベクトル$\fat{k}$は入射波の送信方向$\fat{p}$，散乱波の観測方向$\hat{\fat{y}}$と
+%角周波数$\omega$に依存する．従って，波数ベクトルに関するフーリエ変換を観測波形を
+%使って評価する際には、観測条件に応じた積分変数を取る必要がある。
+ここでは，次のような二つのケースについて考える．
+%では微小体積要素$d^3\fat{k}$を書き下すことができる。
+\begin{enumerate}
+\item
+	送信(受信)方向$\fat{p}(\hat{\fat{y}})$を固定し、
+	受信(送信)方向$\hat{\fat{y}}(\fat{p})$を変化させる場合\\
+
+	観測方向を表すベクトルを次のように球座標を使って表す．
+	\begin{equation}
+		\hat{\fat{y}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
+		\label{eqn:}
+	\end{equation}
+	このとき，微小体積要素はヤコビ行列式を計算すれば
+	\begin{equation}
+		d^3\fat{k}=k^2\sin\theta (1-\hat{\fat{y}}\cdot\fat{p})dkd\theta d\phi
+		\label{eqn:}
+	\end{equation}
+	となることが示される．
+	ここで,
+	\begin{equation}
+		\cos\delta=\hat{\fat{y}}\cdot\fat{p}
+		\label{eqn:}
+	\end{equation}
+	とおけば,
+	\begin{equation}
+		d^3\fat{k}=4k^2\sin\theta \sin^2 \frac{\delta}{2} dkd\theta d\phi
+		\label{eqn:}
+	\end{equation}
+\item
+	送信方向と受信方向が成す角度を一定に保ち、送受方向を同時に変化させる場合\\
+
+	単位ベクトル:
+	\begin{equation}
+		\hat{\fat{k}}=\frac{\hat{\fat{y}}-\fat{p}}
+		{\left| \fat{y}-\fat{p} \right| }
+		\label{eqn:}
+	\end{equation}
+	を用いれば,波数ベクトル$\fat{k}$は
+	\begin{equation}
+		\fat{k}= k\left| \hat{\fat{y}}-\fat{p} \right| \hat{\fat{k}} 
+		\label{eqn:}
+	\end{equation}
+	と書くことができ,$\hat{\fat{y}} \cdot \fat{p}= \cos \delta$とおけば,	
+	\begin{equation}
+		\fat{k}= 2k \sin \frac{\delta}{2}\hat{\fat{k}} 
+	\label{eqn:}
+	\end{equation}
+	と表すことができる.$\delta$は一定だから,$\hat{\fat{k}}$を
+	\begin{equation}
+		\hat{\fat{k}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
+		\label{eqn:}
+	\end{equation}
+	と球座標を使って表せば,微小体積要素を
+	\begin{equation}
+		d^3\fat{k}=2\sin\frac{\delta}{2} 
+		k^2 \sin\theta dkd\theta d\phi
+		\label{eqn:}
+	\end{equation}
+\end{enumerate}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.7\linewidth]{Figs/pulse_echo.eps} 
+	\end{center}
+	\caption{送受信パターン.} 
+	\label{fig:}
+\end{figure}
+パルスエコー法(一探触子法)による計測は後者の特別な場合に相当する。
+以上より、$d^3\fat{k}$は
+\begin{equation}
+	d^3\fat{k}=k^2\hat{J}(\theta,\phi) dkd\theta d\phi
+	\label{eqn:}
+\end{equation}
+と表すことができる．
+これを式(\ref{eqn:Vx_usc})に代入することにより次の再構成式が得られる．
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int yu^{sc}(\fat{y})
+	e^{i\fat{k}\cdot \fat{x}-iky}
+	\hat{J}(\theta,\phi) dkd\theta d\phi
+	\label{eqn:}
+\end{equation}
+
+ここで，送信点を$\fat{z}$とし，
 \begin{equation}
 	u^{in}(\fat{x})= F(\omega) e^{ik_0\fat{p}\cdot(\fat{x}-\fat{z})}
 	\label{eqn:}
 \end{equation}
-を入射する場合について考える。
+のような周波数成分$F(\omega)$をもつ平面波を入射する場合について考える。
 このとき、散乱場は
 \begin{equation}
-	u^{\rm sc}(\fat{y})= \frac{e^{ik(y-\fat{p}\cdot \fat{z})}}{4\pi y }F(\omega)U(\hat{\fat{y}};\fat{p}) 
+	u^{\rm sc}(\fat{y})= \frac{e^{ik_0(y-\fat{p}\cdot \fat{z})}}{4\pi y }F(\omega)U(\hat{\fat{y}};\fat{p}) 
 	\label{eqn:}
 \end{equation}
 と書くことができる．よって、散乱ポテンシャルは観測データとして得られる
 散乱場を使って次のように表される．
 \begin{equation}
-	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} \frac{u^{sc}(\fat{y})}{F(\omega)}
-	e^{i\fat{k}\cdot \fat{x}-iky+ik\fat{p}\cdot\fat{z}}d^3\fat{k}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int \frac{u^{sc}(\fat{y})}{F(\omega)}
+	e^{i\fat{k}\cdot \fat{x}-iky+ik\fat{p}\cdot\fat{z}}
+	\hat{J} dkd\phi d\theta	
 	\label{eqn:}
 \end{equation}
+さらに，$\fat{k}=k(\hat{\fat{y}}-\fat{p})$を代入し，$k=\omega/c$を用いれば，
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2c} \int \frac{yu^{sc}(\fat{y})}{F(\omega)}
+	e^{-ik_0(y-\hat{\fat{y}}\cdot\fat{x}+\fat{p}\cdot(\fat{x}-\fat{z})) }
+	\hat{J} d\omega d\phi d\theta	
+	\label{eqn:}
+\end{equation}
+を得る．
 ここで、角周波数$\omega$に関するフーリエ変換
 \begin{equation}
-	a(\fat{y},t):=\frac{1}{2\pi} \int \frac{u^{sc}(\fat{y})}{F(\omega)}e^{-i\omega t}d\omega
+	a(\fat{y},\fat{z},t):=\frac{1}{2\pi} \int \frac{u^{sc}(\fat{y})}{F(\omega)}e^{-i\omega t}d\omega
 	\label{eqn:}
 \end{equation}
 で得られる時間波形を用いると、散乱ポテンシャルを
 \begin{equation}
-	V(\fat{x}) =\frac{1}{2\pi^2} y\int a\left(\fat{y}, t_{in}+t_{sc} \right) d\Omega
-	\label{eqn:}
+	V(\fat{x}) =\frac{1}{2\pi^2c} \int a\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) y \hat{J} d\theta d\phi
+	\label{eqn:Vx_time}
 \end{equation}
 と表される。ただし、$t_{in},t_{sc}$はそれぞれ
 \begin{equation}
 	t_{in}=\frac{\fat{p}\cdot \left( \fat{x}-\fat{z}\right)}{c}, \ \ 
-	t_{sc}=\frac{\left|\fat{y}-\fat{x}\right|}{c}, \ \ 
+	t_{sc}=
+	\frac{ y-\hat{\fat{y}}\cdot \fat{x} }{c} \simeq 
+	\frac{\left|\fat{y}-\fat{x}\right|}{c} 
 	\label{eqn:}
 \end{equation}
 で、入射波と散乱波の伝播時間を意味する。
+式(\ref{eqn:Vx_time})を離散的な$\fat{y},\fat{z}$について評価する場合，
+積分は次のような和とみなすことができ、これは、発見的に導かれた開口合成法の
+形式と一致する．
 \begin{equation}
-	\fat{k}=k(\hat{\fat{y}}-\fat{p}) 
-	\label{eqn:}
-\end{equation}
-\begin{equation}
-	\hat{\fat{y}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
-	\label{eqn:}
-\end{equation}
-\begin{equation}
-	d^3\fat{k}=k^2\sin\theta (1-\hat{\fat{y}}\cdot\fat{p})dkd\theta d\phi
-	\label{eqn:}
-\end{equation}
-\begin{equation}
-	\hat{\fat{k}}= \frac{\fat{k}}{\left| \fat{k}\right|}
-	\label{eqn:}
-\end{equation}
-\begin{equation}
-	d^3\fat{k}=2k^2\sin\theta\sin\frac{\delta}{2} dkd\theta d\phi\\
-	\label{eqn:}
-\end{equation}
-\begin{equation}
-	\hat{\fat{k}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
-	\label{eqn:}
-\end{equation}
-\begin{equation}
-	\cos\delta=\hat{\fat{y}}\cdot\fat{p}
+	V(\fat{x}) = 
+	\frac{1}{2\pi^2c} 
+	\sum_{\fat{y},\fat{z}} 
+	a\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) y \hat{J} \Delta \theta \Delta \phi
 	\label{eqn:}
 \end{equation}
 \end{document}
