@@ -1,7 +1,7 @@
 all: fdm.pdf saft.pdf
 saft.pdf: saft.dvi
 	dvipdfmx -p a4 saft.dvi
-saft.dvi: saft.tex measurement.eps cloud.eps wvfm2.eps locii.eps saftM2.eps setup.eps Evald.eps pulse_echo.eps
+saft.dvi: saft.tex measurement.eps cloud.eps wvfm2.eps locii.eps saftM2.eps psf_pulse.eps 1D_prb.eps setup.eps Evald.eps pulse_echo.eps
 	platex saft.tex
 
 fdm.pdf: fdm.dvi
@@ -26,6 +26,10 @@ locii.eps: Figs/locii.svgz
 	inkscape -z -f Figs/locii.svgz -E Figs/locii.eps 
 saftM2.eps: Figs/saftM2.svgz
 	inkscape -z -f Figs/saftM2.svgz -E Figs/saftM2.eps 
+psf_pulse.eps: Figs/psf_pulse.svgz
+	inkscape -z -f Figs/psf_pulse.svgz -E Figs/psf_pulse.eps 
+1D_prb.eps: Figs/1D_prb.svgz
+	inkscape -z -f Figs/1D_prb.svgz -E Figs/1D_prb.eps 
 setup.eps: Figs/setup.svgz
 	inkscape -z -f Figs/setup.svgz -E Figs/setup.eps 
 Evald.eps: Figs/Evald.svgz

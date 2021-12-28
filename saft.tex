@@ -135,7 +135,7 @@ $w_i$と$w_j$は、送受信センサーの指向性や感度を補正するた�
 また、再構成公式のアドホックな改善や拡張も容易で，例えば、送受信センサーの指向性や
 距離減衰，入射波や散乱波の反射やモード変換を計測条件に応じて考慮することも（そのやり方が
 妥当かどうかの検証はさておき）簡単である．
-\subsubsection{画像合成の原理}
+\subsection{画像合成の原理}
 開口合成法では、大きさをもった散乱体を，互いに相互作用のない理想的な点散乱体の集まりとみなし、
 個々の点散乱体の位置と強度を推定する。
 従って、画像化関数$I(\fat{x})$は、位置$\fat{x}$における散乱強度で正負いずれの値も取りうる．
@@ -169,7 +169,20 @@ $w_i$と$w_j$は、送受信センサーの指向性や感度を補正するた�
 	\caption{開口合成画像の例.(a)送受信点が離れている場合,(b)送受信点が近接している場合.} 
 	\label{fig:saftM2}
 \end{figure}
-
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=1.0\linewidth]{Figs/psf_pulse.eps} 
+	\end{center}
+	\caption{全周方向からパルス-エコーモードで送受信したときの開口合成像.(a)$M=10$, (b)$M=20$の場合.} 
+	\label{fig:psf_pulse}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.5\linewidth]{Figs/1D_prb.eps} 
+	\end{center}
+	\caption{反射壁の開口合成イメージング(1次元問題).} 
+	\label{fig:1D_prb}
+\end{figure}
 
 問題を最大限に単純にするため、ここでは$M=2$、すなわち
 \begin{equation}
