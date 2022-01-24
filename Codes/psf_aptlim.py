@@ -11,7 +11,8 @@ class IMG:
         self.Amp=np.zeros([Ny,Nx])
         self.Nx=Nx
         self.Ny=Ny
-
+    def clear(self):
+        self.Amp=np.zeros([Ny,Nx])
     def set_xlim(self,x1,x2):
         self.Xa[0]=x1
         self.Xb[0]=x2
@@ -59,28 +60,68 @@ class IMG:
         self.Amp+=np.exp(-arg/sig*0.5)
 
 if __name__=="__main__":
-    fig=plt.figure()
-    ax=fig.add_subplot(111)
+    fig=plt.figure(figsize=[8,8])
 
-    Nx=120
-    Ny=60
+    ax11=fig.add_subplot(221)
+    ax12=fig.add_subplot(222)
+    ax21=fig.add_subplot(223)
+    ax22=fig.add_subplot(224)
+
+    Nx=100
+    Ny=100
     im=IMG(Nx,Ny)
-    im.set_xlim(-3,5)
-    im.set_ylim(-2,1.0)
-
-    Y1=np.array([-1,1])
-
-    Y1=np.array([ 1,1])
-    Y2=np.array([ 2,1])
+    im.set_xlim(-3,3)
+    im.set_ylim(-3,3)
 
 
-    im.draw(Y1,Y1)
-    im.draw(Y2,Y2)
-    im.draw(Y1,Y2)
-    im.show(ax)
-    ax.plot(Y1[0],Y1[1],"ko",markersize=12,markerfacecolor="w")
-    ax.plot(Y2[0],Y2[1],"ko",markersize=12,markerfacecolor="w")
-    ax.set_ylim([-2,1.2])
+    M=24
+    R=2.0
 
-    fig.savefig("img2.png",bbox_inches="tight")
+    dth=15
+    dth=dth/180*np.pi
+
+    msz=4
+    for k in range(M):
+        th=dth*k
+        Y1=np.zeros(2)
+        Y1[0]=R*np.cos(th)
+        Y1[1]=R*np.sin(th)
+        im.draw(Y1,Y1)
+        ax11.plot(Y1[0],Y1[1],"ko",markersize=msz,markerfacecolor="w")
+    im.show(ax11)
+
+    im.clear()
+    M=12+1
+    for k in range(M):
+        th=dth*k
+        Y1=np.zeros(2)
+        Y1[0]=R*np.cos(th)
+        Y1[1]=R*np.sin(th)
+        im.draw(Y1,Y1)
+        ax12.plot(Y1[0],Y1[1],"ko",markersize=msz,markerfacecolor="w")
+    im.show(ax12)
+
+    im.clear()
+    M=8+1
+    for k in range(M):
+        th=dth*k
+        Y1=np.zeros(2)
+        Y1[0]=R*np.cos(th)
+        Y1[1]=R*np.sin(th)
+        im.draw(Y1,Y1)
+        ax21.plot(Y1[0],Y1[1],"ko",markersize=msz,markerfacecolor="w")
+    im.show(ax21)
+
+    im.clear()
+    M=4+1
+    for k in range(M):
+        th=dth*k
+        Y1=np.zeros(2)
+        Y1[0]=R*np.cos(th)
+        Y1[1]=R*np.sin(th)
+        im.draw(Y1,Y1)
+        ax22.plot(Y1[0],Y1[1],"ko",markersize=msz,markerfacecolor="w")
+    im.show(ax22)
+
+    fig.savefig("psf_apllim.png",bbox_inches="tight")
     plt.show()

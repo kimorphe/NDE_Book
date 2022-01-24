@@ -59,19 +59,17 @@ class IMG:
         self.Amp+=np.exp(-arg/sig*0.5)
 
 if __name__=="__main__":
-    fig=plt.figure()
-    ax=fig.add_subplot(111)
+    fig1=plt.figure()
+    ax=fig1.add_subplot(111)
 
     Nx=120
     Ny=60
     im=IMG(Nx,Ny)
-    im.set_xlim(-3,5)
-    im.set_ylim(-2,1.0)
+    im.set_xlim(-3,3)
+    im.set_ylim(-1,2)
 
-    Y1=np.array([-1,1])
-
-    Y1=np.array([ 1,1])
-    Y2=np.array([ 2,1])
+    Y1=np.array([-1,2])
+    Y2=np.array([ 1,2])
 
 
     im.draw(Y1,Y1)
@@ -80,7 +78,17 @@ if __name__=="__main__":
     im.show(ax)
     ax.plot(Y1[0],Y1[1],"ko",markersize=12,markerfacecolor="w")
     ax.plot(Y2[0],Y2[1],"ko",markersize=12,markerfacecolor="w")
-    ax.set_ylim([-2,1.2])
+    ax.set_ylim([-1,2.2])
 
-    fig.savefig("img2.png",bbox_inches="tight")
+    fig2=plt.figure()
+    ax2=fig2.add_subplot(111)
+
+    im.draw(Y1,Y2)
+    im.show(ax2)
+    ax2.plot(Y1[0],Y1[1],"ko",markersize=12,markerfacecolor="w")
+    ax2.plot(Y2[0],Y2[1],"ko",markersize=12,markerfacecolor="w")
+    ax2.set_ylim([-1,2.2])
+
+    fig1.savefig("img_w12_1.png",bbox_inches="tight")
+    fig2.savefig("img_w12_2.png",bbox_inches="tight")
     plt.show()

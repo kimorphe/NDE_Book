@@ -11,15 +11,19 @@ class IMG:
         self.Amp=np.zeros([Ny,Nx])
         self.Nx=Nx
         self.Ny=Ny
+    def clear(self):
+        self.Amp=np.zeros([Ny,Nx])
 
     def set_xlim(self,x1,x2):
         self.Xa[0]=x1
         self.Xb[0]=x2
         self.xlim=np.array([x1,x2])
+        self.xcod=np.linspace(x1,x2,self.Nx)
     def set_ylim(self,y1,y2):
         self.Xa[1]=y1
         self.Xb[1]=y2
         self.ylim=np.array([y1,y2])
+        self.ycod=np.linspace(y1,y2,self.Nx)
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
         im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="jet",interpolation="none")
@@ -69,7 +73,9 @@ if __name__=="__main__":
     im.set_ylim(-3,3)
 
 
-    M=20
+
+
+    M=10
     R=2.0
     dth=2*np.pi/M
     for k in range(M):
@@ -84,4 +90,37 @@ if __name__=="__main__":
     #ax.set_ylim([-2,1.2])
 
     fig.savefig("psf.png",bbox_inches="tight")
+
+
+    fig2=plt.figure()
+    bx=fig2.add_subplot(111)
+    N2=int(Nx/2)
+    bx.plot(im.xcod,im.Amp[N2,:]/M,"b",label="M=10")
+    bx.grid(True)
+
+    im.clear()
+    M=20
+    R=2.0
+    dth=2*np.pi/M
+    for k in range(M):
+        th=dth*k
+        Y1=np.zeros(2)
+        Y1[0]=R*np.cos(th)
+        Y1[1]=R*np.sin(th)
+        im.draw(Y1,Y1)
+        #ax.plot(Y1[0],Y1[1],"ko",markersize=6,markerfacecolor="w")
+
+    #im.show(ax)
+    bx.plot(im.xcod,im.Amp[N2,:]/M,"k--",label="M=20")
+    bx.grid(True)
+    fsz=14
+    bx.set_xlabel("x",fontsize=fsz)
+    bx.set_ylabel("I(x)",fontsize=fsz)
+    ax.tick_params(labelsize=fsz-2)
+    bx.tick_params(labelsize=fsz-2)
+    bx.legend()
+
+
+    fig2.savefig("psf_profile.png",bbox_inches="tight")
+
     plt.show()
