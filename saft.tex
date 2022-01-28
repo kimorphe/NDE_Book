@@ -493,19 +493,18 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 	\label{fig:}
 \end{figure}
 ここまでの議論では、任意の形状と幅のパルス波を送受信できることを前提としてきた。
-しかしながら、実際の計測装置では周波数帯域が制限されるため、
-任意の波形を送受信することはできない。そのため、パルス的でない波形を用いる
-ことにによる開口合成像の変化について理解しておくことが望ましい。
-その極端なケースとして、単一の周波数成分からなる連続波(continuous monochlomatic wave)
-での画像化について検討しておく。
+一方、実際の計測装置では周波数帯域が制限されるため、任意波形を送受信することはできない。
+そのため、パルス的でない波形を用いることにによる開口合成像の変化について理解しておくこと
+が有用である。その極端な場合として、単一周波数成分からなる連続波(continuous monochlomatic wave)
+での画像化について検討する。
 
-原点にある点散乱体に向けて点$\fat{y}_i$から角周波数$\omega$の単位振幅の入射波を送信したとする。
-このとき入射場は
+いま、原点にある点散乱体に向けて点$\fat{y}_i$から角周波数$\omega$で単位振幅の入射波を
+送信したとする。このとき入射場は
 \begin{equation}
 	u^{in}(\fat{x},t)=e^{i\omega t-kr_i}, \ \ (r_i=\left| \fat{x}-\fat{y}_i\right|)
 	\label{eqn:}
 \end{equation}
-で与えられる。ここに、$k=\omega/c$は波数を表す。このとき点散乱体から放射される散乱波は、
+で与えられる。ここに、$k=\omega/c$は波数を表す。このとき、点散乱体から放射される散乱波は、
 観測点$\fat{y}_j$において
 \begin{equation}
 	u^{sc}(\fat{y}_j,t)=
@@ -513,8 +512,8 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 	=e^{i\omega t -k(R_i+R_j)}
 	\label{eqn:}
 \end{equation}
-となる。ただし$R_i=\left| y_i\right|$とする．
-これを観測波形$a_{ij}(t)$とし、パルス-エコーモードで開口合成を行うとき、
+と表される。ただし、$R_i=\left| y_i\right|$とする．これを観測波形$a_{ij}(t)$として
+パルス-エコーモードで開口合成を行うとき、
 画像化関数$I(\fat{x})$は
 \begin{equation}
 	I(\fat{x}) =
@@ -525,16 +524,16 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 		e^{2ik(r_i-R_i)}
 	\label{eqn:PSF_mono}
 \end{equation}
-で、この実部は単周波数成分の場合の点広がり関数である。
-そこで、式(\ref{eqn:PSF_mono})を、観測点数$M=14$および20で計算すると、図\ref{fig:PSF_mono}
-に示す結果が得られる。
+で、この実部が単周波連続波を用いるときの点広がり関数を与える。
+そこで、式(\ref{eqn:psf_cont})を観測点数$M=10$および20で計算すると、
+図\ref{fig:PSF_mono}のような像が得られる。
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.9\linewidth]{Figs/psf_cont.eps} 
 	\end{center}
 	\caption{全周方向からパルス-エコーモードで送受信したときの開口合成像.(a)$M=10$, (b)$M=20$で
 	波長2の連続波を用いた場合.} 
-	\label{fig:}
+	\label{fig:psf_cont}
 \end{figure}
 \begin{figure}[h]
 	\begin{center}
@@ -542,10 +541,25 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 	\end{center}
 	\caption{$y=0$における開口合成像の断面図. 観測点数(a)$M=10$, (b)$M=20$で波長2の
 	連続波を用いた場合.}
-	\label{fig:}
+	\label{fig:psf_profile_cont}
 \end{figure}
-
+また、$y=0$における断面は図\ref{fig:psf_profile_cont}のようである。
+これらの図に示されるように、観測点数の少ない$M=10$のケースでは、
+顕著なグレーティングローブが発生しているが、単周波数成分の波を用いた場合も、
+全周方向からの計測であれば原点に明確なメインローブが現れることが分かる。
+なお、メインローブ幅はおよそ半波長であることが読み取れ、このことは後で
+述べるように理論的に示すことができる。
 \subsection{結像位置のずれ}
+送信点において、時刻0での入射波の位相が0でないとき、点拡がり関数は容易に劣化する。
+図\ref{fig:psf_profile_delay}はその様子を見るため、
+点拡がり関数の断面図を4つの位相遅れについて計算した結果である。
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.6\linewidth]{Figs/psf_cont_delay.eps} 
+	\end{center}
+	\caption{位相遅れのある入射波を用いたときの点拡がり関数.} 
+	\label{fig:psf_cont_delay}
+\end{figure}
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.5\linewidth]{Figs/1D_prb.eps} 

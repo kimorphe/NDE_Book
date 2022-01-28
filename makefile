@@ -2,7 +2,7 @@ all: fdm.pdf saft.pdf
 saft.pdf: saft.dvi
 	dvipdfmx -p a4 saft.dvi
 saft.dvi: saft.tex measurement.eps cloud.eps wvfm2.eps locii.eps saftM2.eps psf_pulse.eps 1D_prb.eps setup.eps Evald.eps pulse_echo.eps\
-	blind_sum.eps psf_aptlim.eps psf_profile.eps psf_cont.eps psf_profile_cont.eps
+	blind_sum.eps psf_aptlim.eps psf_profile.eps psf_cont.eps psf_profile_cont.eps psf_cont_delay.eps
 	platex saft.tex
 
 fdm.pdf: fdm.dvi
@@ -39,6 +39,8 @@ psf_cont.eps: Figs/psf_cont.svgz
 	inkscape -z -f Figs/psf_cont.svgz -E Figs/psf_cont.eps 
 psf_profile_cont.eps: Figs/psf_profile_cont.svgz
 	inkscape -z -f Figs/psf_profile_cont.svgz -E Figs/psf_profile_cont.eps 
+psf_cont_delay.eps: Figs/psf_cont_delay.svgz
+	inkscape -z -f Figs/psf_cont_delay.svgz -E Figs/psf_cont_delay.eps 
 1D_prb.eps: Figs/1D_prb.svgz
 	inkscape -z -f Figs/1D_prb.svgz -E Figs/1D_prb.eps 
 setup.eps: Figs/setup.svgz
