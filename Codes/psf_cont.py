@@ -62,6 +62,8 @@ class IMG:
         arg*=arg;
         self.Amp+=np.exp(-arg/sig*0.5)
     def draw_cont(self,Y1,Y2,lmb=2):
+
+        # imaging grid
         x1=self.xlim[0]
         x2=self.xlim[1]
         xcod=np.linspace(x1,x2,self.Nx)
@@ -71,71 +73,91 @@ class IMG:
         ycod=np.linspace(y1,y2,self.Ny)
         [X,Y]=np.meshgrid(xcod,ycod)
         
-        rx=X-Y1[0]
-        ry=Y-Y1[1]
+        #source to grid distance
+        rx=X-Y1[0]  
+        ry=Y-Y1[1]  
         ri=np.sqrt(rx*rx+ry*ry)
-
+        # receiver to grid distance
         rx=X-Y2[0]
         ry=Y-Y2[1]
         rj=np.sqrt(rx*rx+ry*ry)
 
+        # Filght distance (S-> Pixel-> R)
         rij=ri+rj
         
-        R1=np.linalg.norm(Y1) 
-        R2=np.linalg.norm(Y2) 
-        Rf=R1+R2
+        Ysc=np.array([0,0]) # scattering point
+        dlt=0.0 # phase delay  (measured in length)
+        R1=np.linalg.norm(Y1-Ysc) 
+        R2=np.linalg.norm(Y2-Ysc) 
+        Rf=R1+R2+dlt
         PI2=2*np.pi
         self.Amp+=np.exp(1j*PI2*(Rf-rij)/lmb)
+    def SAFT(self,M,R,Lmb):
+        #Lmb=2.0
+        #M=14    # T/R points
+        #R=2.0   # T/R radial distance
+        dth=2*np.pi/M   # angular increment
+        Y1=np.zeros(2)
+        xtr=[]
+        ytr=[]
+        for k in range(M):  # imaging 
+            th=dth*k
+            Y1[0]=R*np.cos(th)
+            Y1[1]=R*np.sin(th)
+            self.draw_cont(Y1,Y1,lmb=Lmb) # stack continuous wave
+            xtr.append(Y1[0])
+            ytr.append(Y1[1])
+        self.xtr=xtr
+        self.ytr=ytr
+        self.Amp/=M
+        self.M=M
+    def show_TR_points(self,ax):
+        xtr=self.xtr
+        ytr=self.ytr
+        ax.plot(xtr,ytr,"ko",markersize=6,markerfacecolor="w")
+    def show_profile(self,ax,Ycut=0.0,lstyl="-k"):
+        ny=np.argmin(abs(Ycut-self.ycod))
+        bx.plot(self.xcod,abs(np.real(im.Amp[ny,:])),lstyl,label="M="+str(self.M))
+
 
 if __name__=="__main__":
-    fig=plt.figure()
-    ax=fig.add_subplot(111)
+    fig1=plt.figure()
+    ax=fig1.add_subplot(111)
 
+    # IMAGE SIZE & AREA
     Nx=100; Ny=100  # Image Size
     im=IMG(Nx,Ny)
     im.set_xlim(-3,3)   # Range x
     im.set_ylim(-3,3)   # Range y
 
-    Lmb=1.0
-    Lmb=2.0
-    M=14    # T/R points
+    Lmb=2.0 # Wave Length
+    M=10    # T/R points
     R=2.0   # T/R radial distance
-    dth=2*np.pi/M   # angular increment
-    for k in range(M):  # imaging 
-        th=dth*k
-        Y1=np.zeros(2)
-        Y1[0]=R*np.cos(th)
-        Y1[1]=R*np.sin(th)
-        im.draw_cont(Y1,Y1,lmb=Lmb) # stack continuous wave
-        ax.plot(Y1[0],Y1[1],"ko",markersize=6,markerfacecolor="w")
 
+    im.SAFT(M,R,Lmb)    #perform saft
     im.show(ax)
+    im.show_TR_points(ax)
 
-    fig.savefig("psf_cont_M"+str(M)+".png",bbox_inches="tight")
+    fig1.savefig("psf_cont_M"+str(M)+".png",bbox_inches="tight")
 
     fig2=plt.figure()
     bx=fig2.add_subplot(111)
-    N2=int(Nx/2)
-    bx.plot(im.xcod,abs(np.real(im.Amp[N2,:]))/M,"b",label="M="+str(M))
-    bx.grid(True)
+    im.show_profile(bx,Ycut=0,lstyl="b-")
 
     im.clear()
+    ax.clear()
+
     M=20    # T/R points
     R=2.0   # T/R radius
-    dth=2*np.pi/M
-    for k in range(M):
-        th=dth*k
-        Y1=np.zeros(2)
-        Y1[0]=R*np.cos(th)
-        Y1[1]=R*np.sin(th)
-        im.draw_cont(Y1,Y1,lmb=Lmb)
-        ax.plot(Y1[0],Y1[1],"ko",markersize=6,markerfacecolor="w")
-
-    ax.clear()
+    im.SAFT(M,R,Lmb)
     im.show(ax)
-    fig.savefig("psf_cont_M"+str(M)+".png",bbox_inches="tight")
-    bx.plot(im.xcod,abs(np.real(im.Amp[N2,:]))/M,"k--",label="M="+str(M))
+    im.show_TR_points(ax)
+    fig1.savefig("psf_cont_M"+str(M)+".png",bbox_inches="tight")
+
+    #bx.plot(im.xcod,abs(np.real(im.Amp[N2,:]))/M,"k--",label="M="+str(M))
+    im.show_profile(bx,Ycut=0,lstyl="k--")
     bx.grid(True)
+
     fsz=14
     bx.set_xlabel("x",fontsize=fsz)
     bx.set_ylabel("I(x)",fontsize=fsz)
