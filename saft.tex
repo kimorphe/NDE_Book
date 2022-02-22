@@ -567,6 +567,31 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 	\caption{反射壁の開口合成イメージング(1次元問題).} 
 	\label{fig:1D_prb}
 \end{figure}
+\subsubsection{1次元問題}
+結像位置のずれを補償するための方法を1次元問題で考える．
+今，$x=0$に送受信点をとり，$x=L(>0)$にある剛体壁からの反射波を観測したとする．
+入射場変位を
+$u^{in}(x,t)=u\left(t-\frac{x}{c}\right)$
+と表し，$u(t)$は既知の入射波形，$c$は位相速度とすれば，反射波は
+$x=L$において$u^{in}+u^{r}=0$であることから
+$u^{r}(x,t)=-u\left(t-\frac{x+2L)}{c}\right)$
+と書ける．従って，$x=0$における観測波形は
+\begin{equation}
+	a_{11}(t)=u^{r}(0,t)=-u\left( t-\frac{2L}{c}\right)
+	\label{eqn:}
+\end{equation}
+で，開口合成像は
+\begin{equation}
+	I(x)=
+	a_{11}\left(t=\frac{2x}{c}\right)
+	=
+	-u\left(\frac{2}{c}(x-L)\right)
+	\label{eqn:}
+\end{equation}
+となる．もし，入射波振幅のピークが$t=t_d(>0)$であったとすれば，
+開口合成像$I(x)$のピーク位置は，$x=L+\frac{ct_d}{2}$となる。
+つまり，$\frac{ct_d}{2}$だけ剛体壁の内側に入った位置に
+ピークが位置し，剛体壁表面の位置は正確に再構成されない．
 %%%%%
 \section{線形化逆散乱法}
 \subsection{散乱場の積分表現}
