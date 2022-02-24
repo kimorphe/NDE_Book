@@ -1,6 +1,6 @@
 \documentclass[10pt,a4j,dvipdfmx]{jarticle}
 %\usepackage{graphicx,wrapfig}
-\usepackage{graphicx}
+\usepackage{graphicx,showkeys}
 \usepackage{pdfpages}
 %\usepackage{showkeys}
 \setlength{\topmargin}{-1.5cm}
@@ -553,6 +553,7 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 送信点において、時刻0での入射波の位相が0でないとき、点拡がり関数は容易に劣化する。
 図\ref{fig:psf_profile_delay}はその様子を見るため、
 点拡がり関数の断面図を4つの位相遅れについて計算した結果である。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.6\linewidth]{Figs/psf_cont_delay.eps} 
@@ -567,20 +568,19 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 	\caption{反射壁の開口合成イメージング(1次元問題).} 
 	\label{fig:1D_prb}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{1次元問題}
-結像位置のずれを補償するための方法を1次元問題で考える．
-今，$x=0$に送受信点をとり，$x=L(>0)$にある剛体壁からの反射波を観測したとする．
-入射場変位を
-$u^{in}(x,t)=u\left(t-\frac{x}{c}\right)$
-と表し，$u(t)$は既知の入射波形，$c$は位相速度とすれば，反射波は
-$x=L$において$u^{in}+u^{r}=0$であることから
-$u^{r}(x,t)=-u\left(t-\frac{x+2L)}{c}\right)$
-と書ける．従って，$x=0$における観測波形は
+結像位置のずれを補償する方法を1次元問題で考える．
+今，$x=0$に送受信点をとり，$x=L(>0)$にある剛体壁からの反射波を観測したとする(図\ref{fig:1D_prb})．
+入射場変位を$u^{in}(x,t)=u\left(t-\frac{x}{c}\right)$と表し，$u(t)$は既知の入射波形，
+$c$は位相速度とすれば，反射波$u^{r}(x,t)$は，$x=L$において$u^{in}+u^{r}=0$であることから
+$u^{r}(x,t)=-u\left(t-\frac{x+2L)}{c}\right)$と書ける．
+従って，$x=0$で反射波を観測して得られる波形は
 \begin{equation}
 	a_{11}(t)=u^{r}(0,t)=-u\left( t-\frac{2L}{c}\right)
 	\label{eqn:}
 \end{equation}
-で，開口合成像は
+と表され，これを使って得られる開口合成像は
 \begin{equation}
 	I(x)=
 	a_{11}\left(t=\frac{2x}{c}\right)
@@ -588,10 +588,60 @@ $u^{r}(x,t)=-u\left(t-\frac{x+2L)}{c}\right)$
 	-u\left(\frac{2}{c}(x-L)\right)
 	\label{eqn:}
 \end{equation}
-となる．もし，入射波振幅のピークが$t=t_d(>0)$であったとすれば，
-開口合成像$I(x)$のピーク位置は，$x=L+\frac{ct_d}{2}$となる。
-つまり，$\frac{ct_d}{2}$だけ剛体壁の内側に入った位置に
-ピークが位置し，剛体壁表面の位置は正確に再構成されない．
+となる．もし，入射波振幅のピークが$t=t_d(>0)$であったとすれば，開口合成像$I(x)$のピーク位置は
+$x=L+\frac{ct_d}{2}$となる。つまり，
+剛体壁の内側に$\frac{ct_d}{2}$だけ入った位置にピークが現れ，
+剛体壁表面の位置は正確に再構成されない．
+このずれを補正して、正確な位置にピークが現れるようにするためには、3つの方法が考えられる。
+\paragraph{時間軸原点の補正}
+もっとも単純な方法は，計測波形を時間軸上であらかじめ$t_d$だけシフトし、
+$a_{11}(t+t_d)$を用いて開口合成を行うことである．
+これは、時間軸原点$t=0$を，送信時のトリガー信号によって決まる時刻でなく、
+入射波形のピーク位置にとることを意味する．
+なお，$t_d$には波形の立ち上がりからピークまでの時間に加え，
+超音波探触子内の全面板や音響整合層とシューを通過するための時間も含まれる．
+また，受信時にもシューや探触子内部を通過することによって遅延が生じる，
+実際には，送信だけでなく受信についても考慮して時間軸の調整量$t_d$を与える必要がある．
+\paragraph{参照波形を使ったデコンボリューション}
+時間軸原点の補正によって正しい位置に像が得られるためには，入射波と反射波の波形が
+変化しないことが前提となる．これは，1次元線形弾性問題の場合，多次元問題では
+平面境界で平面波が反射される特殊なケースに限られる．
+一般には入射波形と反射波形は異なり，両者の立ち上がり時間も異なることから，
+結像位置が状況に応じて変化する．
+そこで，既知の反射壁からのエコーを計測し，これを参照波形として用いることで
+結像位置を調整する．反射壁の位置は$x=L_0$，反射壁の画像化を行う反射壁と同一とする．
+このとき，反射波変位は$u^{ref}(x,t)$は，
+\begin{equation}
+	u^{ref}(x,t)=Ru\left(t-\frac{x+2L_0}{c}\right)
+	\label{eqn:}
+\end{equation}
+と書ける。ただし$R$は反射係数で、剛体壁であれば$R=-1$である。
+観測で得られる参照波形$a^{ref}(t)$は、
+\begin{equation}
+	a^{ref}(t)=u^{ref}(0,t)=
+	Ru\left(t-\frac{2L_0}{c}\right)
+	\label{eqn:}
+\end{equation}
+である。ここで、$a(t)$と$a^{ref}(t)$の時間に関するフーリエ変換をとり，
+\begin{equation}
+	A(\omega)=\int a(t)e^{i\omega t}dt, \ \ 
+	A^{ref}(\omega)=\int a^{ref}(t)e^{i\omega t}dt
+	\label{eqn:}
+\end{equation}
+とする。これらｈ，
+\begin{equation}
+	A(\omega) = RU(\omega) e^{2i\omega L},  \ \
+	A^{ref}(\omega) = RU(\omega) e^{2i\omega L_0}, 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\tilde a(t)= {\cal F}^{-1} \left\{ 
+	\frac{A(\omega)}{A^{ref}(\omega)} e ^{i\omega L_0}
+	\right\}
+	=\delta \left(t-\frac{2L}{c})\right)
+	\label{eqn:}
+\end{equation}
+\paragraph{位相共役あるいは時間反転法}
 %%%%%
 \section{線形化逆散乱法}
 \subsection{散乱場の積分表現}
