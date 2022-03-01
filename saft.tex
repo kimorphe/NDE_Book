@@ -572,10 +572,18 @@ PSFを示したものである。いずれのケースでも原点にピーク�
 \subsubsection{1次元問題}
 結像位置のずれを補償する方法を1次元問題で考える．
 今，$x=0$に送受信点をとり，$x=L(>0)$にある剛体壁からの反射波を観測したとする(図\ref{fig:1D_prb})．
-入射場変位を$u^{in}(x,t)=u\left(t-\frac{x}{c}\right)$と表し，$u(t)$は既知の入射波形，
+入射場変位を
+\begin{equation}
+	u^{in}(x,t)=u\left(t-\frac{x}{c}\right)
+	\label{eqn:uin_1D}
+\end{equation}
+と表し，$u(t)$は既知の入射波形，
 $c$は位相速度とすれば，反射波$u^{r}(x,t)$は，$x=L$において$u^{in}+u^{r}=0$であることから
-$u^{r}(x,t)=-u\left(t-\frac{x+2L)}{c}\right)$と書ける．
-従って，$x=0$で反射波を観測して得られる波形は
+\begin{equation}
+	u^{r}(x,t)=-u\left(t-\frac{x+2L}{c}\right)
+	\label{eqn:ur_1D}
+\end{equation}
+と書ける．従って，$x=0$で反射波を観測して得られる波形は
 \begin{equation}
 	a_{11}(t)=u^{r}(0,t)=-u\left( t-\frac{2L}{c}\right)
 	\label{eqn:}
@@ -672,12 +680,35 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 	U^{r}(x,\omega)={\cal F} \{ u^{r}(x,t)\}
 	\label{eqn:}
 \end{equation}
-を用いて$U^{in}\left( U^{sc}\right)^*$の$\omega$に関する積分を計算すると，
+を用い，角周波数$\omega$に関する次の積分を計算する．
 \begin{equation}
-	\left< U^{in},U^{r}\right>(x)
+	{\cal I }(x)=
+	\int 	
+	U^{in}(x,\omega)\left( U^{r}(x,\omega)\right)^* d\omega
+	\label{eqn:}
+\end{equation}
+ここで、複素数値関数$f(x)$と$g(x)$の内積を
+\begin{equation}
+	\left< f,g\right>=\int f(x)g^*(x)dx
+	\label{eqn:}
+\end{equation}
+で、ノルムを
+\begin{equation}
+	\left\| f \right\|^2=\left<f,\right> =\int |f(x)|^2dx
+	\label{eqn:}
+\end{equation}
+で定義する。ただし,$(\cdot)^*$は複素共役を表す．
+$U^{in}$と$U^{r}$は
+\begin{equation}
+	U^{in}(x,\omega)=U(\omega)e^{ikx}, \ \ 
+	U^{r}(x,\omega)=U(\omega)e^{-ik(x-2L)}
+	\label{eqn:}
+\end{equation}
+だから，${\cal I}(x)$は
+\begin{equation}
+	{\cal I}(x)
 	=
-	\int 
-	U^{in}\left( U^{r}\right)^* d\omega
+	\left< U^{in},U^{r}\right>(x)
 	=
 	\int 
 	\left| U(\omega) \right|^2 
@@ -685,7 +716,7 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 	e^{2ik(x-L)}d\omega
 	\label{eqn:pcnj}
 \end{equation}
-となる．
+となる．また，シュワルツの不等式より
 \begin{equation}
 	\left| \left< U^{in},U^{r} \right> \right|
 	\leq  \left\| U^{in}\right\| \left\| U^{r}\right\|
@@ -693,10 +724,61 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 	\left| U\right|^2
 	\label{eqn:}
 \end{equation}
-より，式(\ref{eqn:pcnj})は$x=L$で最大値を取ることが分かる．
-そこで、$<U^{in},U^{r}>$を位置の関数として見ることで、
-反射壁表面を画像化できる。これは、以下の理由から開口合成法の一般化とみなすことができる．
+だから，式(\ref{eqn:pcnj})は$x=L$で最大値を取ることが分かる．
+従って${\cal I}=<U^{in},U^{r}>$を位置の関数として見ることで反射壁表面を画像化できる。
+これは、以下の理由から開口合成法の一般化とみなすことができる．
 
+${\cal I}$は，時間域での変位場を用いて
+\begin{equation}
+	{\cal I}(x)= 2\pi \left< u^{in}(x,t), u^{r}(x,t)\right>
+	\label{eqn:I_ut}
+\end{equation}
+と書くことができる．ただし，内積は時間$t$についての積分を意味する．
+ここで、式(\ref{eqn:I_ut})の反射波変位を観測波形$a_{11}(t)$を用いて書けば
+\begin{eqnarray}
+	{\cal I}(x) &= & 
+	2\pi \int u^{in}(x,t) a_{11}\left(t+\frac{x}{c}\right) dt
+	\\
+	&=&
+	2\pi \int u^{in}\left(x,t-\frac{x}{c}\right) a_{11}\left(t\right) dt \\
+	&=&
+	2\pi \left< u^{in}\left(x,t-\frac{x}{c}\right), a_{11}(t) \right>
+	\label{eqn:I_at}
+\end{eqnarray}
+とすることができる．
+入射波波形$u(t)$を(実際とは異なるとしても)
+理想的なパルスであるとして$u(t)=\delta(t)$とすれば、
+式(\ref{eqn:I_at})は
+\begin{equation}
+	{\cal I}(x)=2\pi a_{11}\left(\frac{2L}{c}\right)
+	\label{eqn:}
+\end{equation}
+となり，$2\pi$の因子を除き，時間軸補正を行わない開口合成結果に一致する．
+式(\ref{eqn:I_at})は，入射場$u^{in}(x,t)$と観測波形$a_{11}(t)$の相関
+を使って像合成を行うもので，開口合成法はその特別なケースであることを意味する．
+明らかに，時間軸を立ち上がり時間$t_d$だけ補正する場合は
+$u^{in}(x,t)=\delta(t-t_d)$とみなすだけでよく，デコンボリューションによる
+時間軸補正も以下のように同様な形式で表現することができる．
+
+式(\ref{eqn:at_dcnv})を用いた開口合成像は
+\begin{equation}
+	I(x)=\left< \delta\left(t-\frac{2L}{c}\right), \tilde a_{11}(t) \right>
+	\label{eqn:}
+\end{equation}
+と表すことができる．右辺の内積を周波数領域で考えれば，
+\begin{eqnarray}
+	I(x) &=&
+	\frac{1}{2\pi}\left< e^{2ikx}, \frac{A}{A^{ref}}e^{2ikL_0} \right> \\
+	&=&
+	\frac{1}{2\pi}\left< \frac{e^{2ik(x-L_0)}}{(A^{ref})^*}, A \right> 
+	\label{eqn:}
+\end{eqnarray}
+となる．これを再び時間領域の表現に戻せば，
+\begin{equation}
+	I(x)= \left< {\cal F}^{-1}\left\{ \frac{1}{(A^{ref})^*}\right\} *\delta \left( t-\frac{2(x-L_0)}{c}\right), a_{11}(t) \right>
+	\label{eqn:Ix_dcnv}
+\end{equation}
+より、式(\ref{eqn:I_at})と同じ形式になる。
 %%%%%
 \section{線形化逆散乱法}
 \subsection{散乱場の積分表現}
