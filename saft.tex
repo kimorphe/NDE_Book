@@ -652,7 +652,7 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 逆変換を行えば，
 \begin{equation}
 	\tilde a_{11}(t)= {\cal F}^{-1} \left\{ 
-	\frac{A(\omega)}{A^{ref}(\omega)} e ^{i\omega L_0}
+	\frac{A(\omega)}{A^{ref}(\omega)} e ^{2ik L_0}
 	\right\}
 	=\delta \left(t-\frac{2L}{c}\right)
 	\label{eqn:at_dcnv}
@@ -672,7 +672,7 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 \end{equation}
 とsinc関数で与えられ,観測誤差が無いと仮定した理想的な場合でも,デコンボリューションで得られる信号は
 帯域幅$\omega_b$に応じた有限な幅を持つものになる.
-\paragraph{位相共役あるいは時間反転法}
+\paragraph{時間反転法}
 入射変位場$u^{in}(x,t)$と反射変位場$u^{r}(x,t)$がそれぞれ推定できたとする.
 このとき,各々の時間に関するフーリ変換
 \begin{equation}
@@ -683,6 +683,7 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 を用い，角周波数$\omega$に関する次の積分を計算する．
 \begin{equation}
 	{\cal I }(x)=
+	Re 
 	\int 	
 	U^{in}(x,\omega)\left( U^{r}(x,\omega)\right)^* d\omega
 	\label{eqn:}
@@ -694,7 +695,7 @@ $a_{11}(t+t_d)$を用いて開口合成を行うことである．
 \end{equation}
 で、ノルムを
 \begin{equation}
-	\left\| f \right\|^2=\left<f,\right> =\int |f(x)|^2dx
+	\left\| f \right\|^2=\left<f,f\right> =\int |f(x)|^2dx
 	\label{eqn:}
 \end{equation}
 で定義する。ただし,$(\cdot)^*$は複素共役を表す．
@@ -708,7 +709,9 @@ $U^{in}$と$U^{r}$は
 \begin{equation}
 	{\cal I}(x)
 	=
-	\left< U^{in},U^{r}\right>(x)
+	Re \left\{ 
+	\left< U^{in},U^{r}\right>
+	\right\}
 	=
 	\int 
 	\left| U(\omega) \right|^2 
@@ -718,14 +721,16 @@ $U^{in}$と$U^{r}$は
 \end{equation}
 となる．また，シュワルツの不等式より
 \begin{equation}
+	Re \left\{ \left< U^{in}, U^{r}\right> \right\}
+	\leq 
 	\left| \left< U^{in},U^{r} \right> \right|
 	\leq  \left\| U^{in}\right\| \left\| U^{r}\right\|
 	=\left| R \right|
-	\left| U\right|^2
+	\left\| U\right\|^2
 	\label{eqn:}
 \end{equation}
-だから，式(\ref{eqn:pcnj})は$x=L$で最大値を取ることが分かる．
-従って${\cal I}=<U^{in},U^{r}>$を位置の関数として見ることで反射壁表面を画像化できる。
+で，${\cal I}(L)=R \left\| U\right\|^2$だから，式(\ref{eqn:pcnj})は$x=L$で最大値を取る．
+従って${\cal I}=Re \left<U^{in},U^{r}\right>$を位置の関数として見ることで反射壁表面を画像化できる。
 これは、以下の理由から開口合成法の一般化とみなすことができる．
 
 ${\cal I}$は，時間域での変位場を用いて
@@ -733,7 +738,7 @@ ${\cal I}$は，時間域での変位場を用いて
 	{\cal I}(x)= 2\pi \left< u^{in}(x,t), u^{r}(x,t)\right>
 	\label{eqn:I_ut}
 \end{equation}
-と書くことができる．ただし，内積は時間$t$についての積分を意味する．
+と書くことができる．ただし，式(\ref{eqn:I_ut})の内積は時間$t$に関する積分を意味する．
 ここで、式(\ref{eqn:I_ut})の反射波変位を観測波形$a_{11}(t)$を用いて書けば
 \begin{eqnarray}
 	{\cal I}(x) &= & 
@@ -750,19 +755,19 @@ ${\cal I}$は，時間域での変位場を用いて
 理想的なパルスであるとして$u(t)=\delta(t)$とすれば、
 式(\ref{eqn:I_at})は
 \begin{equation}
-	{\cal I}(x)=2\pi a_{11}\left(\frac{2L}{c}\right)
+	{\cal I}(x)=2\pi a_{11}\left(\frac{2x}{c}\right)
 	\label{eqn:}
 \end{equation}
 となり，$2\pi$の因子を除き，時間軸補正を行わない開口合成結果に一致する．
 式(\ref{eqn:I_at})は，入射場$u^{in}(x,t)$と観測波形$a_{11}(t)$の相関
 を使って像合成を行うもので，開口合成法はその特別なケースであることを意味する．
 明らかに，時間軸を立ち上がり時間$t_d$だけ補正する場合は
-$u^{in}(x,t)=\delta(t-t_d)$とみなすだけでよく，デコンボリューションによる
+$u^{in}(x,t)=\delta(t+t_d)$とみなすだけでよく，デコンボリューションによる
 時間軸補正も以下のように同様な形式で表現することができる．
 
 式(\ref{eqn:at_dcnv})を用いた開口合成像は
 \begin{equation}
-	I(x)=\left< \delta\left(t-\frac{2L}{c}\right), \tilde a_{11}(t) \right>
+	I(x)=\left< \delta\left(t-\frac{2x}{c}\right), \tilde a_{11}(t) \right>
 	\label{eqn:}
 \end{equation}
 と表すことができる．右辺の内積を周波数領域で考えれば，
@@ -780,6 +785,102 @@ $u^{in}(x,t)=\delta(t-t_d)$とみなすだけでよく，デコンボリュー�
 \end{equation}
 より、式(\ref{eqn:I_at})と同じ形式になる。
 %%%%%
+\subsubsection{多次元問題}
+\paragraph{時間軸補正}
+多次元問題では開口合成像は式(\ref{eqn:saft})で与えられる。
+従って、時間軸の原点位置を補正したときの画像化関数は
+\begin{equation}
+	I(\fat{x})=\sum a_{ij}(t+t_d)w_{ij}
+	\label{eqn:}
+\end{equation}
+となる。なお，時間軸原点の補正量$t_d$は、送受信子の組み合わせによって
+異なることが考えられるため、$t_d=t_d(i,j)$として、一般には観測波形毎に
+異なるものとしておく．
+\paragraph{デコンボリューション}
+既知の点散乱体からの散乱波$\left\{ a_{ij}^{sc}(t)\right\}$
+を参照波形として用いる．
+$a_{ij}^{ref}(t)$のフーリエ変換を$A^{ref}_{ij}(\omega)$とすれば、
+\begin{equation}
+	\tilde a_{ij}(t) = {\cal F}^{-1} 
+	\left\{
+		\frac{A_{ij}}{A_{ij}^{ref}}e^{ik(L_i+L_j)}
+	\right\}
+	\label{eqn:}
+\end{equation}
+を用いて開口合成を行うことで、正しい位置に結像する。
+ただし、$L_i$は、点$\fat{x}_i$から参照波形の観測に用いた点散乱体までの距離を表す．
+\paragraph{時間反転法}
+位置$\fat{x}_j$の送信子からの入射波を$u^{in}(\fat{x},t;\fat{x}_j)$，そのときに
+生じる散乱波を$u^{sc}(\fat{x},t;\fat{x}_j)$とする．
+このとき，時間反転法における画像化関数を
+\begin{eqnarray}
+	{\cal I}(\fat{x})
+		&=&
+	2\pi
+	\sum_{j}
+	\left<
+		u^{in}(\fat{x},t;\fat{x}_j), u^{sc}(\fat{x},t;\fat{x}_j)
+	\right>
+	\\
+	&=&
+	\sum_{j}
+	\left<
+		U^{in}(\fat{x},\omega;\fat{x}_j), U^{sc}(\fat{x},\omega;\fat{x}_j)
+	\right>
+	\label{eqn:}
+\end{eqnarray}
+とすれば，開口合成法における画像化関数$I(\fat{x})$が${\cal I}(\fat{x})$の特別な
+ケースとして得られる．
+なお，$U^{in}$と$U^{sc}$は、それぞれ$u^{in}$と$u^{sc}$の時間に関するフーリエ変換である。
+$u^{in}$は散乱体を含まない場合の波動場であることから既知とみなすことができる。
+一方$u^{sc}$は未知のため、時間反転法で推定する。
+時間反転法で散乱場を推定する際、観測波形を用いる。
+推定に用いる情報は多い方がよいため、全ての受信点$\fat{x}_i$で得られた観測波形を用いる。
+このとき解くべき初期値問題は
+\begin{equation}
+	\nabla ^2 u^{sc}(\fat{x},\tau;\fat{x}_j)-c^{-2}\ddot{u}^{sc}(\fat{x},\tau; \fat{x}_j)=0
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{sc}(\fat{x},\tau=0;\fat{x}_j)=0, \ \ 
+	\dot{u}^{sc}(\fat{x},\tau=0;\fat{x}_j)=0
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{sc}(\fat{x}_i,\tau;\fat{x}_j)=a_{ij}(T-\tau), \ \ (i \in {\cal M})
+	\label{eqn:}
+\end{equation}
+である。点源からの入射場は
+\begin{equation}
+	u^{in}(\fat{x},t;\fat{x}_j)=\frac{1}{4\pi r_j}u\left(t-\frac{r_j}{c}\right)
+	\label{eqn:}
+\end{equation}
+で、散乱場は
+\begin{equation}
+	u^{sc}(\fat{x},t;\fat{x}_j)=\sum_{\fat{x}_i}
+	\frac{1}{4\pi r_i}a_{ij}\left(T-\left(\tau-\frac{r_i}{c}\right)\right), \ \ (\tau=T-t)
+	\label{eqn:}
+\end{equation}
+となるので、これらの結果を用いて$\cal I$を評価することができる。
+さらに、入射波形を理想的なパルスとみなし、
+\begin{equation}
+	u(t)=\delta(t)
+	\label{eqn:}
+\end{equation}
+とすれば、
+\begin{equation}
+	{\cal I}(\fat{x})
+	=
+	\sum_{i,j} \frac{1}{8\pi r_ir_j} a_{ij} \left(\frac{r_i+r_j}{c}\right)
+	\label{eqn:}
+\end{equation}
+が得られ、重みを
+\begin{equation}
+	w_{ij}(\fat{x})=\frac{1}{8\pi r_ir_j} 
+	\label{eqn:}
+\end{equation}
+としたときの開口合成画像が得られる。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{線形化逆散乱法}
 \subsection{散乱場の積分表現}
 周波数領域におけるスカラー波の散乱問題を考える．
