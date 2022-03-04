@@ -22,7 +22,7 @@ class IMG:
         self.ylim=np.array([y1,y2])
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
-        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="jet",interpolation="none")
+        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="gray",interpolation="none")
         ax.set_aspect(1.0)
         fsz=14
         ax.set_xlabel("x",fontsize=fsz)

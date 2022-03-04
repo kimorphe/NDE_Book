@@ -22,7 +22,8 @@ class IMG:
         self.ylim=np.array([y1,y2])
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
-        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="jet",interpolation="none")
+        #im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="jet",interpolation="none")
+        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="gray",interpolation="none")
         ax.set_aspect(1.0)
         fsz=14
         ax.set_xlabel("x",fontsize=fsz)
@@ -68,9 +69,10 @@ if __name__=="__main__":
     im.set_xlim(-3,5)
     im.set_ylim(-2,1.0)
 
+    #Y1=np.array([ 1,1])
+
     Y1=np.array([-1,1])
 
-    Y1=np.array([ 1,1])
     Y2=np.array([ 2,1])
 
 
@@ -82,5 +84,5 @@ if __name__=="__main__":
     ax.plot(Y2[0],Y2[1],"ko",markersize=12,markerfacecolor="w")
     ax.set_ylim([-2,1.2])
 
-    fig.savefig("img2.png",bbox_inches="tight")
+    fig.savefig("img1.png",bbox_inches="tight")
     plt.show()
