@@ -1,0 +1,424 @@
+\section{随伴方程式法}
+これまでの議論は点散乱体に対するものであった．
+ここまでの結果が大きさを持つ散乱体に対しても有効であることを示す．
+そのための一つの方法は，随伴方程式法を単純化したものとして、これまでの再構成式が得られることを見ることである。
+もう一つの方法は、線形化逆散乱解析（あるいはphysical optics far-field scattering method:POFFIS）によって
+与えられる再構成式を時間領域で表せば、開口合成法の画像化関数とみなせることを見ることである。
+本節では、随伴方程式法について述べる．
+\subsection{問題設定}
+引き続きスカラー波の散乱問題を考える．
+ただし，モデルパラメータの意味を明確にするために，音響波を対象として考える．
+いま，媒体の粒子速度を$\fat{v}(\fat{x},t)$，圧力を$p(\fat{x},t)$とする．
+運動量保存則は，質量密度$\rho$とすれば，
+\begin{equation}
+	\rho \dot{\fat{v}}= -\nabla p, \ \ \fat{x}\in G, t\in [0,T]
+	\label{eqn:YYY_2nd_law}
+\end{equation}
+と表される．また，圧力と速度の関係は
+\begin{equation}
+	\dot{p}=-\lambda \nabla \cdot \fat{v}
+	\label{eqn:YYY_pv}
+\end{equation}
+で，$\lambda$はラメ定数を表す．式(\ref{eqn:YYY_2nd_law})と式(\ref{eqn:YYY_pv})から速度ベクトルとその時間微分を
+消去すれば，圧力に関する方程式が次のように得られる．
+\begin{equation}
+	\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)=0
+	\label{eqn:YYY_wveq_p}
+\end{equation}
+ただし，
+\begin{equation}
+	\alpha = \frac{1}{\rho}, \ \ \beta=\frac{1}{\lambda}
+	\label{eqn:YYY_consts_ab}
+\end{equation}
+とする．圧力場には，静止過去の条件:
+\begin{equation}
+	p(\fat{x},t)=0, \ \ \dot{p}(\fat{x},t)=0, \ \ (t\leq 0)
+	\label{eqn:YYY_IC_p}
+\end{equation}
+と，ノイマン条件:
+\begin{equation}
+	\frac{\partial p}{\partial n}(\fat{x},t)=0, \ \ \left( \fat{x} \in  \partial G \right)
+	\label{eqn:YYY_BC_p}
+\end{equation}
+を課す．ここで，領域$G$の内部には，領域$D\in G$を占めるインクルージョンがある場合を考え，
+\begin{equation}
+	\rho (\fat{x})=
+	\left\{
+	\begin{array}{cc}
+		\rho_0 +\Delta \rho & (\fat{x}\in D) \\
+		\rho_0 & (\rm otherwise)
+	\end{array}
+	\right.
+	\label{eqn:YYY_rho_x}
+\end{equation}
+\begin{equation}
+	\lambda (\fat{x})=
+	\left\{
+	\begin{array}{cc}
+		\lambda_0 +\Delta \lambda & (\fat{x}\in D) \\
+		\lambda_0 & (\rm otherwise)
+	\end{array}
+	\right.
+	\label{eqn:YYY_rho_x}
+\end{equation}
+とする．以下では，$D$で発生した散乱波$p^{in}(\fat{x},t)$から
+$D$を再構成する問題を考える．
+そのためには，$\lambda(\fat{x}$あるいは$\rho(\fat{x})$を画像化領域において
+再構成すればよい．観測は$\left\{ \fat{y}_i, i=1,\dots M\right\}$において，
+$0\leq t\leq T$の範囲で行い，圧力の時間波形データ
+\begin{equation}
+	{\cal D}
+	=
+	\left\{ 
+		p^{0}(\fat{y}_i,t), i=1,2,\dots M, \, 0\leq t \leq T
+	\right\}
+	\label{eqn:YYY_00}
+\end{equation}
+が得られているものとする．
+データ$\cal D$から$\rho$と$\lambda$を再構成する問題を，次のコスト関数
+の最小化問題として考える．
+\begin{equation}
+	\chi (\fat{m})=\frac{1}{2} \sum_{i=1}^M\int_0^T \left| p(\fat{x},t)-p^0(\fat{x}_i,t))\right|^2dtd\fat{x}
+	\label{eqn:YYY_01}
+\end{equation}
+ただし，$\fat{m}$は
+\begin{equation}
+	\fat{m}=(\alpha,\,\beta)=\left( \rho^{-1},\, \lambda^{-1} \right)
+	\label{eqn:YYY_02}
+\end{equation}
+で，コスト関数が再構成すべきモデルパラメータ$\rho$と$\lambda$に依存することを明示するためのものである．
+\subsection{随伴方程式法}
+コスト関数$\chi(\fat{m})$を最小化する際，適当なモデルパラメータ$\fat{m}$の初期値からはじめ，
+コスト関数の値が減少する方向へ$\fat{m}$を修正する勾配法の適用を考える．
+勾配法を適用するためには，$\chi(\fat{m})$の$\fat{m}$に関する勾配が必要となる．勾配は次のように
+定義することができる．
+\begin{equation}
+	\nabla_m \chi(\fat{m}) 
+	\delta \fat{m}
+	= \lim_{\varepsilon \rightarrow 0}
+	\frac{1}{\varepsilon}
+	\left[
+		\chi(\fat{m}+\varepsilon \delta \fat{m}) - \chi(\fat{m})
+	\right]
+	\label{eqn:YYY_03}
+\end{equation}
+ここに$\delta \fat{m}$は，$\fat{m}+\delta \fat{m}$がモデルパラメータの
+空間に属するような任意の変分を表す．
+勾配$\nabla \chi (\fat{m})\delta \fat{m}$は，以下に示すように随伴方程式法(adjoint method)
+を用いて効率的に求めることができる．
+
+はじめに，次のように拡張されたコスト関数を定義する．
+\begin{equation}
+	\chi^*(\fat{m})
+	=
+	\chi(\fat{m})
+	+
+	\int_G\int_0^T 
+	p^*(\fat{x},t)
+	\left( 
+		\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
+	\right)
+	dt d\fat{x}
+	\label{eqn:YYY_chi2}
+\end{equation}
+右辺第二項は，圧力場の支配方程式(\ref{eqn:YYY_wveq_p})を制約条件として加えるための
+ラグランジュ乗数項で，$p^*(\fat{x},t)$は任意の関数である．
+コスト関数の被積分関数を
+\begin{equation}
+	\chi_1(\fat{m})=\frac{1}{2} 
+	\sum_{i=1}^M
+	\left| p(\fat{x},t)-p^0(\fat{x},t)\right|^2
+	\delta(\fat{x}-\fat{y}_i )
+	\label{eqn:YYY_04}
+\end{equation}
+で，$G$と$[0,T]$上での積分を
+\begin{equation}
+	\left< \cdot \right>=\int_G\int_0^T (\cdot )dtd\fat{x}
+	\label{eqn:YYY_05}
+\end{equation}
+とし，微分作用素
+\begin{equation}
+	L(p,\fat{m})=\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
+	\label{eqn:YYY_06}
+\end{equation}
+を使って式(\ref{eqn:YYY_chi2})右辺の第二項を表せば，$\chi^*(\fat{m})$は
+\begin{equation}
+	\chi^*(\fat{m}) 
+	=
+	\left< \chi_1 (\fat{m})\right>
+	+
+	\left< p^* L(p,\fat{m})\right>
+	\label{eqn:YYY_chi2s}
+\end{equation}
+と書くことができる．
+圧力場$p$はモデルパラメータ$\fat{m}$に依存するので，
+\begin{equation}
+	\delta p= \nabla_m p \delta \fat{m}
+	\label{eqn:YYY_var_p}
+\end{equation}
+とすれば，式(\ref{eqn:YYY_chi2s})の勾配を次にように表すことができる．
+\begin{equation}
+	\nabla_m \chi^* \delta \fat{m}
+	=
+	\nabla_p \chi \delta p
+	+
+	\nabla_p \left< p^*  L(p,\fat{m}) \right> \delta p
+	+
+	\nabla_m \left< p^*  L(p,\fat{m}) \right> \delta \fat{m}
+	\label{eqn:YYY_dchi2}
+\end{equation}
+式(\ref{eqn:YYY_dchi2})右辺のそれぞれの項は
+\begin{equation}
+	\nabla_p \chi \delta p
+	=  
+	\left< \nabla_p \chi_1\cdot \delta p \right> 
+	\label{eqn:YYY_dp1}
+\end{equation}
+\begin{equation}
+	\nabla_p \left< p^*  L(p,\fat{m}) \right> \delta p
+	=  
+	\left< p^*  \cdot \nabla_p L(p,\fat{m})\delta p \right> 
+	\label{eqn:YYY_dp2}
+\end{equation}
+\begin{equation}
+	\nabla_m \left< p^*  L(p,\fat{m}) \right> \delta \fat{m}
+	=
+	\left< p^*  \cdot \nabla_m L(p,\fat{m}) \delta \fat{m}\right> 
+	\label{eqn:YYY_dm3}
+\end{equation}
+とすることができる．これらの式の右辺に現れる勾配を具体的に計算すると，それぞれ以下のようになる．
+\begin{equation}
+	\nabla_p \chi_1 =
+	\sum_{i=1}^M \left(p(\fat{x},t)-p^0(\fat{x},t)\right) \delta(\fat{x}-\fat{y}_i)
+	\label{eqn:YYY_dm_chi1}
+\end{equation}
+\begin{equation}
+	\nabla_p L(p,\fat{m})\delta p 
+	=
+	L(\delta p,\fat{m})
+	\label{eqn:YYY_dp_L}
+\end{equation}
+\begin{equation}
+	\nabla_m L(p,\fat{m})\delta \fat{m} 
+	=
+	L(p,\delta \fat{m})
+	\label{eqn:YYY_dm_L}
+\end{equation}
+式(\ref{eqn:YYY_dp_L})を式(\ref{eqn:YYY_dp2})に用いれば，
+\begin{equation}
+	\left< p^*  \cdot \nabla_p L(p,\fat{m})\delta p \right> 
+	=
+	\left< p^*  \cdot L(\delta p,\fat{m}) \right> 
+	=
+	\left<
+		\alpha p^*\delta\ddot{p}
+	\right>
+	-
+	\left<
+		p^* \cdot \left( \nabla \beta \nabla p\right)
+	\right>
+	\label{eqn:YYY_dp2_ab}
+\end{equation}
+となる．式(\ref{eqn:YYY_dp2_ab})右辺の項は，部分積分を用いて次のように書き直すことができる．
+\begin{equation}
+	\left<
+		\alpha p^*\delta\ddot{p}
+	\right>
+	=
+	\left[ 
+		\alpha p^* \delta \dot{p}	
+	\right]_0^T
+	-
+	\left[ 
+		\alpha \dot{p}^* \delta p	
+	\right]_0^T
+	+
+	\left< \alpha\ddot{p} \delta p \right>
+	\label{eqn:YYY_08}
+\end{equation}
+\begin{eqnarray}
+	\left<
+		p^* \cdot \left( \nabla \beta \nabla p\right)
+	\right>
+	&=&
+	\left<
+		\nabla\cdot
+		\left( \beta p^*\nabla p -\beta p \nabla p^* \right)
+	\right>
+	+
+	\left<
+		p \nabla\cdot \left( \beta \nabla p^* \right)
+	\right> \\
+	\label{eqn:YYY_09}
+	&=&
+	\int_0^T\int_{\partial G}
+	\beta\left( 
+		p^* \frac{\partial p}{\partial n}
+		-
+		-p \frac{\partial p^*}{\partial n}
+	\right)
+	dS
+	dt
+	+
+	\left<
+		p \nabla\cdot \left( \beta \nabla p^* \right)
+	\right>
+	\label{eqn:YYY_10}
+\end{eqnarray}
+従って，時間に関して
+\begin{equation}
+	\delta p(\fat{x},0)=0, \ \ \delta \dot{p} (\fat{x},0)=0
+	\label{eqn:YYY_11}
+\end{equation}
+と，終端条件
+\begin{equation}
+	p^*(\fat{x},T)=0, \ \ \dot{p}^*(\fat{x},T)=0 
+	\label{eqn:YYY_12}
+\end{equation}
+を課し，空間に関してノイマン条件
+\begin{equation}
+	\left. \frac{\partial p^*}{\partial n}
+	\right|_{\partial G}=0
+	\label{eqn:yyy_13}
+\end{equation}
+を課せば，式(\ref{eqn:YYY_dp2})について次の関係が成り立つことが分かる．
+\begin{equation}
+	\left< p^*  \cdot \nabla_p L(p,\fat{m})\delta p \right> 
+	=
+	\left< p^*  \cdot L(\delta p,\fat{m})\right> 
+	=
+	\left< L(\delta p^*,\fat{m}) \cdot \delta p\right> 
+	\label{eqn:YYY_14}
+\end{equation}
+以上を踏まえてコスト関数の勾配(\ref{eqn:YYY_dchi2})を書けば，
+\begin{equation}
+	\nabla_m \chi^* \delta \fat{m}
+	=
+	\left< 
+		\left(L(p^*,\fat{m})+\nabla_p\chi_1)\right) \cdot \delta p
+	\right>
+	+
+	\left< p^*  \cdot L(p,\delta \fat{m}) \right> 
+	\label{eqn:YYY_dchi2_adj}
+\end{equation}
+となる．このことから，
+\begin{equation}
+	L(p^*,\fat{m})+\nabla_p\chi_1=0
+	\label{eqn:YYY_adj_PDE}
+\end{equation}
+となるように$p^*$を選べば，
+\begin{equation}
+	\nabla_m \chi^* \delta \fat{m}
+	=
+	\left< p^*  \cdot L(p,\delta \fat{m}) \right> 
+	\label{eqn:YYY_gradX0}
+\end{equation}
+とすることができる．式(\ref{eqn:YYY_adj_PDE})は随伴方程式と呼ばれる．
+ここでは，随伴方程式は元の方程式である$L(p,\fat{m})=0$と同じ
+波動方程式で，$-\nabla \chi_1(p)$はそのソース項となっている．
+\begin{equation}
+	\delta \fat{m}=\left( \delta \alpha, \, \delta \beta \right)
+	\label{eqn:YYY_d_ab}
+\end{equation}
+とすれば，
+\subsection{随伴場と画像化関数}
+式(\ref{eqn:YYY_gradX0})の右辺を評価することで，圧力場に関する任意の変分$\delta p$
+を計算することなくコスト関数の勾配が得られる．ただしそのためには随伴問題の解$p^*(\fat{x},t)$
+を$G \times [0,T]$において求める必要がある．
+$p^*$はこれまでの議論より、次の条件を満足する場である．
+\begin{equation}
+	L(p^*,\fat{m})=
+	\alpha \ddot{p}^* -\nabla\cdot \left( \beta \nabla p^* \right)
+	=	
+	-\nabla_p\chi_1
+	\label{eqn:YYY_adj_PDE_rep}
+\end{equation}
+\begin{equation}
+	p*(\fat{x},T)=0, \ \ \dot{p}^*(\fat{x},T)=0
+	\label{eqn:YYY_TC_rep}
+\end{equation}
+\begin{equation}
+	\left. \frac{\partial p^*}{\partial n}\right|_{\partial G}=0
+	\label{eqn:YYY_BC_rep}
+\end{equation}
+演算子$L(p^*,\fat{m})$は時間反転に対して不変で，
+終端条件(\ref{eqn:YYY_TC_rep})は$t\rightarrow T-t$によって初期条件
+\begin{equation}
+	p*(\fat{x},0)=0, \ \ \dot{p}^*(\fat{x},0)=0
+	\label{eqn:YYY_IC_adj}
+\end{equation}
+として扱うことができる．このことから$G\times [0,T]$における初期値問題を解くことで
+随伴場$p^*(\fat{x},t)$が得られる．その際，ソース項である式(\ref{eqn:YYY_dm_chi1})
+において$p^{0}(\fat{y}_i,t)$には観測データ${\cal D}$を用い，
+$p(\fat{x},t)$には，現時点での$\fat{m}$の推定値を用いて順問題
+$L(p,\fat{m})=0$を解いて得られた圧力場$p(\fat{x},t)$を用いる．
+その結果得られる勾配$\nabla_m\chi \delta \fat{m}$から
+得られるコスト関数の下降方向へモデルパラメータ$\delta \fat{m}$を繰り返し修正すれば，
+最終的に未知のモデルパラメータを決定することができる．
+このような方法はフルウェーブインバージョンと呼ばれる．
+ここでは，フルウェーブインバージョンのような反復は行わず，一回の計算で散乱体の
+形状を再構成することを考える．
+そこで，モデルパラメータの初期値を
+\begin{equation}
+	\delta \fat{m}=\left(\rho_0^{-1},\, \lambda_0^{-1} \right)
+	\label{eqn:YYY_16}
+\end{equation}
+と均質材として与える．この場合，随伴方程式のソース項に含まれる
+順問題の圧力場は入射場$p^{in}(\fat{x},t)$意味し，
+$p(\fat{x},t)-p^{0}(\fat{x},t)$は，散乱波$p^{sc}(\fat{x},t)$を時間反転した
+\begin{equation}
+	-\nabla_p\chi_1 = 
+	-\sum_{i=1}^M p^{sc}(\fat{x},T-t)\delta(\fat{x}-\fat{y}_i)
+	\label{eqn:YYY_17}
+\end{equation}
+となる．従って、観測した散乱波形を時間反転して媒体に入力することで励起される波動場が
+，随伴場の物理的な意味になる．
+最後に，式(\ref{eqn:YYY_gradX0})を計算し易い形に書き直す．式(\ref{eqn:YYY_gradX0})において
+演算子の部分を具体的に書けば,
+\begin{equation}
+	\left< p^*  \cdot L(p,\delta \fat{m}) \right> 
+	=
+	\left< \delta \alpha p^*  \ddot{p} \right> 
+	-
+	\left< p^*  \nabla\cdot \left( \delta \beta \nabla p \right)\right> 
+	\label{eqn:YYY_18}
+\end{equation}
+で,右辺の項を終端条件(\ref{eqn:YYY_TC_rep})と境界条件(\ref{eqn:YYY_BC_p})を考慮して部分積分によって
+変形すれば，
+\begin{equation}
+	\left< \alpha p^*  \ddot{p} \right> 
+	=\int_G \left( \int_0^T \dot{p}\dot{p}^* dt \right) \delta \alpha  d\fat{x}
+	\label{eqn:YYY_19}
+\end{equation}
+\begin{equation}
+	-\left< p^*  \nabla\cdot \left( \delta \beta \nabla p \right)\right> 
+	=
+	\int_G \left( \int_0^T \nabla p\cdot \nabla p^* dt \right) \delta \beta  d\fat{x}
+	\label{eqn:YYY_20}
+\end{equation}
+が得られる．そこで，
+\begin{equation}
+	K_\alpha(\fat{x})=-\int_0^T \dot{p}\dot{p}^* dt 
+	\label{eqn:YYY_Ka}
+\end{equation}
+\begin{equation}
+	K_\beta(\fat{x})=-\int_0^T \nabla p\cdot \nabla p^* dt 
+	\label{eqn:YYY_Kb}
+\end{equation}
+とおけば，$K_\alpha(\fat{x})$と$K_\beta(\fat{x})$が，それぞれ
+$\rho$と$\lambda$の推定値を修正すべき方向であることが分かる．
+従って，$K_\alpha(\fat{x})$や$K_\beta(\fat{x})$，あるいはその組み合わせを
+画像化関数として用いれば，密度や弾性係数差の変動を推定することにより
+散乱体の像合成を行うことができる．特に，式(\ref{eqn:YYY_Ix_trev})において
+$U(\fat{x})=\dot{p}$であると考えれば，$K_\alpha(\fat{x})$は，発見的な方法で
+導かれた時間反転法による再構成式を与えることに気付く．
+随伴方程式法では形状再構成を行う散乱体は点散乱体である必要は無い．
+このことから，点散乱体の再構成を念頭において導出した式(\ref{eqn:YYY_Ix_trev})
+の再構成式を大きさのある散乱体に適用することの根拠が得られる．
+さらに，時間反転法は開口合成法の拡張とみなせることはこれまで議論した通りである
+ことから，開口合成法も随伴方程式法から導出できることが分かる．
+より具体的に言えば，随伴方程式法で得られた$K_\alpha(\fat{x})$や$K_\beta(\fat{x})$
+の一部を用い，その計算に必要となる波動場$ p(\fat{x},t)$や$p^*(\fat{x},t)$
+を非常に簡単な近似解で置き換えた結果として時間反転法や開口合成法の再構成式が
+得られるという形での導出が可能となる．
+

@@ -1,7 +1,7 @@
 all: fdm.pdf saft.pdf
 saft.pdf: saft.dvi
 	dvipdfmx -p a4 saft.dvi
-saft.dvi: saft.tex\
+saft.dvi: saft.tex adj.tex poffis.tex\
        	Figs/measurement.eps Figs/cloud.eps Figs/wvfm2.eps Figs/locii.eps\
        	Figs/saftM2.eps Figs/psf_pulse.eps Figs/1D_prb.eps Figs/setup.eps\
        	Figs/Evald.eps Figs/pulse_echo.eps Figs/blind_sum.eps Figs/psf_aptlim.eps\

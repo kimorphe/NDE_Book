@@ -1,0 +1,396 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{線形化逆散乱法}
+\subsection{散乱場の積分表現}
+周波数領域におけるスカラー波の散乱問題を考える．
+波動場を$u(\fat{x},\omega)$とし，特に必要の無い限り角周波数$\omega$は省略する．
+$u(\fat{x})$は，ヘルムホルツ方程式を満足する．
+\begin{equation}
+	\nabla^2 u(\fat{x}) + k^2 u(\fat{x}) =0, \ \ (\fat{x} \notin \bar{D})
+	\label{eqn:ZZZ_00}
+\end{equation}
+ここに，$k=\omega/c$は一定の波数を表す．
+はじめに，無限領域中に置かれた散乱体$D$は，境界$\partial D$上でディリクレ条件
+\begin{equation}
+	u(\fat{x}) = 0, \ \ \fat{x}\in \partial D
+	\label{eqn:ZZZ_01}
+\end{equation}
+あるいは，ノイマン条件:
+\begin{equation}
+	\frac{\partial u}{\partial n} = 0 ,\ \ \fat{x}\in \partial D
+	\label{eqn:ZZZ_02}
+\end{equation}
+を満足する場合について考える．
+散乱場を$u^{\rm sc}(\fat{x})$，入射波$u^{in}(\fat{x})$とすると，全波動場は
+\begin{equation}
+	u(\fat{x})=u^{in}(\fat{x})+ u^{\rm sc}(\fat{x})
+	\label{eqn:ZZZ_03}
+\end{equation}
+と表される．散乱場は放射条件を満足するものとすれば，
+$u^{\rm sc}(\fat{x})$は次のように積分表現することができる．
+\begin{equation}
+	u^{\rm sc}(\fat{y}) = \int _{\partial D} 
+	\left\{
+		G(\fat{x},\fat{y})t(\fat{x})
+	-
+		H(\fat{x},\fat{y})u(\fat{x})
+	\right\} dS_x
+	\label{eqn:ZZZ_04}
+\end{equation}
+ここで，$G(\fat{x},\fat{y})$は
+\begin{equation}
+	\nabla^2 G(\fat{x},\fat{y}) + k^2 G(\fat{x},\fat{y}) =-\delta (\fat{x}-\fat{y} )
+	\label{eqn:ZZZ_05}
+\end{equation}
+を満足する無限領域のおけるグリーン関数で，
+\begin{equation}
+	G(\fat{x},\fat{y}) =\frac{e^{ikr}}{4\pi r}, \ \ r=\left| \fat{x}-\fat{y} \right|
+	\label{eqn:ZZZ_Green}
+\end{equation}
+で与えられる．また，
+\begin{equation}
+	H(\fat{x},\fat{y}) = \frac{\partial G(\fat{x},\fat{y})}{\partial n(\fat{x})}, \ \ 
+	t(\fat{x}) =\frac{\partial u(\fat{x})}{\partial n(\fat{x})}
+	\label{eqn:ZZZ_06}
+\end{equation}
+とした．
+ここで，$y=\left|\fat{y}\right|\gg \left| \fat{x} \right|$のとき，幾何光学近似
+\begin{equation}
+	r\sim  y  -\hat{\fat{y}}\cdot \fat{x}, \ \ (y\rightarrow \infty)
+	\label{eqn:ZZZ_para}
+\end{equation}
+を用いると，散乱場の積分表現は，ディリクレ問題，ノイマン問題，それぞれの場合について
+\begin{equation}
+	u^{\rm sc}(\fat{y}) \sim \frac{e^{iky}}{4\pi y} U(\hat{\fat{y}};s)  
+	\label{eqn:ZZZ_07}
+\end{equation}
+\begin{equation}
+	U(\hat{\fat{y}};s)  = \int _{\partial D} t(\fat{x};s)e^{-ik\hat{\fat{y}}\cdot \fat{x}} dS_x
+	, \ \ ( {\rm Dirichlet})
+	\label{eqn:ZZZ_08}
+\end{equation}
+\begin{equation}
+	U(\hat{\fat{y}};s)  =-\int _{\partial D} u(\fat{x};s)e^{-ik\hat{\fat{y}}\cdot \fat{x}} dS_x
+	, \ \ ({\rm Neumann})
+	\label{eqn:ZZZ_09}
+\end{equation}
+なお，$;$に続く$s$は入射波を指定するパラメータを表し，このように表記すること
+入射波に依存した量であることを必要あ場合には明示する．
+ここで，任意の$D$と場の量$f(\fat{x})$に対して次のように作用する特異関数$\gamma_D(\fat{x})$
+\begin{equation}
+	\int \gamma_D(\fat{x})f(\fat{x})d^3\fat{x} =\int _{\partial D} f(\fat{x}) dS
+	\label{eqn:ZZZ_10}
+\end{equation}
+を導入する．これを用いると，散乱振幅を
+\begin{equation}
+	U(\hat{\fat{y}};s)  = \int \gamma_D(\fat{x})t(\fat{x};s)e^{-ik\hat{\fat{y}}\cdot \fat{x}} dS_x
+	, \ \ ( {\rm Dirichlet})
+	\label{eqn:ZZZ_11}
+\end{equation}
+\begin{equation}
+	U(\hat{\fat{y}};s)  =-\int \gamma_D(\fat{x})u(\fat{x};s)e^{-ik\hat{\fat{y}}\cdot \fat{x}} dS_x
+	, \ \ ({\rm Neumann})
+	\label{eqn:ZZZ_12}
+\end{equation}
+と，フーリエ積分の形式で表すことができる．
+
+続いて，領域$D$を介在物が占める場合について考える．
+ここで，介在物の外部で波数は$k_0$で一定とし，内部では一般に$k_0$とは異なる
+波数となるとする．
+そこで，波数を位置の関数として$k(\fat{x})$とすれば，支配方程式であるHelmholtz方程式は
+\begin{equation}
+	\nabla^2 u(\fat{x},\omega) + k^2(\fat{x}) u(\fat{x},\omega) =0
+	\label{eqn:ZZZ_Hlmhlz2}
+\end{equation}
+となる．ここで，
+\begin{equation}
+	n_r(\fat{x}) =\frac{k}{k_0}
+	\label{eqn:ZZZ_13}
+\end{equation}
+\begin{equation}
+	V(\fat{x})=n_r^2(\fat{x}-1)
+	\label{eqn:ZZZ_14}
+\end{equation}
+とおけば，
+\begin{equation}
+	k^2=k_0^2 + k_0^2 V(\fat{x})
+	\label{eqn:ZZZ_15}
+\end{equation}
+より，式(\ref{eqn:ZZZ_Hlmhlz2})は
+\begin{equation}
+	\nabla^2 u(\fat{x},\omega) + k_0(\fat{x}) u(\fat{x},\omega) = -k_0^2 V(\fat{x})u(\fat{x})
+	\label{eqn:ZZZ_Hlmhlz3}
+\end{equation}
+と，形式上，非斉次のHelmholtz方程式の形に書き直すことができる．
+従って，右辺の非斉次項を物体力項として扱えば，散乱場を次のように積分表示することができる．
+\begin{equation}
+	u^{\rm sc}(\fat{y})=u(\fat{y})-u^{in}(\fat{y}) = k_0^2\int G_0(\fat{x},\fat{y})V(\fat{x})u(\fat{x}) d^3\fat{x}
+	\label{eqn:ZZZ_LS}
+\end{equation}
+ここで$G_0(\fat{x},\fat{y})$は波数$k_0$をもつ均質な無限媒体に対するグリーン関数で，
+式(\ref{eqn:ZZZ_Green})において$k=k_0$としたものである．
+式(\ref{eqn:ZZZ_LS})はLippman-Schwinger方程式，$V(\fat{x})$は散乱ポテンシャルと呼ばれる．
+散乱ポテンシャルは$D$を台に持つため，$V(\fat{x})$を求めることができれば，
+散乱体形状が再構成される．
+最後に，$G_0(\fat{x},\fat{y})$に幾何光学近似(\ref{eqn:ZZZ_para})を用いれば，
+式(\ref{eqn:ZZZ_LS})は
+\begin{equation}
+	u^{\rm sc}(\fat{y})
+	=
+	\frac{e^{ik_0y}}{4\pi y}
+	\int
+	k_0^2 V(\fat{x})u(\fat{x}) e^{-ik\hat{\fat{y}}\cdot \fat{x}}d^3\fat{x}
+	\label{eqn:ZZZ_16}
+\end{equation}
+となるので，
+\begin{equation}
+	U(\hat{\fat{y}},s)
+	=
+	\int
+	k_0^2 V(\fat{x})u(\fat{x};s) e^{-ik\hat{\fat{y}}\cdot \fat{x}}d^3\fat{x}
+	\label{eqn:ZZZ_U_vol}
+\end{equation}
+とすることで，散乱場を表面散乱体の場合と同じ形式に表すことができる．
+%
+\subsection{線形化逆散乱解析}
+はじめに，式(\ref{eqn:ZZZ_LS})に基づき，散乱ポテンシャル$V(\fat{x}$を推定することで
+介在物の形状を再構成する方法を示す．いま，散乱体$D$に平面波:
+\begin{equation}
+	u^{in}(\fat{x})= e^{ik_0\fat{p}\cdot\fat{x}}
+	\label{eqn:ZZZ_17}
+\end{equation}
+を入射したときの$U(\hat{\fat{y}};s)$を
+\begin{equation}
+	u^{\infty}(\hat{\fat{y}};\fat{p})=U(\hat{\fat{y}};\fat{p})
+	\label{eqn:ZZZ_18}
+\end{equation}
+と表し，これを散乱振幅と呼ぶ．
+ここで，$\fat{p}$は入射平面波の伝播方向を表す単位ベクトルを意味する．
+このとき，式(\ref{eqn:ZZZ_U_vol})にボルン近似を用い，$u(\fat{x})\simeq u^{in}(\fat{x})$
+とすれば，散乱振幅は
+\begin{equation}
+	u^{\infty}(\hat{\fat{y}},\fat{p})
+	=
+	\int
+	k_0^2 V(\fat{x}) e^{-ik(\hat{\fat{y}}-\fat{p} )\cdot \fat{x}}d^3\fat{x}
+	\label{eqn:ZZZ_U_Born}
+\end{equation}
+と書ける．そこで，散乱ポテンシャル$V(\fat{x})$のフーリエ変換を
+\begin{equation}
+	\tilde V(\fat{k}) = \int V(\fat{x}) e^{i\fat{k}\cdot \fat{x}} d^3\fat{x}
+	\label{eqn:ZZZ_Vk}
+\end{equation}
+とすれば，式(\ref{eqn:ZZZ_U_Born})は
+\begin{equation}
+	u^{\infty}(\hat{\fat{y}},\fat{p}) =k_0^2 \tilde V (
+	k(\hat{\fat{y}}-\fat{p} )
+	)
+	\label{eqn:ZZZ_19}
+\end{equation}
+となることから，散乱振幅が散乱ポテンシャルの波数ベクトル$k(\hat{\fat{y}}-\fat{x})$
+でのスペクトル成分であることが分かる．
+従って，送受信条件や周波数帯域を適切に設定し，十分な範囲と密度で波数スペクトル成分を
+得ることができれば，逆フーリエ変換
+\begin{equation}
+	V(\fat{x}) =\frac{1}{(2\pi)^3} \int k_0^{-2} u^{\infty}(\hat{\fat{y}};\fat{p}) 
+	e^{i\fat{k}\cdot \fat{x}}d^3\fat{k}
+	\label{eqn:ZZZ_Vx}
+\end{equation}
+によって散乱ポテンシャル$V(\fat{x})$を再構成できる．
+ここに，式(\ref{eqn:ZZZ_Vx})における波数ベクトル$\fat{k}$は
+\begin{equation}
+	\fat{k}=k(\hat{\fat{y}}-\fat{p})
+	\label{eqn:ZZZ_20}
+\end{equation}
+だから，フーリエ積分の評価に用いることのできる波数ベクトル成分は，角周波数$\omega$,
+観測方向$\hat{\fat{y}}$，入射方向$\fat{p}$に依って決まる．
+いま，$\omega$と$\fat{p}$を固定し，観測方向だけを自由に取ることができる場合を考えると，
+$\fat{k}$は波数空間で，図\ref{fig:ZZZ_Evald}に実線で示したような半径$k$球を描き，
+これをEvald球と呼ぶ．つまり，観測方向だけを変化させて観測した場合，
+散乱ポテンシャルのEvald球状の成分だけしか得られない．一方，観測方向$\hat{\fat{y}}$に加え，
+入射方向$\fat{p}$も任意に選べる場合，Evald球は原点を中心として半径$2k$の球表面と内部を履く．
+このような波数空間の球領域はEvald limitting sphere(Evald限界球)と呼ばれる．
+全ての送受信方向で観測を行うことができれば，Evald限界球内部の
+波数成分全ての情報が得られるため，波数$k$十分に大きければ，単一の波数成分
+のデータだけで，散乱ポテンシャルの十分な情報が得られる．
+しかしながら，例えば超音波探傷試験では，送受信方向は制約が厳しく，
+ごく限られた方向からの送受信しか行うことができないために，Evald限界球内の
+一部のデータしか得られない．
+一方で，送受信することのできる周波数帯域はパルスやチャープ波を用いることで
+ある程度広くとることができる．このときには，波数$k$が$k\in \left(k_{min},k_{max} \right)$
+の範囲にあるEvald球の一部が掃く領域が単一周波数(monochromatic)での
+検査に比べて広くとることができ，散乱ポテンシャルに関するより多くの情報を得ることができる．
+\\
+
+ここで,散乱振幅を
+\begin{equation}
+	u^{\infty}(\hat{\fat{y}};\fat{p})=4\pi ye^{-iky} u^{sc}(\fat{y})
+	\label{eqn:ZZZ_21}
+\end{equation}
+として，観測波形データ$u^{sc}$を用いて式(\ref{eqn:ZZZ_Vx})を書き直すと
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} yu^{sc}(\fat{y})
+	e^{i\fat{k}\cdot \fat{x}-iky}d^3\fat{k}, 
+	\ \ (\fat{k}=k(\hat{\fat{y}}-\fat{p}))
+	\label{eqn:ZZZ_Vx_usc}
+\end{equation}
+となる．この再構成式がどのような操作を意味するかは，次節で述べるように，
+周波数$\omega$に関する積分を行い時間領域における再構成式に直すことで
+明らかになる．
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.5\linewidth]{Figs/setup.eps} 
+	\end{center}
+	\caption{無限領域におけるスカラー波の散乱問題.} 
+	\label{fig:ZZZ_100}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.6\linewidth]{Figs/Evald.eps} 
+	\end{center}
+	\caption{波数ベクトル空間におけるEvaldおよびEvald limitting sphere.} 
+	\label{fig:ZZZ_Evald}
+\end{figure}
+\subsection{時間領域における再構成式}
+式(\ref{eqn:ZZZ_Vx})の積分を評価するにあたり，微小体積要素$d^3\fat{k}$を 
+$\fat{p}$，$\hat{\fat{y}}$, $k$を用いて表す必要がある．
+%波数ベクトル$\fat{k}$は入射波の送信方向$\fat{p}$，散乱波の観測方向$\hat{\fat{y}}$と
+%角周波数$\omega$に依存する．従って，波数ベクトルに関するフーリエ変換を観測波形を
+%使って評価する際には，観測条件に応じた積分変数を取る必要がある．
+ここでは，次のような二つのケースについて考える．
+%では微小体積要素$d^3\fat{k}$を書き下すことができる．
+\begin{enumerate}
+\item
+	送信(受信)方向$\fat{p}(\hat{\fat{y}})$を固定し，
+	受信(送信)方向$\hat{\fat{y}}(\fat{p})$を変化させる場合\\
+
+	観測方向を表すベクトルを次のように球座標を使って表す．
+	\begin{equation}
+		\hat{\fat{y}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
+		\label{eqn:ZZZ_22}
+	\end{equation}
+	このとき，微小体積要素はヤコビ行列式を計算すれば
+	\begin{equation}
+		d^3\fat{k}=k^2\sin\theta (1-\hat{\fat{y}}\cdot\fat{p})dkd\theta d\phi
+		\label{eqn:ZZZ_23}
+	\end{equation}
+	となることが示される．
+	ここで,
+	\begin{equation}
+		\cos\delta=\hat{\fat{y}}\cdot\fat{p}
+		\label{eqn:ZZZ_24}
+	\end{equation}
+	とおけば,
+	\begin{equation}
+		d^3\fat{k}=4k^2\sin\theta \sin^2 \frac{\delta}{2} dkd\theta d\phi
+		\label{eqn:ZZZ_25}
+	\end{equation}
+\item
+	送信方向と受信方向が成す角度を一定に保ち，送受方向を同時に変化させる場合\\
+
+	単位ベクトル:
+	\begin{equation}
+		\hat{\fat{k}}=\frac{\hat{\fat{y}}-\fat{p}}
+		{\left| \fat{y}-\fat{p} \right| }
+		\label{eqn:ZZZ_26}
+	\end{equation}
+	を用いれば,波数ベクトル$\fat{k}$は
+	\begin{equation}
+		\fat{k}= k\left| \hat{\fat{y}}-\fat{p} \right| \hat{\fat{k}} 
+		\label{eqn:ZZZ_27}
+	\end{equation}
+	と書くことができ,$\hat{\fat{y}} \cdot \fat{p}= \cos \delta$とおけば,	
+	\begin{equation}
+		\fat{k}= 2k \sin \frac{\delta}{2}\hat{\fat{k}} 
+	\label{eqn:ZZZ_28}
+	\end{equation}
+	と表すことができる.$\delta$は一定だから,$\hat{\fat{k}}$を
+	\begin{equation}
+		\hat{\fat{k}}=(\sin\theta\cos\phi,\sin\theta\sin\phi, \cos\theta)
+		\label{eqn:ZZZ_29}
+	\end{equation}
+	と球座標を使って表せば,微小体積要素を
+	\begin{equation}
+		d^3\fat{k}=2\sin\frac{\delta}{2} 
+		k^2 \sin\theta dkd\theta d\phi
+		\label{eqn:ZZZ_30}
+	\end{equation}
+\end{enumerate}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.7\linewidth]{Figs/pulse_echo.eps} 
+	\end{center}
+	\caption{送受信パターン.} 
+	\label{fig:ZZZ_101}
+\end{figure}
+パルスエコー法(一探触子法)による計測は後者の特別な場合に相当する．
+以上より，$d^3\fat{k}$は
+\begin{equation}
+	d^3\fat{k}=k^2\hat{J}(\theta,\phi) dkd\theta d\phi
+	\label{eqn:ZZZ_30}
+\end{equation}
+と表すことができる．
+これを式(\ref{eqn:ZZZ_Vx_usc})に代入することにより次の再構成式が得られる．
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int yu^{sc}(\fat{y})
+	e^{i\fat{k}\cdot \fat{x}-iky}
+	\hat{J}(\theta,\phi) dkd\theta d\phi
+	\label{eqn:ZZZ_31}
+\end{equation}
+
+ここで，送信点を$\fat{z}$とし，
+\begin{equation}
+	u^{in}(\fat{x})= F(\omega) e^{ik_0\fat{p}\cdot(\fat{x}-\fat{z})}
+	\label{eqn:ZZZ_32}
+\end{equation}
+のような周波数成分$F(\omega)$をもつ平面波を入射する場合について考える．
+このとき，散乱場は
+\begin{equation}
+	u^{\rm sc}(\fat{y})= \frac{e^{ik_0(y-\fat{p}\cdot \fat{z})}}{4\pi y }F(\omega)U(\hat{\fat{y}};\fat{p}) 
+	\label{eqn:ZZZ_33}
+\end{equation}
+と書くことができる．よって，散乱ポテンシャルは観測データとして得られる
+散乱場を使って次のように表される．
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2} \int \frac{u^{sc}(\fat{y})}{F(\omega)}
+	e^{i\fat{k}\cdot \fat{x}-iky+ik\fat{p}\cdot\fat{z}}
+	\hat{J} dkd\phi d\theta	
+	\label{eqn:ZZZ_34}
+\end{equation}
+さらに，$\fat{k}=k(\hat{\fat{y}}-\fat{p})$を代入し，$k=\omega/c$を用いれば，
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2c} \int \frac{yu^{sc}(\fat{y})}{F(\omega)}
+	e^{-ik_0(y-\hat{\fat{y}}\cdot\fat{x}+\fat{p}\cdot(\fat{x}-\fat{z})) }
+	\hat{J} d\omega d\phi d\theta	
+	\label{eqn:ZZZ_35}
+\end{equation}
+を得る．
+ここで，角周波数$\omega$に関するフーリエ変換
+\begin{equation}
+	a(\fat{y},\fat{z},t):=\frac{1}{2\pi} \int \frac{u^{sc}(\fat{y})}{F(\omega)}e^{-i\omega t}d\omega
+	\label{eqn:ZZZ_36}
+\end{equation}
+で得られる時間波形を用いると，散乱ポテンシャルを
+\begin{equation}
+	V(\fat{x}) =\frac{1}{2\pi^2c} \int a\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) y \hat{J} d\theta d\phi
+	\label{eqn:ZZZ_Vx_time}
+\end{equation}
+と表される．ただし，$t_{in},t_{sc}$はそれぞれ
+\begin{equation}
+	t_{in}=\frac{\fat{p}\cdot \left( \fat{x}-\fat{z}\right)}{c}, \ \ 
+	t_{sc}=
+	\frac{ y-\hat{\fat{y}}\cdot \fat{x} }{c} \simeq 
+	\frac{\left|\fat{y}-\fat{x}\right|}{c} 
+	\label{eqn:ZZZ_37}
+\end{equation}
+で，入射波と散乱波の伝播時間を意味する．
+式(\ref{eqn:ZZZ_Vx_time})を離散的な$\fat{y},\fat{z}$について評価する場合，
+積分は次のような和とみなすことができ，これは，発見的に導かれた開口合成法の
+形式と一致する．
+\begin{equation}
+	V(\fat{x}) = 
+	\frac{1}{2\pi^2c} 
+	\sum_{\fat{y},\fat{z}} 
+	a\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) y \hat{J} \Delta \theta \Delta \phi
+	\label{eqn:ZZZ_38}
+\end{equation}
+
