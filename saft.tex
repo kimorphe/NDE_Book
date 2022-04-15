@@ -1,54 +1,3 @@
-\documentclass[10pt,a4j,dvipdfmx]{jarticle}
-%\usepackage{graphicx,wrapfig}
-\usepackage{graphicx}
-\usepackage{pdfpages}
-\usepackage{showkeys}
-\setlength{\topmargin}{-1.5cm}
-%\setlength{\textwidth}{16.5cm}
-\setlength{\textheight}{25.2cm}
-\newlength{\minitwocolumn}
-\setlength{\minitwocolumn}{0.5\textwidth}
-\addtolength{\minitwocolumn}{-\columnsep}
-%\addtolength{\baselineskip}{-0.1\baselineskip}
-%
-\def\Mmaru#1{{\ooalign{\hfil#1\/\hfil\crcr
-\raise.167ex\hbox{\mathhexbox 20D}}}}
-%
-\begin{document}
-\newcommand{\fat}[1]{\mbox{\boldmath $#1$}}
-\newcommand{\D}{\partial}
-\newcommand{\w}{\omega}
-\newcommand{\ga}{\alpha}
-\newcommand{\gb}{\beta}
-\newcommand{\gx}{\xi}
-\newcommand{\gz}{\zeta}
-\newcommand{\vhat}[1]{\hat{\fat{#1}}}
-\newcommand{\spc}{\vspace{0.7\baselineskip}}
-\newcommand{\halfspc}{\vspace{0.3\baselineskip}}
-\bibliographystyle{unsrt}
-%\pagestyle{empty}
-\newcommand{\twofig}[2]
- {
-   \begin{figure}
-     \begin{minipage}[t]{\minitwocolumn}
-         \begin{center}   #1
-         \end{center}
-     \end{minipage}
-         \hspace{\columnsep}
-     \begin{minipage}[t]{\minitwocolumn}
-         \begin{center} #2
-         \end{center}
-     \end{minipage}
-   \end{figure}
- }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\vspace*{\baselineskip}
-\begin{flushright}
-	波動解析と非破壊評価\\
-\end{flushright}
-\begin{center}
-	{\LARGE  \bf 超音波イメージングの原理} \\
-\end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{section}{3}
 \section{問題設定}
@@ -113,7 +62,7 @@ ${\cal D}_M$は$\cal D$の特別なケースである．以下では，波形デ
 %数値解析上$I(\fat{x})$の特異性を気にする必要はない．
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.6\linewidth]{Figs/measurement.eps} 
+	\includegraphics[width=0.6\linewidth]{Figs/measurement.pdf} 
 	\end{center}
 	\caption{送受信アレイ$\cal M$，散乱体$D$，および画像化領域$A$.} 
 	\label{fig:XXX_arrayM}
@@ -166,7 +115,7 @@ $I(\fat{x})$は位置$\fat{x}$にある点散乱体の推定強度と解釈す�
 このような単一点散乱体の開口合成結果を見ることで，開口合成法がどのように機能するかを理解することができる．
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.5\linewidth]{Figs/cloud.eps} 
+	\includegraphics[width=0.5\linewidth]{Figs/cloud.pdf} 
 	\end{center}
 	\caption{点散乱体群による散乱体の表現(イメージ).} 
 	\label{fig:XXX_cloud}
@@ -296,14 +245,14 @@ $a_{11}(t_{11})$と$a_{22}(t_22)$は，それぞれ，$\fat{y}_1,\fat{y}_2$の�
 この場合，２つの円とだ円は原点で交わり，このことから，点散乱体が座標原点に位置するということが読み取れる．
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.6\linewidth]{Figs/locii.eps} 
+	\includegraphics[width=0.6\linewidth]{Figs/locii.pdf} 
 	\end{center}
 	\caption{散乱波到達時刻における等時曲線.(a)送受信点が離れている場合,(b)送受信点が近接している場合.} 
 	\label{fig:XXX_locii}
 \end{figure}
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.8\linewidth]{Figs/wvfm2.eps} 
+	\includegraphics[width=0.8\linewidth]{Figs/wvfm2.pdf} 
 	\end{center}
 	\caption{2つの送受信子を使った点散乱体からのエコー観測.} 
 	\label{fig:XXX_wvfm2}
@@ -410,7 +359,7 @@ $\fat{n}_{ij}$の方向が様々に変化するように観測点$\fat{y}_i$が�
 
 \begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=.6\linewidth]{Figs/saftM2.eps} 
+	\includegraphics[width=.6\linewidth]{Figs/saftM2.pdf} 
 	\end{center}
 	\caption{開口合成画像の例.(a)送受信点が離れている場合,(b)送受信点が近接している場合.} 
 	\label{fig:XXX_saftM2}
@@ -1293,5 +1242,4 @@ $\fat{p}$，$\hat{\fat{y}}$, $k$を用いて表す必要がある．
 	a\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) y \hat{J} \Delta \theta \Delta \phi
 	\label{eqn:}
 \end{equation}
-\end{document}
 
