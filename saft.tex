@@ -141,109 +141,154 @@ $\cal M$上で多点計測を行う場合，必ずしも全ての可能な位置
 を考えてみる．例えば，き裂や空洞，剛体介在物では領域の表面で散乱がおきるため，
 散乱体をその境界$\partial D$上に稠密に配置された点散乱体群とみなす．一方，
 介在物の場合，領域内部に入射波の一部が透過するため，$D$全体に渡って点散乱体が
-配置されたモデルを考える．以下に述べるように，開口合成法は，これら点散乱体の
-位置と強度を推定する方法と解釈することができる．なお，点散乱体の強度は，
-点散乱体への入射波と散乱波の振幅比で，周波数領域では周波数応答関数，
-時間領域ではインパルス応答関数として定義される．
-ただしここでは，散乱による波形変化や位相遅れは無視できるととし，
-散乱強度を実定数とする．ただし，入射波と散乱波で位相が逆転することがあるため，
-散乱強度は負になり得る．
-ここで，波動場$u(\fat{x},t)$を入射波と散乱波の和として
+配置されたモデルを考える．以下に述べるように，開口合成法はこれら点散乱体の
+位置と強度を画像化する方法と解釈することができる．
+ここで，点散乱体とは，大きさの無視できる理想化された散乱体を意味し，入射波振幅
+に比例した強度の点源として振る舞うものである．その比例係数を$s$とし，これを
+散乱強度と呼べば，位置$\fat{z}$にある点散乱体は，入射波$u^{in}(\fat{x},t)$に
+よって励起される点源項としして扱うことができる．スカラー波動場の場合，それは
+支配波動方程式における次のようなソース項として表される．
+\begin{equation}
+	s\delta (\fat{x}-\fat{z})u^{in}(\fat{z},t)
+	\label{eqn:XXX_psct}
+\end{equation}
+ただし，式(\ref{eqn:XXX_psct})において$s$は定数としており，これは散乱による
+位相遅れや波形変化が無いことを意味している．ただし，入射波と散乱波で位相が
+逆転することがある場合は，散乱強度$s$は負の値となることは許容する必要がある．
+次に，観測波形と散乱強度を結びつけるために，全波動場を入射場と散乱場の
+和として次のように表す．
 \begin{equation}
 	u(\fat{x},t)=u^{in}(\fat{x},t)+u^{sc}(\fat{x},t)
 	\label{eqn:XXX_utot}
 \end{equation}
-と表す．いま，散乱波が位置$\fat{z}$にある散乱強度$s$の点散乱体によって
-生じたとするとき，散乱波と入射波の関係は
+また，全空間のグリーン関数を$G(\fat{x},\fat{y},t)$とすれば，
+点散乱体群からの散乱波$u^{sc}(\fat{x},t)$は次のように表すことができる．
 \begin{equation}
-	u^{sc}(\fat{z},t)=su^{in}(\fat{z},t)
-	\label{eqn:}
+	u^{sc}(\fat{x},t)=\sum_k s_k G(\fat{x},\fat{z}_k,t)*u^{in}(\fat{z}_k,t)
+	\label{eqn:XXX_usc_G}
 \end{equation}
-と書くことができる．
-
-
-また，位置$\fat{y}$にある単位強度の点源に対する
-観測点$\fat{x}$でのインパルス応答，すなわち
-全空間のグリーン関数を$G(\fat{x},\fat{y},t)$と書く．
-このとき，$\fat{z}$にある強度$s(\fat{z})$の散乱体で生じる
-散乱波$u^{sc}(\fat{x},t;\fat{z})$は
+ただし，$*$は時間に関する畳み込み積を，$\fat{z}_k$と$s_k$は，
+第$k$番目の点散乱体の位置と強度をそれぞれ表す．さらに，入射波は
+位置$\fat{y}_i(\in {\cal M})$の点源で励起されるとしているため，
+式(\ref{eqn:XX_usc_G})において$u^{in}(\fat{x},t)=G(\fat{x},\fat{y}_i,t)$とすれば，
+次の関係が得られる．
 \begin{equation}
-	u^{sc}(\fat{x},t;\fat{z},\fat{y})=
-	s(\fat{z})G(\fat{x},\fat{z},t)G(\fat{z},\fat{y},t)
-	\label{eqn:XXX_usc_mono}
+	u^{sc}(\fat{x},t;\fat{y}_{i})=\sum_k s_k G(\fat{x},\fat{z}_k,t)*G(\fat{z}_k,\fat{y}_i,t)
+	\label{eqn:XXX_usc_GG}
 \end{equation}
-と表すことができる．ただし，$*$は時間に関する畳込み積を意味する．
-従って，点散乱体が複数存在する場合の散乱場は，$\fat{z}$について式
-(\ref{eqn:XXX_usc_mono})の和を取り，
-\begin{equation}
-	u^{sc}(\fat{x},t;\fat{y})=
-	\sum_{\fat{z}}
-	s(\fat{z})G(\fat{x},\fat{z},t)G(\fat{z},\fat{y},t)
-	\label{eqn:XXX_usc_sum}
-\end{equation}
-と表される．
-Aスキャン波形$a_{ij}(t)$は，式(\ref{eqn:XXX_usc_sum})において
-送信点を$\fat{y}=\fat{y}_i$，受信点を$\fat{x}=\fat{y}_j$として
+なお，式(\ref{eqn:XXX_usc_GG})の左辺では，セミコロンの後に$\fat{y}_i$を加え，
+位置$\fat{y}_i$からの入射波に起因した散乱波であることを明示するようにしている．
+観測で得らるAスキャン波形$a_{ij}(t)$は，$\fat{y}_j$における散乱場だから
 \begin{equation}
 	a_{ij}(t)
-	=
-	\sum_{\fat{z}}
-	s(\fat{z})G(\fat{y}_j,\fat{z},t)G(\fat{z},\fat{y}_i,t)
-	\label{eqn:XXX_aij_G}
+	=u^{sc}(\fat{y}_j,t;\fat{y}_i)
+	=\sum_k s_k G(\fat{y}_j,\fat{z}_k,t)*G(\fat{z}_k,\fat{y}_i,t)
+	\label{eqn:XXX_aij_GG}
 \end{equation}
-とすることができる．これをより具体的な形で表現するために、
-グリーン関数として，3次元スカラー波のグリーン関数:
+となる．これをより具体的な表現にするために，3次元スカラー波のグリーン関数:
 \begin{equation}
 	G(\fat{x},\fat{y},t)=
 	\frac{\delta\left(t-\frac{r}{c}\right)}{r}, 
 	\ \ (r=\left| \fat{x}-\fat{y}\right|)
 	\label{eqn:}
 \end{equation}
-を使って書き下してみる．このとき，式(\ref{eqn:XXX_aij_G})は次のようになる．
+を用いれば，$a_{ij}(t)$は次のようになる．
 \begin{eqnarray}
 	a_{ij}(t)
 	&=&
-	\sum_{\fat{z} }
-	s(\fat{z})
-	\frac{\delta\left(t-\frac{r_i(\fat{z})}{c}\right) * \delta\left( t-\frac{r_j(\fat{z})}{c}\right)}{r_ir_j} \\
+	\sum_{k}
+	\frac{ s(\fat{z}_k) }{ r_i(k)r_j(k) }
+	\delta\left(t-\frac{r_i(k)}{c}\right) * \delta\left( t-\frac{r_j(k)}{c}\right)\\
 	\label{eqn:}
 	&=&
-	\sum_{\fat{z} }
-	s(\fat{z})
-	\frac{\delta\left(t-\frac{r_i(\fat{z})+r_j(\fat{z})}{c}\right) }{r_ir_j}
+	\sum_k
+	\frac{ s(\fat{z}_k) }{ r_i(k)r_j(k) }
+	\delta\left(t-\frac{r_i(k)+r_j(k)}{c}\right) 
 	\label{eqn:XXX_aijt}
 \end{eqnarray}
-ただし，$r_i(\fat{z})=\left| \fat{y}_i-\fat{z}\right|, \, (\fat{y}\in {\cal M})$とした．
+ただし，$r_i(k)=\left| \fat{y}_i-\fat{z}_k\right|$とした．
+
 式(\ref{eqn:XXX_aijt})を式(\ref{eqn:XXX_saft})を用いれば，開口合成法における画像化関数を
 次のように表すことができる．
 \begin{eqnarray}
 	I(\fat{x})
 	&=&
 	\sum_{\cal D}
-	\sum_{\fat{z}}
-	s(\fat{z})
-	\frac{\delta\left(t_{ij}(\fat{x})-\frac{r_i(\fat{z})+r_j(\fat{z})}{c}\right) }{r_i(\fat{z})r_j\fat{z}}w_{ij}
+	\sum_{k}
+	\frac{ s(\fat{z}_k)}{r_i(k)r_j(k)}
+	\delta\left(t_{ij}(\fat{x})-\frac{r_i(k)+r_j(k)}{c}\right)  w_{ij}
 	\\
 	&=&
-	\sum_{\cal D} \sum_{\fat{z}}
-	\frac{cw_{ij}}{r_i(\fat{z})r_j(\fat{z})} s(\fat{z})
-	\delta\left(\fat{r}_i(\fat{x})-r_i(\fat{z})+r_j(\fat{x})-r_j(\fat{z})\right) 
-	\label{eqn:}
+	\sum_{\cal D} \sum_{k}
+	\frac{cw_{ij}}{r_i(k)r_j(k)} s(\fat{z}_k)
+	\delta\left(\fat{r}_i(\fat{x})+r_j(\fat{x})-r_i(k)-r_j(k)\right) 
+	\label{eqn:XXX_I_model}
 \end{eqnarray}
-そこで，重み係数を$w_{ij}=\frac{r_i(\fat{x})r_j(\fat{x})}{c}$にとれば，
+式(\ref{eqn:XXX_I_model})の右辺は，Diracのデルタ関数を使って書かれているため
+その値を評価することはできない．そこで，デルタ関数$\delta(s)$を，
+分散$\sigma^2$の正規分布:
 \begin{equation}
-	I(\fat{x})=
-	\sum_{k}
+	\delta_\sigma (s) = \frac{1}{ \sqrt{2\pi}\sigma } \exp\left( -\frac{s^2}{2\sigma^2}\right)
+	\label{eqn:Gauss}
+\end{equation}
+で近似する．$\delta_s(s)$は普通の関数であり数値的な評価は容易である．また，$\sigma\rightarrow 0$の
+極限においてデルタ関数を与えるため，パラメータ$\sigma$の設定により近似の精度を必要なだけ上げることができる．
+最後に，データ$\cal D(A)$に含まれる波形数を$|{\cal A}|$として，
+\begin{equation}
+	w_{ij}
+	=w_{ij}^*
+	:=
+	\sqrt{2\pi}\sigma
+	\frac{r_{i}(\fat{x})r_j(\fat{x})}{c\left| {\cal A}\right|}
+	\label{eqn:wij_model}
+\end{equation}
+にとれば，画像化関数は$\sigma$に応じた精度で
+\begin{equation}
+	I(\fat{x}) \simeq 
+	I_\sigma(\fat{x}):=
 	\sum_{\cal D} 
-	%s(\fat{z})
-	%\delta\left(\fat{r}_i(\fat{x})-r_i(\fat{z})+r_j(\fat{x})-r_j(\fat{z})\right) 
-	s_k
-	\delta\left(\fat{r}_i(\fat{x})-r_i(\fat{z}_k)+r_j(\fat{x})-r_j(\fat{z}_k)\right) 
+	\sum_{k}
+	\frac{w_{ij}^*s_k}{r_i(k)r_j(k)} 
+	\delta_\sigma\left(\fat{r}_i(\fat{x})+\fat{r}_j(\fat{x})-r_i(k)-r_j(k)\right) 
 	\label{eqn:XXX_saft_model}
 \end{equation}
-とすることができる．
-式(\ref{eqn:XXX_saft_model})の右辺は，推定すべき$s(\fat{z})$が含まれていること，
-Diracのデルタ関数を使って書かれていることから，直接数値を代入して計算する
+と近似できる．このようにして得られた$I_\sigma(\fat{x})$は散乱体位置$\fat{z}_k$において
+\begin{equation}
+	I_\sigma(\fat{z}_k)=s_k
+	\label{eqn:}
+\end{equation}
+と散乱体強度に一致することが確かめられる．一方，$\fat{x}\neq \fat{z}_k$の場合，
+$I_{\sigma}(\fat{x})$がどのような値を取るかは明らかでない．しかしながら，$I_\sigma(\fat{x})$が1に近い値を
+取るのはレアなケースであると予想されることが次のようにして分かる．
+はじめに，$\sigma$が十分小さい時，$\delta_\sigma(s)$は$|s|\rightarrow \infty$に
+おいて急速に減少する関数であることから，
+$\delta_\sigma\left(\fat{r}_i(\fat{x})+\fat{r}_j(\fat{x})-r_i(k)-r_j(k)\right)$が
+有意な値を取るは
+\begin{equation}
+	\fat{r}_i(\fat{x})+\fat{r}_j(\fat{x})-r_i(k)-r_j(k)=0
+	\label{eqn:cntr}
+\end{equation}
+のごく近傍に限られる．式(\ref{eqn:cntr})は$(i,j)$組，すなわち送受信点のペアに対して
+3次元問題では一つの曲面を， 2次元問題では曲線を定義する．
+従って，$(i,j)$を一つ指定したとき，式(\ref{eqn:cntr})を満足するような$\fat{x}$は
+無数に存在する．しかしながら，$I_\sigma(\fat{x})$が1に近い値をとるためには，
+多数の$(i,j)$の組に対して式(\ref{eqn:cntr})を満足する必要がある．つまり，
+$\fat{x}$は多数の曲面あるいは曲線の共通部分に入っている必要がある．
+2つの曲面の共通部分は一般に曲線で，2つの曲線の共通部分は点であることを
+考えると，そのようなケースは稀であると予想されるため．
+が共通部分を持つ場合，共通部分は曲線となることが一般的で
+これは$\left| {\cal A} \right|$が大きいとき，非常に
+
+
+標準偏差適当な連続関数$\delta_\sigma(s)$で近似する．
+ただし，$\left\{ \delta_\sigma(s) \right\} $はパラメータ$\sigma(>0)$を持つ
+関数の族で$\sigma\rightarrow 0 $の極限でデルタ関数を与えるものとする．
+例えば，
+
+このデルタ関数はグリーン関数に由来するもので，入射波形をインパルス波形とした
+ことによる．実際の計測では，送信センサーは帯域に制限があるため，デルタ関数が
+帯域制限
+
 ものでは無い．しかしながら，式(\ref{eqn:XXX_saft_model})の右辺開口合成法が
 \begin{equation}
 	\fat{r}_i(\fat{x})+r_j(\fat{x})
