@@ -247,7 +247,7 @@ $\cal M$上で多点計測を行う場合，必ずしも全ての可能な位置
 	=
 	\sqrt{2\pi}\sigma
 	\frac{r_{i}(\fat{x})r_j(\fat{x})}{c\left| {\cal A}\right|}
-	\label{eqn:wij_model}
+	\label{eqn:XXX_wij_model}
 \end{equation}
 とし，これを開口合成法の重みとして用いれば，画像化関数が$\sigma$に応じた精度で
 \begin{equation}
@@ -442,7 +442,7 @@ $\Gamma_{ij}(\fat{z})$の，位置$\fat{z}$における単位法線ベクトル�
 $i=j$のとき，
 \begin{equation}
 	\fat{n}_{ii}(\fat{z})=\hat{\fat{r}}_i(\fat{z})
-	\label{eqn:}
+	\label{eqn:normal_pecho}
 \end{equation}
 で，散乱体位置$\fat{z}$から送受信点$\fat{y}_i$を指す単位ベクトルに一致するという
 単純な結果が得られる．このことは，パルスエコーモードで観測を行う場合，
@@ -529,6 +529,7 @@ $a_{12}(t)$と$a_{21}(t)$を同じ重みで加算したことによる．この�
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{点拡がり関数(point spread function)}
+\subsubsection{パルス波の場合}
 点散乱体が一つだけ存在することが分かっている場合，2点での観測波形から位置特定が
 可能であることをみた．一方，合成された画像から，散乱体形状が点であることを知るには，
 これまでに示した少数の観測結果からの開口合成が十分でないことは明らかである．そこで，
@@ -570,9 +571,8 @@ $M=10$で，より分布の裾野が広く，わずかにサイドローブも�
 増やすことには偽像の発生を抑える効果があることを示唆している．
 
 次に，観測方向が制限されることによって生じる画像の劣化についてみてみる．
-そのために， 
-観測点の配置間隔を15度に保ち，観測点数を(a)24点として全周方向から観測した場，
-(b)13点,半周，(c)9点,120度,(d)5点，60度としたそれぞれの場合について
+そのために， 観測点間隔を15度に保ち，観測点数を(a)24点として全周方向に配置した
+場合，(b)13点,半周，(c)9点,120度,(d)5点，60度としたそれぞれの場合について
 PSFを計算する．図\ref{fig:XXX_psf_aptlim}はその結果を示したものである．
 いずれのケースでも原点にピークを持つ分布が得られているが，
 観測方向が半周に制限された(b)では，画像は上下非対称で，鉛直方向にメインローブ
@@ -602,15 +602,109 @@ PSFを計算する．図\ref{fig:XXX_psf_aptlim}はその結果を示したも�
 	\begin{center}
 	\includegraphics[width=0.9\linewidth]{Figs/psf_aptlim.eps} 
 	\end{center}
-	\caption{開口を制限したときの点散乱体の開口合成像(送受信点の配置間隔は15度，観測点数数と観測範囲は
+	\caption{開口を制限したときの点散乱体の開口合成像(送受信点の配置間隔は15度，観測点数と観測範囲は
 	(a)24点,360度, (b)13点,180度, (c)9点,120度, (d)5点.60度.} 
 	\label{fig:XXX_100}
 \end{figure}
-ここまでの議論では，任意の形状と幅のパルス波を送受信できることを前提としてきた．
-一方，実際の計測装置では周波数帯域が制限されるため，任意波形を送受信することはできない．
-そのため，パルス的でない波形を用いることにによる開口合成像の変化について理解しておくこと
-が有用である．その極端な場合として，単一周波数成分からなる連続波(continuous monochlomatic wave)
-での画像化について検討する．
+\subsubsection{連続波の場合}
+ここまでの議論では，任意の幅をもつパルス波を送受信できることを前提としてきた．
+実際の計測では周波数帯域の制限により，任意の幅と形状のパルス波を送受信することはできない．
+特に，圧電素子を用いた計測では一定の時間振動する波形が得られることが普通で，振動継続時間は
+センサーの駆動電圧を調整することでは自由に制御出来ない場合がある．
+そのため，振動する波形を用いた場合に，どのような開口合成像が得られるかを
+理解しておくことは実探傷波形によるイメージングを行う上で有用である．
+ここでは，振動する波形の極端なケースとして，単一周波数成分からなる連続波
+を画像化に用いた場合のPSFについて検討する．
+
+パルス波を使った画像化関数を導出する際，時間領域のグリーン関数$G(\fat{x},\fat{y},t)$を用いて
+Aスキャン波形を表した．連続波を送受信する場合は，周波数領域のグリーン関数:
+\begin{equation}
+	\tilde G(\fat{x},\fat{y},\omega)
+	=
+	\frac{e^{ikr}}{r}, \ \ (r=\left| \fat{x}-\fat{y} \right|)
+	\label{eqn:}
+\end{equation}
+を用いてAスキャン波形を表す．なお，$\omega$は角周波数を，$k$は波数を表し，
+両者の間には$\omega=kc$の関係がある．このとき，$a_{ij}(t)$は次にように表すことができる．
+\begin{eqnarray}
+	a_{ij}(t)
+	&=&
+	\sum_k 
+	s_k \tilde G(\fat{z}_k,\fat{y}_i,\omega)G(\fat{y}_j,\fat{z}_k,\omega)e^{-i\omega t} \\
+	&=&
+	\sum_k \frac{s_k}{r_i(\fat{z}_k)r_j(\fat{z}_k)}
+	\exp\left\{
+		ik\left( 
+			r_i(\fat{z}_k)+r_j(\fat{z}_k)
+		\right)
+		-i\omega t
+	\right\}
+	\label{eqn:XXX_aij_wt}
+\end{eqnarray}
+式(\ref{eqn:XXX_aij_wt})を式(\ref{eqn:XXX_saft})に代入すれば
+\begin{equation}
+	I(\fat{x})
+		=
+	I_\omega(\fat{x})
+		:=
+	\sum_{\cal D} \sum_{k}
+	\frac{w_{ij}^*s_k}{r_i(k)r_j(k)} 
+	\exp \left\{ 
+	ik
+	\left(
+		r_i(\fat{x})+r_j(\fat{x})-r_i(\fat{z}_k)-r_j(\fat{z}_k)
+	\right)
+	\right\} 
+	\label{eqn:XXX_Iwt}
+\end{equation}
+が得られる．ここに，$\omega_{ij}^*$は式(\ref{eqn:wij_model})で与え，
+連続波から得られる画像であることを明示するために$I(\fat{x})=I_\omega(\fat{x})$と表した．
+式(\ref{eqn:eqn:XXX_Iwt})の指数関数の項は，振動する関数で，
+位相
+\begin{equation}
+	\phi_{ij}(\fat{x})=k 
+	\left(
+		r_i(\fat{x})+r_j(\fat{x})-r_i(\fat{z}_k)-r_j(\fat{z}_k)
+	\right)
+	\label{eqn:}
+\end{equation}
+が$\pi$の整数倍となる位置で繰返しピークを示す．
+従って，パルス波を用いた場合とは異なり、$\phi_{ij}(\fat{x})=2m\pi, (m=0,\pm 1, \pm 2,\dots)$
+で定義される波面群の干渉によって像合成が行われることを意味している．
+%%%
+%%%
+式(\ref{eqn:XXX_Iwt})に基づいてPSFを計算するために，単一の点散乱体を原点$\fat{o}$に置く．
+この場合，$r_i(\fat{z})=|\fat{y}_i|$で，$k=1$のみなのでインデックス$k$
+を省略すれば，
+\begin{equation}
+	I_\omega(\fat{x})
+		:=
+	\sum_{\cal D} 
+	\frac{w_{ij}^*s}{|\fat{y}_i||\fat{y}_j|} 
+	\exp \left\{ 
+	ik
+	\left(
+		r_i(\fat{x})+r_j(\fat{x})-|\fat{y}_i|-|\fat{y}_j|
+	\right)
+	\right\}
+	\label{eqn:}
+\end{equation}
+となる．さらに，原点を中心とする半径$R$の円周上に観測点を取り，
+パルス-エコーモードでの送受信を想定すれば，$|\fat{y}_i|=R$だから，
+画像化関数は次のように表される．
+\begin{equation}
+	I_\omega(\fat{x})
+		:=
+	\sum_{\cal D} 
+	\frac{w_{ij}^*s}{R^2}
+	\exp \left\{ 
+	2ik
+	\left(
+		r_i(\fat{x})-R
+	\right)
+	\right\}
+	\label{eqn:}
+\end{equation}
 
 いま，原点にある点散乱体に向けて点$\fat{y}_i$から角周波数$\omega$で単位振幅の入射波を
 送信したとする．このとき入射場は
