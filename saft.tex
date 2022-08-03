@@ -670,12 +670,9 @@ Aスキャン波形を表した．連続波を送受信する場合は，周波�
 \end{equation}
 が$\pi$の整数倍となる位置で繰返しピークを示す．
 従って，パルス波を用いた場合とは異なり、$\phi_{ij}(\fat{x})=2m\pi, (m=0,\pm 1, \pm 2,\dots)$
-で定義される波面群の干渉によって像合成が行われることを意味している．
-%%%
-%%%
-式(\ref{eqn:XXX_Iwt})に基づいてPSFを計算するために，単一の点散乱体を原点$\fat{o}$に置く．
-この場合，$r_i(\fat{z})=|\fat{y}_i|$で，$k=1$のみなのでインデックス$k$
-を省略すれば，
+で定義される波面群の干渉によって像合成が行われることが分かる．
+ここで，式(\ref{eqn:XXX_Iwt})に基づいてPSFを計算するために，単一の点散乱体を原点$\fat{o}$に置く．
+この場合，$r_i(\fat{z})=|\fat{y}_i|$で，$k=1$のみだから，インデックス$k$を省略して，
 \begin{equation}
 	I_\omega(\fat{x})
 		:=
@@ -689,73 +686,182 @@ Aスキャン波形を表した．連続波を送受信する場合は，周波�
 	\right\}
 	\label{eqn:}
 \end{equation}
-となる．さらに，原点を中心とする半径$R$の円周上に観測点を取り，
-パルス-エコーモードでの送受信を想定すれば，$|\fat{y}_i|=R$だから，
-画像化関数は次のように表される．
+と表す．さらに，原点を中心とする半径$R$の円周上に観測点を取り，
+パルス-エコーモードでの送受信を想定する．その場合，
+$|\fat{y}_i|=R$だから，画像化関数は次のようになる．
 \begin{equation}
 	I_\omega(\fat{x})
 		:=
 	\sum_{\cal D} 
 	\frac{w_{ij}^*s}{R^2}
-	\exp \left\{ 
+	e^{
 	2ik
 	\left(
 		r_i(\fat{x})-R
 	\right)
-	\right\}
-	\label{eqn:}
+	}
+	\label{eqn:XXX_PSF_cont}
 \end{equation}
-
-いま，原点にある点散乱体に向けて点$\fat{y}_i$から角周波数$\omega$で単位振幅の入射波を
-送信したとする．このとき入射場は
-\begin{equation}
-	u^{in}(\fat{x},t)=e^{i\omega t-kr_i}, \ \ (r_i=\left| \fat{x}-\fat{y}_i\right|)
-	\label{eqn:XXX_10}
-\end{equation}
-で与えられる．ここに，$k=\omega/c$は波数を表す．このとき，点散乱体から放射される散乱波は，
-観測点$\fat{y}_j$において
-\begin{equation}
-	u^{sc}(\fat{y}_j,t)=
-	u^{in}(\fat{o},t)e^{i k|\fat{y}_j|}
-	=e^{i\omega t -k(R_i+R_j)}
-	\label{eqn:XXX_11}
-\end{equation}
-と表される．ただし，$R_i=\left| y_i\right|$とする．これを観測波形$a_{ij}(t)$として
-パルス-エコーモードで開口合成を行うとき，
-画像化関数$I(\fat{x})$は
-\begin{equation}
-	I(\fat{x}) =
-	\sum_{{\cal D}_M} 
-		e^{i\omega t_{ii}(\fat{x}) -2kR_i)}
-	=
-	\sum_{{\cal D}_M} 
-		e^{2ik(r_i-R_i)}
-	\label{eqn:XXX_PSF_mono}
-\end{equation}
-で，この実部が単周波連続波を用いるときの点広がり関数を与える．
-そこで，式(\ref{eqn:XXX_psf_cont})を観測点数$M=10$および20で計算すると，
+この実部が単一周波の連続波を用いてパルスエコー法で計測した
+場合のPSFを与える．いま，式(\ref{eqn:XXX_psf_cont})を，
+観測点数$M=10$および20で計算すると，
 図\ref{fig:XXX_PSF_mono}のような像が得られる．
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.9\linewidth]{Figs/psf_cont.eps} 
 	\end{center}
-	\caption{全周方向からパルス-エコーモードで送受信したときの開口合成像.(a)$M=10$, (b)$M=20$で
-	波長2の連続波を用いた場合.} 
+	\caption{
+	全周方向からパルス-エコーモードで送受信したときの点拡がり関数.
+	観測点数は(a)$M=10$, (b)$M=20$で，波長2の連続波を用いた場合.} 
 	\label{fig:XXX_psf_cont}
 \end{figure}
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.6\linewidth]{Figs/psf_profile_cont.eps} 
 	\end{center}
-	\caption{$y=0$における開口合成像の断面図. 観測点数(a)$M=10$, (b)$M=20$で波長2の
-	連続波を用いた場合.}
+	\caption{$y=0$における点広がり関数の断面図. 
+	観測点数は(a)$M=10$, (b)$M=20$で，波長2の連続波を用いた場合.}
 	\label{fig:XXX_psf_profile_cont}
 \end{figure}
-また，$y=0$における断面は図\ref{fig:ZZ_psf_profile_cont}のようである．
-これらの図に示されるように，観測点数の少ない$M=10$のケースでは，
-顕著なグレーティングローブが発生しているが，単周波数成分の波を用いた場合も，
-全周方向からの計測であれば原点に明確なメインローブが現れることが分かる．
-なお，メインローブ幅はおよそ半波長であることが読み取れ，このことは後で
+これら二つのPSFの，$y=0$における断面は図\ref{fig:ZZ_psf_profile_cont}のようである．
+このように，観測点数の少ない$M=10$のケースでは顕著なグレーティングローブが発生している．
+一方で，単周波数成分の波を用いた場合も，全周方向からの計測であれば原点に明確なメインローブ
+が現れることが示されている．
+メインローブ幅は，次のようにして理論的に見積もることができる．
+
+PSFの式(\ref{eqn:XXX_PSF_cont})が測定方向間隔:
+\begin{equation}
+	\Delta \theta = \theta_{i+1}-\theta_i
+	\label{eqn:}
+\end{equation}
+使って
+\begin{equation}
+	I_\omega(\fat{x})
+		=
+	\sum_{i} 
+	e^{
+	2ik
+	\left(
+		r_i(\fat{x})-R
+	\right)
+	}
+	\Delta \theta
+	\label{eqn:XXX_PSF_dth}
+\end{equation}
+となるように$w_{ij}$を与えることができるとする．この
+$\Delta \theta \rightarrow 0$すなわち$M\rightarrow \infty$
+の極限を取り，PSFを積分で表す．
+\begin{equation}
+	I_\omega(\fat{x})
+		=
+	\int_{-\pi}^{\pi}
+	e^{
+	2ik
+	\left(
+		r_i(\fat{x})-R
+	\right)
+	}
+	d\theta
+	\label{eqn:XXX_PSF_int}
+\end{equation}
+さらに，$R\gg |\fat{x}|$として，光軸近似
+\begin{equation}
+	r_i=R-\fat{x}\cdot \hat{\fat{y}}
+	\label{eqn:}
+\end{equation}
+を式(\ref{eqn:XXX_PSF_int})用いれば，
+\begin{equation}
+	I_\omega(\fat{x})
+		=
+	\int_{-\pi}^{\pi}
+	e^{
+	-2ik \fat{x}\cdot \hat{\fat{y}}
+	}
+	d\theta
+	\label{eqn:XXX_PSF_int2}
+\end{equation}
+が得られる．ここで，測定点方向$\hat{\fat{y}}$を，画像化点$\fat{x}$
+を基準として測った角度を$\theta$とすれば，
+\begin{equation}
+	I_\omega(\fat{x})
+		=
+	\int_{-\pi}^{\pi}
+	e^{
+	-2ik |\fat{x}| \cos \theta
+	}
+	d\theta
+	=
+	2\pi J_0(2k\left|\fat{x}\right|)
+	\label{eqn:XXX_PSF_J0}
+\end{equation}
+と，0次，第一種のベッセル関数$J_0(z)$を使って表すことができる．
+$J_0(z)$の最小のゼロ点を$z=z_0$として，
+\begin{equation}
+	2k|\fat{x}|=\frac{4\pi}{\lambda}|\fat{x}|=z_0
+	\label{eqn:}
+\end{equation}
+となる距離$|\fat{x}|$を求めれば，PSFのメインローブ幅の指標とみなすことができる．
+そこで，上の式を$|\fat{x}|$について解き，
+\begin{equation}
+	\frac{|\fat{x}|}{\lambda}=\frac{z_0}{4\pi}\simeq 0.191
+	\label{eqn:}
+\end{equation}
+となる．メインローブ幅$w_l$をこの２倍として評価すれば，$\frac{w_l}{\lambda}=0.382$
+で，これが理想的な状況での画像化システムの分解能と考えることができる．
+この結果を導くために用いた仮定が完全に満足されることは無く，この結果は
+実際の画像化システムの理論的な分解能の上限とみる必要がある．
+また，画像化関数の積分による近似を，円周上の積分でなく，
+球面上に3次元的に配置された観測点での計測の極限として，
+球面$\Omega$上の積分として
+\begin{equation}
+	I_\omega(\fat{x})
+		=
+	\int_\Omega
+	%\exp \left(
+	e^{
+	-2ik |\fat{x}| \cos \theta
+	}
+	\sin\theta
+	d\theta d\phi
+	=
+	4\pi j_0(2k\left|\fat{x}\right|)
+	\label{eqn:XXX_PSF_J0}
+\end{equation}
+としてみる．この場合，画像化関数は0次の球ベッセル関数$j_0(z)$が現れる．
+$j_0(z)=\frac{\sin z}{z}$だから，最小のゼロ点は$z_0=\pi$である．
+これを使って，メインローブ幅を
+評価すると，$\frac{w_l}{\lambda}=\frac{1}{2}$となる．
+以上のことを考慮すれば，
+開口合成法による画像化の分解能は，およそ半波長と考えることができ，
+観測点配置の最適化によってこの分解能を超えることが原理的に
+できないことが分かる．
+\subsection{結像位置のずれ}
+送信点において，時刻0での入射波の位相が0でないとき，点拡がり関数は容易に劣化する．
+図\ref{fig:XXX_psf_cont_delay}はその様子を見るため，
+点拡がり関数の断面図を4つの位相遅れについて計算した結果である．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.6\linewidth]{Figs/psf_cont_delay.eps} 
+	\end{center}
+	\caption{位相遅れのある入射波を用いたときの点拡がり関数.} 
+	\label{fig:XXX_psf_cont_delay}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.5\linewidth]{Figs/1D_prb.eps} 
+	\end{center}
+	\caption{反射壁の開口合成イメージング(1次元問題).} 
+	\label{fig:XXX_1D_prb}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{1次元問題}
+結像位置のずれを補償する方法を1次元問題で考える．
+今，$x=0$に送受信点をとり，$x=L(>0)$にある剛体壁からの反射波を観測したとする(図\ref{fig:XXX_1D_prb})．
+入射場変位を
+
+
+およそ半波長であることが読み取れ，このことは後で
 述べるように理論的に示すことができる．
 \subsection{結像位置のずれ}
 送信点において，時刻0での入射波の位相が0でないとき，点拡がり関数は容易に劣化する．
