@@ -920,7 +920,7 @@ $x=0$に送受信点をとり，$x=L(>0)$にある壁面からの反射波を観
 で，これを使って得られる開口合成像は
 \begin{equation}
 	I(x)=
-	\left. a_{11}\left(t-\frac{2L}{c}\right)
+	\left. a_{11}\left(t\right)
 	\right|_{t=\frac{2x}{c}}
 	=
 	Ru_0\left(\frac{2}{c}(x-L)\right)
@@ -969,7 +969,7 @@ Aスキャン波形$a_0(t)$は，
 \end{equation}
 である．ここで，時間に関するフーリエ変換対を
 \begin{eqnarray}
-	F(\omega)={\cal F}\{ a(t)\} &:=&  \int f(t)e^{-i\omega t} dt \\
+	F(\omega)={\cal F}\{ a(t)\} &:=&  \int f(t)e^{i\omega t} dt \\
 	{\cal F}^{-1}\{ F(\omega)\} &:=&  \frac{1}{2\pi} \int F(\omega)e^{-i\omega t} dt 
 \end{eqnarray}
 で定義し，$a(t)$と$a_0(t)$のフーリエ変換をとる．
@@ -1007,57 +1007,61 @@ Aスキャン波形$a_0(t)$は，
 例えば，周波数帯域が$(-\omega_b,\, \omega_b)$に制限されるとき，
 帯域内でノイズが無いと仮定しても，式\ref{eqn:XXX_at_dcnv}のフーリエ逆変換は
 \begin{equation}
-	\tilde a_{11}(t)= 
+	\tilde a(t)= 
 	\int_{-\omega_b}^{\omega_b} 
 	e^{2ikL-i\omega t} d\omega 
 	=\frac{\sin\left\{ \omega_b \left( t-\frac{2L}{c}\right)\right\}}{\pi \left(t-\frac{2L}{c}\right)}
 	\label{eqn:XXX_18}
 \end{equation}
-となる．この例からも分かるように，デコンボリューションで得られる信号は，観測波形よりは
-パルス幅が圧縮されるとしても，帯域幅$\omega_b$に応じた有限な幅を持つものになる.
+となる．この例からも分かるように，デコンボリューションで得られる信号は，観測波形に
+比べてパルス幅が圧縮され，圧縮の程度は帯域幅$\omega_b$に依存する．
 また，実際の計測では， 参照波形と画像化に用いるAスキャン波形の周波数スペクトルが
-完全に一致することは無く，このことからもデコンボリューションは完全なものとならない．
-デコンボリューションの効果は，画像化に用いる波形とどれだけ近い参照波形を用意する
-ことができるかにかかっており，その成否は，画像化すべききずの位置や性状,散乱特性が
-どの程度事前に分かっているかに依存する.
+完全に一致することは無く，この点でもデコンボリューションは完全なものとならない．
+結局のところ，デコンボリューションの成否は，対象とするAスキャン波にどれだけ近い
+参照波形を用いることができるかという点にかかっている．きずに関して得られている情報に基づき，
+できるだけ実情にあったモデルや試験体で参照波形の取得を行うことが，デコンボリューションによる
+波形処理を用いる上で重要となる．
 \paragraph{時間反転法}
-入射変位場$u^{in}(x,t)$と反射変位場$u^{r}(x,t)$がそれぞれ推定できたとする.
-このとき,各々の時間に関するフーリ変換
+入射場$u^{in}(x,t)$と反射場$u^{r}(x,t)$がそれぞれ得られているとし，
+各々の時間に関するフーリ変換を
 \begin{equation}
 	U^{in}(x,\omega)={\cal F} \{ u^{in}(x,t)\}, \ \ 
 	U^{r}(x,\omega)={\cal F} \{ u^{r}(x,t)\}
 	\label{eqn:XXX_19}
 \end{equation}
-を用い，角周波数$\omega$に関する次の積分を計算する．
+と表し，角周波数に関する次のような積分を考える．
 \begin{equation}
 	{\cal I }(x)=
-	Re 
+	\frac{1}{2\pi}
+	{\rm Re }
 	\int 	
 	U^{in}(x,\omega)\left( U^{r}(x,\omega)\right)^* d\omega
 	\label{eqn:XXX_20}
 \end{equation}
-ここで，複素数値関数$f(x)$と$g(x)$の内積を
+ここで，$\left<f,g\right>$は次式で定義される，複素数値関数$f(x)$と$g(x)$の内積を表す．
 \begin{equation}
 	\left< f,g\right>=\int f(x)g^*(x)dx
 	\label{eqn:XXX_21}
 \end{equation}
-で，ノルムを
+また，以下では内積から導入されるノルムを
 \begin{equation}
 	\left\| f \right\|^2=\left<f,f\right> =\int |f(x)|^2dx
 	\label{eqn:XXX_21}
 \end{equation}
-で定義する．ただし,$(\cdot)^*$は複素共役を表す．
-$U^{in}$と$U^{r}$は
+と表す． なお，以上において$(\cdot)^*$は複素共役を意味する．
+$U^{in}$と$U^{r}$を具体的に書くと，
 \begin{equation}
 	U^{in}(x,\omega)=U(\omega)e^{ikx}, \ \ 
-	U^{r}(x,\omega)=U(\omega)e^{-ik(x-2L)}
+	U^{r}(x,\omega)=RU(\omega)e^{-ik(x-2L)}
 	\label{eqn:XXX_22}
 \end{equation}
 だから，${\cal I}(x)$は
 \begin{equation}
 	{\cal I}(x)
 	=
-	Re \left\{ 
+	\frac{1}{2\pi}
+	{\rm Re }
+	\left\{ 
 	\left< U^{in},U^{r}\right>
 	\right\}
 	=
@@ -1067,7 +1071,7 @@ $U^{in}$と$U^{r}$は
 	e^{2ik(x-L)}d\omega
 	\label{eqn:XXX_pcnj}
 \end{equation}
-となる．また，シュワルツの不等式より
+である．式(\ref{eqn:XXX_pcnj})は，シュワルツの不等式より
 \begin{equation}
 	Re \left\{ \left< U^{in}, U^{r}\right> \right\}
 	\leq 
@@ -1077,61 +1081,100 @@ $U^{in}$と$U^{r}$は
 	\left\| U\right\|^2
 	\label{eqn:XXX_23}
 \end{equation}
-で，${\cal I}(L)=R \left\| U\right\|^2$だから，式(\ref{eqn:XXX_pcnj})は$x=L$で最大値を取る．
-従って${\cal I}=Re \left<U^{in},U^{r}\right>$を位置の関数として見ることで反射壁表面を画像化できる．
-これは，以下の理由から開口合成法の一般化とみなすことができる．
-
-${\cal I}$は，時間域での変位場を用いて
+だから，${\cal I}$は
 \begin{equation}
-	{\cal I}(x)= 2\pi \left< u^{in}(x,t), u^{r}(x,t)\right>
+	{\cal I}(x) \leq R \left\| U \right\|^2
+	\label{eqn:}
+\end{equation}
+を満たす．また，式(\ref{eqn:XXX_pcnj})より${\cal I}(L)=R \left\| U\right\|^2$だから，
+式(\ref{eqn:XXX_23})の等号は$x=L$で成立して${\cal I}(x)$の最大値を与える．
+このことから，${\cal I}(x)=Re \left<U^{in},U^{r}\right>$を画像化関数として
+用い，反射の表面を再構成できると期待される．さらに，式(\ref{eqn:XXX_pcnj})は，
+パーセバルの等式を用い，時間$t$に関する次のような積分に書き直すことができる．
+\begin{equation}
+	{\cal I}(x)= \left< u^{in}(x,t), u^{r}(x,t)\right>
+	=\int u^{in}(x,t), u^{r}(x,t) dt
 	\label{eqn:XXX_I_ut}
 \end{equation}
-と書くことができる．ただし，式(\ref{eqn:XXX_I_ut})の内積は時間$t$に関する積分を意味する．
-ここで，式(\ref{eqn:XXX_I_ut})の反射波変位を観測波形$a_{11}(t)$を用いて書けば
+ここで,$u^{in}(x,t)$と$u^r(x,t)$は実信号だから,積分の結果は実数値を与える．
+式(\ref{eqn:XXX_I_ut})による画像化は，以下の理由から開口合成法の一般化とみなすことができる．
+
+
+反射波変位$u^{r}(x,t)$は，観測波形$a_{11}(t)$を用いて
+\begin{equation}
+	u^r(x,t)=a_{11}\left(t+\frac{x}{c}\right)
+	\label{eqn:}
+\end{equation}
+と表すことができる．これを式(\ref{eqn:XXX_I_ut})に用いることで，
 \begin{eqnarray}
 	{\cal I}(x) &= & 
-	2\pi \int u^{in}(x,t) a_{11}\left(t+\frac{x}{c}\right) dt
+	\int u^{in}(x,t) a_{11}\left(t+\frac{x}{c}\right) dt
 	\\
 	&=&
-	2\pi \int u^{in}\left(x,t-\frac{x}{c}\right) a_{11}\left(t\right) dt \\
+	 \int u^{in}\left(x,t-\frac{x}{c}\right) a_{11}\left(t\right) dt \\
 	&=&
-	2\pi \left< u^{in}\left(x,t-\frac{x}{c}\right), a_{11}(t) \right>
+	\left< u^{in}\left(x,t-\frac{x}{c}\right), a_{11}(t) \right>
 	\label{eqn:XXX_I_at}
 \end{eqnarray}
-とすることができる．
-入射波波形$u(t)$を(実際とは異なるとしても)
-理想的なパルスであるとして$u(t)=\delta(t)$とすれば，
-式(\ref{eqn:XXX_I_at})は
+とすることができる．ここで，入射波波形$u_0(t)$を(実際とは異なるとしても)
+理想的なパルスであるとして$u_0(t)=\delta(t)$とする．
+このとき，
 \begin{equation}
-	{\cal I}(x)=2\pi a_{11}\left(\frac{2x}{c}\right)
+	u^{in}(x,t)=
+	u_0\left(t-\frac{x}{c}\right)
+	=
+	\delta \left(t-\frac{x}{c}\right)
+	\label{eqn:}
+\end{equation}
+より， 式(\ref{eqn:XXX_I_at})は
+\begin{equation}
+	{\cal I}(x)=a_{11}\left(\frac{2x}{c}\right)
 	\label{eqn:XXX_24}
 \end{equation}
-となり，$2\pi$の因子を除き，時間軸補正を行わない開口合成結果に一致する．
-式(\ref{eqn:XXX_I_at})は，入射場$u^{in}(x,t)$と観測波形$a_{11}(t)$の相関
-を使って像合成を行うもので，開口合成法はその特別なケースであることを意味する．
+となり，時間軸補正を行わない場合の開口合成法と一致する．
+${\cal I}(x)$は，入射場$u^{in}(x,t)$と観測波形$a_{11}(t)$の相関
+を使って像合成を行うもので一見開口合成法とは無関係に思われる．
+式(\ref{eqn:XXX_I_at})は，反射場を観測波形で表した場合の表現で，
+観測波形$a(t)$を時間軸を遡る方向へ場を外挿して反射場を推定している
+ことに相当する．式(\ref{eqn:XXX_24})では，これに加えて入射波形
+をデルタ関数で近似している．これにより，観測波形をどのように
+サンプリングして像合成が行われるかが決まり，結果として開口合成法の
+画像化関数が得られている．以上より，${\cal I}(x)$の計算には
+入射場のモデル化と，観測波形に基づく反射場の推定が必要なこと，
+入射場をデルタ関数でモデル化することで開口合成法の画像化関数
+が得られ，開口合成法が${\cal I}(x)$の特別なケースであることが分かる．
+%
+%
+%
 明らかに，時間軸を立ち上がり時間$t_d$だけ補正する場合は
 $u^{in}(x,t)=\delta(t+t_d)$とみなすだけでよく，デコンボリューションによる
 時間軸補正も以下のように同様な形式で表現することができる．
 
 式(\ref{eqn:XXX_at_dcnv})を用いた開口合成像は
 \begin{equation}
-	I(x)=\left< \delta\left(t-\frac{2x}{c}\right), \tilde a_{11}(t) \right>
+	I(x)=\left< \delta\left(t-\frac{x}{c}\right), \tilde a_{11}(t) \right>
 	\label{eqn:XXX_25}
 \end{equation}
 と表すことができる．右辺の内積を周波数領域で考えれば，
 \begin{eqnarray}
 	I(x) &=&
-	\frac{1}{2\pi}\left< e^{2ikx}, \frac{A}{A^{ref}}e^{2ikL_0} \right> \\
+	\frac{1}{2\pi}\left< e^{ikx}, \frac{A}{A_0e^{2ikL_0}} \right> \\
 	&=&
-	\frac{1}{2\pi}\left< \frac{e^{2ik(x-L_0)}}{(A^{ref})^*}, A \right> 
+	\frac{1}{2\pi}\left< \frac{e^{ik(x-2L_0)}}{(A_0)^*}, A \right> 
 	\label{eqn:XXX_26}
 \end{eqnarray}
 となる．これを再び時間領域の表現に戻せば，
 \begin{equation}
-	I(x)= \left< {\cal F}^{-1}\left\{ \frac{1}{(A^{ref})^*}\right\} *\delta \left( t-\frac{2(x-L_0)}{c}\right), a_{11}(t) \right>
+	I(x)= 
+	\left< 
+	{\cal F}^{-1}\left\{ \frac{e^{-2ikL_0}}{A_0^*}\right\} *\delta \left( t-\frac{x}{c}\right), 
+	a_{11}(t) \right>
 	\label{eqn:XXX_Ix_dcnv}
 \end{equation}
 より，式(\ref{eqn:XXX_I_at})と同じ形式になる．
+ただしこの場合，入射場$u^{in}(x,t)$はデルタ関数を参照波形で補正した形となっている．
+なお，実際に$\frac{1}{A_0^*}$を評価する際には，ゼロ割を避けるために何らかのフィルターを
+用いる必要がある．
 %%%%%
 \subsubsection{多次元問題}
 \paragraph{時間軸補正}
