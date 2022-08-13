@@ -1234,7 +1234,7 @@ $L_i+L_j$となっていることが，1次元問題との違いである．
 \paragraph{時間反転法}
 位置$\fat{x}_i$の送信子からの入射波を$u^{in}(\fat{x},t;\fat{x}_i)$，
 それに対して生じる散乱波を$u^{sc}(\fat{x},t;\fat{x}_i)$と表す．
-このとき，時間反転法における画像化関数をとする．
+このとき，時間反転法における画像化関数を次の式で定義する．
 \begin{eqnarray}
 	{\cal I}(\fat{x})
 		&=&
@@ -1251,37 +1251,206 @@ $L_i+L_j$となっていることが，1次元問題との違いである．
 	\right>
 	\label{eqn:XXX_Ix_trev}
 \end{eqnarray}
-なお，$U^{in}$と$U^{sc}$は，それぞれ$u^{in}$と$u^{sc}$の時間に関するフーリエ変換である．
-開口合成法における画像化関数$I(\fat{x})$は，${\cal I}(\fat{x})$の特別な
-ケースとして得られることが以下のようにして示される．
-ただし，１次元問題のように散乱場を観測波形だけを使って具体的に表現する
-ことができない．そのため，送受信条件をこれまでよりも具体的に設定して議論を進める．
-なお，式(\ref{eqn:XXX_Ix_trev})自体は，散乱問題が定義されれば，その解として
-$u^{sc}(\fat{x},t)$を求めることで計算できる．
-ただし，散乱体の情報は未知であるため，観測波形から散乱場を推定する方法が必要とされ
-時間反転法はそのために用いられる．
-
-
-ここでは，観測面$\Gamma$において次のノイマン条件を課す．
+ここに，$U^{in}$と$U^{sc}$は，$u^{in}$と$u^{sc}$の時間に
+関するフーリエ変換をそれぞれ表す．
+以下では，開口合成法における画像化関数$I(\fat{x})$が，${\cal I}(\fat{x})$の
+特別なケースとして得られることを示す．
+%
+なお，散乱場$u^{sc}$は，1次元問題のようにを観測波形だけを使って具体的に
+表現することができない．そこで，観測面における条件が指定され，遠方近似が
+成り立つと仮定してこの後の議論を進める．
+%
+欠陥が存在しない場合の領域を$B$その表面を$\partial B$とし，
+観測点$\cal M$は$\partial B$上に置かれているとする．
+欠陥が占める領域とその表面はこれまで通り$D$および$\partial D$ですれぞれ表す．
+全ての境界$\partial D\cup \partial B$において，次のノイマン条件を課す．
 \begin{equation}
-	\frac{\partial u}{\partial n}=0, \ \ (\fat{x} \in \Gamma)
+	\frac{\partial u}{\partial n}
+	=\left\{
+		\begin{array}{cc}
+			\bar{q} & (\fat{x}\in S) \\
+			0, & {\rm otherwise} 
+		\end{array}
+	\right.
 	\label{eqn:}
 \end{equation}
-このとき，媒体内部の場を次のよう表現することができる．
+
+全波動場$u(\fat{x},t)$は，
 \begin{equation}
-	u(\fat{y})=
-	\int_{\Gamma}
-	\left\{
-		G(\fat{x},t)*\frac{\partial u(x)}{\partial n_x}
+	\nabla^2_x u(\fat{x},t)
 	-
-	\frac{\partial G(\fat{x},t)}{\partial n_x}*u(\fat{x})
-	\right\}dS_x	
+	\frac{1}{c^2}\ddot{u}(\fat{x},t)
+	=
+	0
+	, \ \ (\fat{x} \in B\setminus \bar D \times (0,\infty))
+	\label{eqn:}
+\end{equation}
+を満足するものとする．また，全空間のグリーン関数$G^+$と$G^-$を
+次のような特異解として定義する．
+\begin{equation}
+	\nabla^2_x G^{\pm}(\fat{x},\fat{y},t)
+	-
+	\frac{1}{c^2}\ddot{G}^{\pm}(\fat{x},\fat{y},t)
+	=
+	-4\pi \delta(\fat{x}-\fat{y})\delta(t)
+	\label{eqn:XXX_Green_pm}
+\end{equation}
+ここで，$G^+$と$G^-$はそれぞれ因果的，非因果的なグリーン関数を表す．
+\begin{equation}
+	G^{\pm}(\fat{x},\fat{y},t)=\frac{1}{r}\delta \left(t\pm \frac{|\fat{x}-\fat{y}|}{c}\right)
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u(\fat{x},t) 
+	=
+	\int_S G(\fat{x},\fat{y},t) * \bar{q}(\fat{x},t)dS_x 
+	-
+	\int_{\partial D \cup \partial B} H(\fat{x},\fat{y},t) * u(\fat{x},t)dS_x 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{in}(\fat{x},t) 
+	=
+	\int_S G(\fat{x},\fat{y},t) * \bar{q}(\fat{x},t)dS_x 
+	-
+	\int_{\partial B} H(\fat{x},\fat{y},t) * u^{in}(\fat{x},t)dS_x 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{sc}(\fat{x},t) 
+	=
+	-
+	\int_{\partial B} H(\fat{x},\fat{y},t) * u^{sc}(\fat{x},t)dS_x 
+	+
+	\int_{\partial D} H(\fat{x},\fat{y},t) * u(\fat{x},t)dS_x 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	H^{\pm}(\fat{x},\fat{y},t)
+	=
+	\frac{\partial G^\pm(\fat{x},\fat{y},t)}{\partial n_x}
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{sc}(\fat{x},t) 
+	=
+	-
+	\int_{\partial B} H^-(\fat{x},\fat{y},t) * u^{sc}(\fat{x},t)dS_x 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\left<
+		u^{in}(\fat{x},t),\, 
+		u^{sc}(\fat{x},t)
+	\right>
+	=-
+	\int_{\partial B} 
+	\left<
+		u^{in}(\fat{x},t),\, 
+		H^{-}(\fat{y},\fat{x})*u^{sc}(\fat{y},t)
+	\right>
+	dS_y
+	\label{eqn:}
+\end{equation}
+\begin{eqnarray}
+	{\cal I}(\fat{x})
+	 &=&
+	\sum_{i}
+	\left<
+		u^{in}(\fat{x},t;\fat{x}_i),\, 
+		u^{sc}(\fat{x},t;\fat{x}_i)
+	\right>
+	\\	
+	&=&-
+	\sum_{i}
+	\int_{\partial B} 
+	\left<
+		u^{in}(\fat{x},t;\fat{x}_i),\, 
+		H^{-}(\fat{y},\fat{x})*u^{sc}(\fat{y},t;\fat{x}_i)
+	\right>
+	dS_y
+	\label{eqn:}
+\end{eqnarray}
+\begin{eqnarray}
+	{\cal I}(\fat{x})
+	&\simeq&
+	-
+	\sum_{i,j}
+	\left<
+		u^{in}(\fat{x},t;\fat{x}_i),\, 
+		H^{-}(\fat{x}_j,\fat{x})*u^{sc}(\fat{x}_j,t;\fat{x}_i)
+	\right>
+	\Delta S_i 
+\end{eqnarray}
+\begin{equation}
+	\frac{\partial H^-}{\partial n}
+	=
+	\frac{\fat{n}\cdot \hat{\fat{r}}}{cr}
+	\left\{
+		-\delta'\left(t+\frac{r}{c}\right)
+		+\frac{c}{r}
+		\delta'\left(t+\frac{r}{c}\right)
+	\right\}
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	H^{-}(\fat{x},\fat{y},t)*u^{sc}(\fat{x},t)
+	\simeq 
+	-\frac{\fat{n}\cdot \hat{\fat{r}}}{cr}
+	\dot{u}^{sc}\left(\fat{x},t+\frac{r}{c}\right)
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	{\cal I}(\fat{x})
+	\simeq 
+	\sum_{i,j}
+	\frac{\fat{n}\cdot\hat{\fat{r}}_j}{cr_j}
+	\left<
+		u^{in}(\fat{x},t;\fat{x}_i),\, 
+		\dot{u}^{sc}\left(\fat{x}_j,t+\frac{r_j}{c};\fat{x}_i\right)
+	\right>
+	\Delta S_i 
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{in}(\fat{x},t;\fat{x}_i) = G^+(\fat{x},\fat{x}_i,t), \ \ 
+	\dot{u}^{sc}(\fat{x}_j,t;x_i)=a_{ij}(t)
+	\label{eqn:}
+\end{equation}
+\begin{eqnarray}
+	{\cal I}(\fat{x})
+	&\simeq & 
+	\sum_{i,j}
+	\frac{\fat{n}\cdot\hat{\fat{r}}_j}{cr_j}
+	\left<
+		\frac{1}{r_i}\delta\left( t-\frac{r_i}{c}\right)
+		,\, 
+		a\left(t+\frac{r_j}{c}\right)
+	\right>
+	\Delta S_i \\ 
+	&=&
+	\sum_{i,j}
+	a\left(\frac{r_i+r_j}{c}\right)
+	\frac{\fat{n}\cdot\hat{\fat{r}}_j}{cr_i r_j} 
+	\Delta S_i 
+	\label{eqn:}
+\end{eqnarray}
+
+散乱場$u^{sc}(\fat{x},t)$を，$u^{sc}=u-u^{in}$で定義する．
+入射場$u^{in}(\fat{x},t)$を，欠陥$D$が存在しないときの波動場を，
+散乱場$u^{sc}(\fat{x},t)$を，$u^{sc}=u-u^{in}$で定義する．
+散乱場$u^{sc}(\fat{x},t)$は，全波動場と同様，境界上にノイマン条件$u$
+全空間のグリーン関数$G(\fat{x},\fat{y},t)$を用いて次のよう表すことができる．
+\begin{equation}
+	u^{sc}(\fat{y},t)
 	=
 	-\int_{\Gamma}
-	\frac{\partial G(\fat{x},t)}{\partial n_x}*u(\fat{x})
+	\frac{\partial G(\fat{x},\fat{y},t)}{\partial n_x}*u(\fat{x},t)
 	dS_x	
 	\label{eqn:}
 \end{equation}
+ただし$*$は，時間に関するたたみ込み積を意味する．
+
 開口合成法の画像化関数が得られることを示す．
 
 
