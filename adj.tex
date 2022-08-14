@@ -1,51 +1,59 @@
 \section{随伴方程式法}
-これまでの議論は点散乱体に対するものであった．
-ここまでの結果が大きさを持つ散乱体に対しても有効であることを示す．
-そのための一つの方法は，随伴方程式法を単純化したものとして、これまでの再構成式が得られることを見ることである。
-もう一つの方法は、線形化逆散乱解析（あるいはphysical optics far-field scattering method:POFFIS）によって
-与えられる再構成式を時間領域で表せば、開口合成法の画像化関数とみなせることを見ることである。
-本節では、随伴方程式法について述べる．
+ここまでに議論では，画像化関数$I(\fat{x})$と${\cal I}(\fat{x})$をはじめ与え，
+それらがどのように散乱体の像を合成するか，また，２つの画像化関数が互いにどの
+ように関係づけられるかを調べてきた．
+ここからは，画像化関数を波動場の支配方程式から導く2つの方法を示す．
+一つ目は，随伴方程式法によるモデルパラメータの推定問題として
+画像化関数が与えられることを示す．
+２つ目の方法では，波動場の積分表現に基づく線形化逆散乱解析法において，
+散乱体形状を表す特異関数として画像化関数が得られることを示す．
+前者の方法からは，時間反転法と同じ形式をもつ画像化関数が，
+後者からは，開口合成法の形式を持つ画像化関数が得られる．
+時間反転法と開口合成法の関係はこれまで示した通りであることから，
+以上の方法全てに共通する側面があることが明らかとなる．
 \subsection{問題設定}
-引き続きスカラー波の散乱問題を考える．
-ただし，モデルパラメータの意味を明確にするために，音響波を対象として考える．
-いま，媒体の粒子速度を$\fat{v}(\fat{x},t)$，圧力を$p(\fat{x},t)$とする．
-運動量保存則は，質量密度$\rho$とすれば，
+領域$B$の内部に存在する散乱体$D$による，スカラー波の散乱問題を考える．
+ここでは，モデルパラメータの意味を明確にするために，スカラー場を
+圧力場$p(\fat{x},t)$とし，媒体の質量密度を$\rho(\fat{x})$，
+粒子速度を$\fat{v}(\fat{x},t)$と表す．このとき，運動量保存則は，
 \begin{equation}
-	\rho \dot{\fat{v}}= -\nabla p, \ \ \fat{x}\in G, t\in [0,T]
+	\rho \dot{\fat{v}}= -\nabla p
+%	, \ \ (\fat{x}\in B, t\in (0,T_f)
 	\label{eqn:YYY_2nd_law}
 \end{equation}
-と表される．また，圧力と速度の関係は
+と表される．圧力と速度の関係は，ラメ定数$\lambda(\fat{x})$を用いて
 \begin{equation}
 	\dot{p}=-\lambda \nabla \cdot \fat{v}
 	\label{eqn:YYY_pv}
 \end{equation}
-で，$\lambda$はラメ定数を表す．式(\ref{eqn:YYY_2nd_law})と式(\ref{eqn:YYY_pv})から速度ベクトルとその時間微分を
-消去すれば，圧力に関する方程式が次のように得られる．
+書けるので，式(\ref{eqn:YYY_2nd_law})と式(\ref{eqn:YYY_pv})から
+$\fat{v}$を消去すれば，圧力に関する波動方程式が次のように得られる．
 \begin{equation}
 	\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)=0
 	\label{eqn:YYY_wveq_p}
 \end{equation}
 ただし，
 \begin{equation}
-	\alpha = \frac{1}{\rho}, \ \ \beta=\frac{1}{\lambda}
+	\alpha(\fat{x}) = \frac{1}{\rho(\fat{x})}, \ \ \beta(\fat{x})=\frac{1}{\lambda(\fat{x})}
 	\label{eqn:YYY_consts_ab}
 \end{equation}
-とする．圧力場には，静止過去の条件:
+とした．圧力場の初期条件は，
 \begin{equation}
-	p(\fat{x},t)=0, \ \ \dot{p}(\fat{x},t)=0, \ \ (t\leq 0)
+	p(\fat{x},t)=0, \ \ \dot{p}(\fat{x},0)=0
 	\label{eqn:YYY_IC_p}
 \end{equation}
-と，ノイマン条件:
+とし，境界条件はノイマン条件:
 \begin{equation}
-	\frac{\partial p}{\partial n}(\fat{x},t)=0, \ \ \left( \fat{x} \in  \partial G \right)
+	\frac{\partial p}{\partial n}(\fat{x},t)=0, \ \ \left( \fat{x} \in  \partial B \right)
 	\label{eqn:YYY_BC_p}
 \end{equation}
-を課す．ここで，領域$G$の内部には，領域$D\in G$を占めるインクルージョンがある場合を考え，
+を課す．また，散乱体$D$はインクルージョンであるとし，
+モデルパラメータである，質量密度とラメ定数を，次のように与える．
 \begin{equation}
 	\rho (\fat{x})=
 	\left\{
 	\begin{array}{cc}
-		\rho_0 +\Delta \rho & (\fat{x}\in D) \\
+		\rho_0 +\Delta \rho(\fat{x}) & (\fat{x}\in D) \\
 		\rho_0 & (\rm otherwise)
 	\end{array}
 	\right.
@@ -55,43 +63,44 @@
 	\lambda (\fat{x})=
 	\left\{
 	\begin{array}{cc}
-		\lambda_0 +\Delta \lambda & (\fat{x}\in D) \\
+		\lambda_0 +\Delta \lambda(\fat{x}) & (\fat{x}\in D) \\
 		\lambda_0 & (\rm otherwise)
 	\end{array}
 	\right.
 	\label{eqn:YYY_rho_x}
 \end{equation}
-とする．以下では，$D$で発生した散乱波$p^{in}(\fat{x},t)$から
-$D$を再構成する問題を考える．
-そのためには，$\lambda(\fat{x}$あるいは$\rho(\fat{x})$を画像化領域において
-再構成すればよい．観測は$\left\{ \fat{y}_i, i=1,\dots M\right\}$において，
-$0\leq t\leq T$の範囲で行い，圧力の時間波形データ
+すなわち，インクルージョンは均質媒体に埋め込まれているとする．
+以下では，バックグラウンドの物性$(\rho_0, \lambda_0)$は既知とし，
+$D$からの散乱波$p^{sc}(\fat{x},t)$を観測して$D$を再構成することを
+考える．そのためには，$\lambda(\fat{x})$あるいは$\rho(\fat{x})$を
+適当な画像化領域において再構成すればよい．なお，観測は
+$\left\{ \fat{x}_i, i=1,\dots M\right\}$において，$0\leq  t\leq T$の
+時間範囲で行い，圧力の時間波形データ
 \begin{equation}
 	{\cal D}
 	=
 	\left\{ 
-		p^{0}(\fat{y}_i,t), i=1,2,\dots M, \, 0\leq t \leq T
+		p(\fat{x}_i, t)=p_i^{0}(t), i=1,2,\dots M, \, 0\leq t \leq T
 	\right\}
 	\label{eqn:YYY_00}
 \end{equation}
-が得られているものとする．
-データ$\cal D$から$\rho$と$\lambda$を再構成する問題を，次のコスト関数
-の最小化問題として考える．
+が得られているとする．ここでは，データ$\cal D$から$\rho$と$\lambda$を再構成する問題を，
+次のようなコスト関数:
 \begin{equation}
-	\chi (\fat{m})=\frac{1}{2} \sum_{i=1}^M\int_0^T \left| p(\fat{x},t)-p^0(\fat{x}_i,t))\right|^2dtd\fat{x}
+	\chi (\fat{m})=\frac{1}{2} 
+	\sum_{i=1}^M\int_0^T \left| p(\fat{x},t)-p^0(\fat{x}_i,t))\right|^2dt
 	\label{eqn:YYY_01}
 \end{equation}
-ただし，$\fat{m}$は
+を最小化するように，モデルパラメータ
 \begin{equation}
 	\fat{m}=(\alpha,\,\beta)=\left( \rho^{-1},\, \lambda^{-1} \right)
 	\label{eqn:YYY_02}
 \end{equation}
-で，コスト関数が再構成すべきモデルパラメータ$\rho$と$\lambda$に依存することを明示するためのものである．
+を決定する問題として考える．
 \subsection{随伴方程式法}
 コスト関数$\chi(\fat{m})$を最小化する際，適当なモデルパラメータ$\fat{m}$の初期値からはじめ，
-コスト関数の値が減少する方向へ$\fat{m}$を修正する勾配法の適用を考える．
-勾配法を適用するためには，$\chi(\fat{m})$の$\fat{m}$に関する勾配が必要となる．勾配は次のように
-定義することができる．
+コスト関数の値が減少する方向へ$\fat{m}$を修正する勾配法を適用する．
+$\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する．
 \begin{equation}
 	\nabla_m \chi(\fat{m}) 
 	\delta \fat{m}
@@ -113,7 +122,7 @@ $0\leq t\leq T$の範囲で行い，圧力の時間波形データ
 	=
 	\chi(\fat{m})
 	+
-	\int_G\int_0^T 
+	\int_B\int_0^T 
 	p^*(\fat{x},t)
 	\left( 
 		\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
@@ -131,17 +140,34 @@ $0\leq t\leq T$の範囲で行い，圧力の時間波形データ
 	\delta(\fat{x}-\fat{y}_i )
 	\label{eqn:YYY_04}
 \end{equation}
-で，$G$と$[0,T]$上での積分を
+で，$B\times (0,T)$での積分を
 \begin{equation}
 	\left< \cdot \right>=\int_G\int_0^T (\cdot )dtd\fat{x}
 	\label{eqn:YYY_05}
 \end{equation}
-とし，微分作用素
+とすれば，コスト関数は
+\begin{equation}
+	\chi (\fat{m})=\left< \chi_1(\fat{m} )\right>
+	\label{eqn:}
+\end{equation}
+と表すことができる．また，波動方程式を表す微分作用素$L$wを
 \begin{equation}
 	L(p,\fat{m})=\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
 	\label{eqn:YYY_06}
 \end{equation}
-を使って式(\ref{eqn:YYY_chi2})右辺の第二項を表せば，$\chi^*(\fat{m})$は
+と定義し，これを踏まえて式(\ref{eqn:YYY_chi2})右辺のラグランジュ乗数項は
+\begin{equation}
+	\int_B\int_0^T 
+	p^*(\fat{x},t)
+	\left( 
+		\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
+	\right)
+	dt d\fat{x}
+	=
+	\left< p^* L(p,\fat{m}) \right>
+	\label{eqn:}
+\end{equation}
+と表すことができ，拡張されたコスト関数を
 \begin{equation}
 	\chi^*(\fat{m}) 
 	=
