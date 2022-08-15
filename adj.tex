@@ -80,7 +80,9 @@ $\left\{ \fat{x}_i, i=1,\dots M\right\}$において，$0\leq  t\leq T$の
 	{\cal D}
 	=
 	\left\{ 
-		p(\fat{x}_i, t)=p_i^{0}(t), i=1,2,\dots M, \, 0\leq t \leq T
+		p(\fat{x}_i, t)=p_i^{0}(t)\left|
+		i=1,2,\dots M, \, 0\leq t \leq T
+		\right.
 	\right\}
 	\label{eqn:YYY_00}
 \end{equation}
@@ -88,7 +90,7 @@ $\left\{ \fat{x}_i, i=1,\dots M\right\}$において，$0\leq  t\leq T$の
 次のようなコスト関数:
 \begin{equation}
 	\chi (\fat{m})=\frac{1}{2} 
-	\sum_{i=1}^M\int_0^T \left| p(\fat{x},t)-p^0(\fat{x}_i,t))\right|^2dt
+	\sum_{i=1}^M\int_0^T \left| p(\fat{x},t)-p_i^0(t))\right|^2dt
 	\label{eqn:YYY_01}
 \end{equation}
 を最小化するように，モデルパラメータ
@@ -97,10 +99,12 @@ $\left\{ \fat{x}_i, i=1,\dots M\right\}$において，$0\leq  t\leq T$の
 	\label{eqn:YYY_02}
 \end{equation}
 を決定する問題として考える．
+なお，$p(\fat{x},t)$は，$\fat{m}$を指定したときの散乱問題の解であり，
+式(\ref{eqn:YYY_01})の右辺は $p(\fat{x},t)$を通じて$\fat{m}$に依存する．
 \subsection{随伴方程式法}
 コスト関数$\chi(\fat{m})$を最小化する際，適当なモデルパラメータ$\fat{m}$の初期値からはじめ，
 コスト関数の値が減少する方向へ$\fat{m}$を修正する勾配法を適用する．
-$\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する．
+$\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義される．
 \begin{equation}
 	\nabla_m \chi(\fat{m}) 
 	\delta \fat{m}
@@ -113,8 +117,8 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 \end{equation}
 ここに$\delta \fat{m}$は，$\fat{m}+\delta \fat{m}$がモデルパラメータの
 空間に属するような任意の変分を表す．
-勾配$\nabla \chi (\fat{m})\delta \fat{m}$は，以下に示すように随伴方程式法(adjoint method)
-を用いて効率的に求めることができる．
+$\delta\fat{m}$方向へのコストの勾配$\nabla \chi (\fat{m})\delta \fat{m}$は，
+以下に示すように随伴方程式法(adjoint method)を用いて効率的に求めることができる．
 
 はじめに，次のように拡張されたコスト関数を定義する．
 \begin{equation}
@@ -124,9 +128,9 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 	+
 	\int_B\int_0^T 
 	p^*(\fat{x},t)
-	\left( 
+	\left\{ 
 		\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
-	\right)
+	\right\}
 	dt d\fat{x}
 	\label{eqn:YYY_chi2}
 \end{equation}
@@ -137,7 +141,7 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 	\chi_1(\fat{m})=\frac{1}{2} 
 	\sum_{i=1}^M
 	\left| p(\fat{x},t)-p^0(\fat{x},t)\right|^2
-	\delta(\fat{x}-\fat{y}_i )
+	\delta(\fat{x}-\fat{x}_i )
 	\label{eqn:YYY_04}
 \end{equation}
 で，$B\times (0,T)$での積分を
@@ -145,29 +149,29 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 	\left< \cdot \right>=\int_G\int_0^T (\cdot )dtd\fat{x}
 	\label{eqn:YYY_05}
 \end{equation}
-とすれば，コスト関数は
+と書くとき，コスト関数は
 \begin{equation}
 	\chi (\fat{m})=\left< \chi_1(\fat{m} )\right>
 	\label{eqn:}
 \end{equation}
-と表すことができる．また，波動方程式を表す微分作用素$L$wを
+と表すことができる．また，波動方程式を表す微分作用素$L$を
 \begin{equation}
 	L(p,\fat{m})=\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
 	\label{eqn:YYY_06}
 \end{equation}
-と定義し，これを踏まえて式(\ref{eqn:YYY_chi2})右辺のラグランジュ乗数項は
+と定義する．これを踏まえて式(\ref{eqn:YYY_chi2})右辺のラグランジュ乗数項を書けば，
 \begin{equation}
 	\int_B\int_0^T 
 	p^*(\fat{x},t)
-	\left( 
+	\left\{ 
 		\alpha \ddot{p}-\nabla \cdot \left(\beta  \nabla  p \right)
-	\right)
+	\right\}
 	dt d\fat{x}
 	=
 	\left< p^* L(p,\fat{m}) \right>
 	\label{eqn:}
 \end{equation}
-と表すことができ，拡張されたコスト関数を
+となるので，拡張されたコスト関数は
 \begin{equation}
 	\chi^*(\fat{m}) 
 	=
@@ -176,13 +180,14 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 	\left< p^* L(p,\fat{m})\right>
 	\label{eqn:YYY_chi2s}
 \end{equation}
-と書くことができる．
-圧力場$p$はモデルパラメータ$\fat{m}$に依存するので，
+と表される．
+圧力場$p$はモデルパラメータ$\fat{m}$に依存するので，モデルパラメータの変化$\delta \fat{m}$
+に対応する圧力場の変化を
 \begin{equation}
 	\delta p= \nabla_m p \delta \fat{m}
 	\label{eqn:YYY_var_p}
 \end{equation}
-とすれば，式(\ref{eqn:YYY_chi2s})の勾配を次にように表すことができる．
+とすれば，式(\ref{eqn:YYY_chi2s})の$\delta \fat{m}$方向への勾配を次にように表すことができる．
 \begin{equation}
 	\nabla_m \chi^* \delta \fat{m}
 	=
@@ -197,25 +202,25 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 \begin{equation}
 	\nabla_p \chi \delta p
 	=  
-	\left< \nabla_p \chi_1\cdot \delta p \right> 
+	\left< \nabla_p \chi_1 \delta p \right> 
 	\label{eqn:YYY_dp1}
 \end{equation}
 \begin{equation}
 	\nabla_p \left< p^*  L(p,\fat{m}) \right> \delta p
 	=  
-	\left< p^*  \cdot \nabla_p L(p,\fat{m})\delta p \right> 
+	\left< p^*  \left\{ \nabla_p L(p,\fat{m})\delta p \right\}\right> 
 	\label{eqn:YYY_dp2}
 \end{equation}
 \begin{equation}
 	\nabla_m \left< p^*  L(p,\fat{m}) \right> \delta \fat{m}
 	=
-	\left< p^*  \cdot \nabla_m L(p,\fat{m}) \delta \fat{m}\right> 
+	\left< p^*  \left\{ \nabla_m L(p,\fat{m}) \delta \fat{m}\right\}\right> 
 	\label{eqn:YYY_dm3}
 \end{equation}
 とすることができる．これらの式の右辺に現れる勾配を具体的に計算すると，それぞれ以下のようになる．
 \begin{equation}
 	\nabla_p \chi_1 =
-	\sum_{i=1}^M \left(p(\fat{x},t)-p^0(\fat{x},t)\right) \delta(\fat{x}-\fat{y}_i)
+	\sum_{i=1}^M \left\{p(\fat{x},t)-p^0_i(t)\right\} \delta(\fat{x}-\fat{x}_i)
 	\label{eqn:YYY_dm_chi1}
 \end{equation}
 \begin{equation}
@@ -232,20 +237,20 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 \end{equation}
 式(\ref{eqn:YYY_dp_L})を式(\ref{eqn:YYY_dp2})に用いれば，
 \begin{equation}
-	\left< p^*  \cdot \nabla_p L(p,\fat{m})\delta p \right> 
+	\left< p^*  \left\{ \nabla_p L(p,\fat{m})\delta p \right\} \right> 
 	=
-	\left< p^*  \cdot L(\delta p,\fat{m}) \right> 
+	\left< p^*  L(\delta p,\fat{m}) \right> 
 	=
 	\left<
 		\alpha p^*\delta\ddot{p}
 	\right>
 	-
 	\left<
-		p^* \cdot \left( \nabla \beta \nabla p\right)
+		p^* \left( \nabla \beta \nabla \delta p\right)
 	\right>
 	\label{eqn:YYY_dp2_ab}
 \end{equation}
-となる．式(\ref{eqn:YYY_dp2_ab})右辺の項は，部分積分を用いて次のように書き直すことができる．
+となる．式(\ref{eqn:YYY_dp2_ab})の右辺第1項は，部分積分を行い次のように書き直すことができる．
 \begin{equation}
 	\left<
 		\alpha p^*\delta\ddot{p}
@@ -262,58 +267,63 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 	\left< \alpha\ddot{p} \delta p \right>
 	\label{eqn:YYY_08}
 \end{equation}
+一方，式(\ref{eqn:YYY_dp2_ab})右辺の第2項は，発散定理を使って
 \begin{eqnarray}
 	\left<
-		p^* \cdot \left( \nabla \beta \nabla p\right)
+		p^* \cdot \left( \nabla \beta \nabla \delta p\right)
 	\right>
 	&=&
 	\left<
 		\nabla\cdot
-		\left( \beta p^*\nabla p -\beta p \nabla p^* \right)
+		\left( \beta p^*\nabla \delta p -\beta \delta p \nabla p^* \right)
 	\right>
 	+
 	\left<
-		p \nabla\cdot \left( \beta \nabla p^* \right)
+		\delta p \nabla\cdot \left( \beta \nabla p^* \right)
 	\right> \\
 	\label{eqn:YYY_09}
 	&=&
-	\int_0^T\int_{\partial G}
+	\int_0^T\int_{\partial B}
 	\beta\left( 
-		p^* \frac{\partial p}{\partial n}
+		p^* \frac{\partial \delta p}{\partial n}
 		-
-		-p \frac{\partial p^*}{\partial n}
+		-\delta p \frac{\partial p^*}{\partial n}
 	\right)
 	dS
 	dt
 	+
 	\left<
-		p \nabla\cdot \left( \beta \nabla p^* \right)
+		\delta p \nabla\cdot \left( \beta \nabla p^* \right)
 	\right>
 	\label{eqn:YYY_10}
 \end{eqnarray}
-従って，時間に関して
+と変形できる．ここで，$\delta p$と$\delta \dot{p}$の初期条件は
 \begin{equation}
 	\delta p(\fat{x},0)=0, \ \ \delta \dot{p} (\fat{x},0)=0
 	\label{eqn:YYY_11}
 \end{equation}
-と，終端条件
+としてよい．また，$p^*$の任意性を利用し，時間に関して終端条件
 \begin{equation}
 	p^*(\fat{x},T)=0, \ \ \dot{p}^*(\fat{x},T)=0 
 	\label{eqn:YYY_12}
 \end{equation}
-を課し，空間に関してノイマン条件
+を，空間に関してノイマン条件
 \begin{equation}
 	\left. \frac{\partial p^*}{\partial n}
-	\right|_{\partial G}=0
+	\right|_{\partial B}=0
 	\label{eqn:yyy_13}
 \end{equation}
-を課せば，式(\ref{eqn:YYY_dp2})について次の関係が成り立つことが分かる．
+を課せば，式(\ref{eqn:YYY_dp2})を次のように書くことができる．
 \begin{equation}
-	\left< p^*  \cdot \nabla_p L(p,\fat{m})\delta p \right> 
+	\left< p^*  \left\{ \nabla_p L(p,\fat{m})\delta p \right\} \right> 
 	=
-	\left< p^*  \cdot L(\delta p,\fat{m})\right> 
+	\left< \alpha \ddot{p}^* \delta p\right>
+	-
+	\left<
+		\delta p \nabla\cdot \left( \beta \nabla p^* \right)
+	\right>
 	=
-	\left< L(\delta p^*,\fat{m}) \cdot \delta p\right> 
+	\left< L(p^*,\fat{m}) \delta p\right> 
 	\label{eqn:YYY_14}
 \end{equation}
 以上を踏まえてコスト関数の勾配(\ref{eqn:YYY_dchi2})を書けば，
@@ -321,10 +331,10 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 	\nabla_m \chi^* \delta \fat{m}
 	=
 	\left< 
-		\left(L(p^*,\fat{m})+\nabla_p\chi_1)\right) \cdot \delta p
+		\left\{L(p^*,\fat{m})+\nabla_p\chi_1\right\} \delta p
 	\right>
 	+
-	\left< p^*  \cdot L(p,\delta \fat{m}) \right> 
+	\left< p^*  L(p,\delta \fat{m}) \right> 
 	\label{eqn:YYY_dchi2_adj}
 \end{equation}
 となる．このことから，
@@ -342,15 +352,10 @@ $\chi(\fat{m})$の$\fat{m}$に関する勾配は，次のように定義する�
 とすることができる．式(\ref{eqn:YYY_adj_PDE})は随伴方程式と呼ばれる．
 ここでは，随伴方程式は元の方程式である$L(p,\fat{m})=0$と同じ
 波動方程式で，$-\nabla \chi_1(p)$はそのソース項となっている．
-\begin{equation}
-	\delta \fat{m}=\left( \delta \alpha, \, \delta \beta \right)
-	\label{eqn:YYY_d_ab}
-\end{equation}
-とすれば，
 \subsection{随伴場と画像化関数}
 式(\ref{eqn:YYY_gradX0})の右辺を評価することで，圧力場に関する任意の変分$\delta p$
 を計算することなくコスト関数の勾配が得られる．ただしそのためには随伴問題の解$p^*(\fat{x},t)$
-を$G \times [0,T]$において求める必要がある．
+を$B \times (0,T)$において求める必要がある．
 $p^*$はこれまでの議論より、次の条件を満足する場である．
 \begin{equation}
 	L(p^*,\fat{m})=
@@ -364,7 +369,7 @@ $p^*$はこれまでの議論より、次の条件を満足する場である．
 	\label{eqn:YYY_TC_rep}
 \end{equation}
 \begin{equation}
-	\left. \frac{\partial p^*}{\partial n}\right|_{\partial G}=0
+	\left. \frac{\partial p^*}{\partial n}\right|_{\partial B}=0
 	\label{eqn:YYY_BC_rep}
 \end{equation}
 演算子$L(p^*,\fat{m})$は時間反転に対して不変で，
@@ -373,7 +378,7 @@ $p^*$はこれまでの議論より、次の条件を満足する場である．
 	p*(\fat{x},0)=0, \ \ \dot{p}^*(\fat{x},0)=0
 	\label{eqn:YYY_IC_adj}
 \end{equation}
-として扱うことができる．このことから$G\times [0,T]$における初期値問題を解くことで
+として扱うことができる．このことから$G\times (0,T)$における初期値問題を解くことで
 随伴場$p^*(\fat{x},t)$が得られる．その際，ソース項である式(\ref{eqn:YYY_dm_chi1})
 において$p^{0}(\fat{y}_i,t)$には観測データ${\cal D}$を用い，
 $p(\fat{x},t)$には，現時点での$\fat{m}$の推定値を用いて順問題
@@ -386,7 +391,7 @@ $L(p,\fat{m})=0$を解いて得られた圧力場$p(\fat{x},t)$を用いる．
 形状を再構成することを考える．
 そこで，モデルパラメータの初期値を
 \begin{equation}
-	\delta \fat{m}=\left(\rho_0^{-1},\, \lambda_0^{-1} \right)
+	\fat{m}=\left(\rho_0^{-1},\, \lambda_0^{-1} \right)
 	\label{eqn:YYY_16}
 \end{equation}
 と均質材として与える．この場合，随伴方程式のソース項に含まれる
