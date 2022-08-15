@@ -352,11 +352,14 @@ $\delta\fat{m}$方向へのコストの勾配$\nabla \chi (\fat{m})\delta \fat{m
 とすることができる．式(\ref{eqn:YYY_adj_PDE})は随伴方程式と呼ばれる．
 ここでは，随伴方程式は元の方程式である$L(p,\fat{m})=0$と同じ
 波動方程式で，$-\nabla \chi_1(p)$はそのソース項となっている．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{随伴場と画像化関数}
-式(\ref{eqn:YYY_gradX0})の右辺を評価することで，圧力場に関する任意の変分$\delta p$
-を計算することなくコスト関数の勾配が得られる．ただしそのためには随伴問題の解$p^*(\fat{x},t)$
-を$B \times (0,T)$において求める必要がある．
-$p^*$はこれまでの議論より、次の条件を満足する場である．
+コスト関数の勾配は，式(\ref{eqn:YYY_gradX0})の右辺を評価することで得られる．
+この式には，$\delta\fat{m}$に対する圧力場の変化$\delta p$が含まれないため，
+様々な$\fat{m}$について順問題$L(p,\fat{m})=0$を解く必要がない．
+その代わりに，随伴場$p^*(\fat{x},t)$を求めておく必要がある．
+随伴場の支配方程式系をここであらためて整理すると，
+次のような波動方程式の終端値−境界値問題となっている．
 \begin{equation}
 	L(p^*,\fat{m})=
 	\alpha \ddot{p}^* -\nabla\cdot \left( \beta \nabla p^* \right)
@@ -365,46 +368,74 @@ $p^*$はこれまでの議論より、次の条件を満足する場である．
 	\label{eqn:YYY_adj_PDE_rep}
 \end{equation}
 \begin{equation}
-	p*(\fat{x},T)=0, \ \ \dot{p}^*(\fat{x},T)=0
-	\label{eqn:YYY_TC_rep}
+	\nabla_p \chi_1 =
+	\sum_{i=1}^M \left\{p(\fat{x},t)-p^0_i(t)\right\} \delta(\fat{x}-\fat{x}_i)
+	\tag{\ref{eqn:YYY_dm_chi1}}
+\end{equation}
+\begin{equation}
+	p^*(\fat{x},T)=0, \ \ \dot{p}^*(\fat{x},T)=0
+	\tag{\ref{eqn:YYY_11}}
 \end{equation}
 \begin{equation}
 	\left. \frac{\partial p^*}{\partial n}\right|_{\partial B}=0
-	\label{eqn:YYY_BC_rep}
+	\tag{\ref{eqn:yyy_13}}
 \end{equation}
-演算子$L(p^*,\fat{m})$は時間反転に対して不変で，
-終端条件(\ref{eqn:YYY_TC_rep})は$t\rightarrow T-t$によって初期条件
+演算子$L(\cdot,\fat{m})$は時間反転に対して不変であるため，
 \begin{equation}
-	p*(\fat{x},0)=0, \ \ \dot{p}^*(\fat{x},0)=0
+	t \rightarrow T-t
+	\label{eqn:}
+\end{equation}
+として，時間軸の方向を反転させれば，終端条件(\ref{eqn:YYY_11})は
+反転後の時間軸において初期条件
+\begin{equation}
+	p^*(\fat{x},0)=0, \ \ \dot{p}^*(\fat{x},0)=0
 	\label{eqn:YYY_IC_adj}
 \end{equation}
-として扱うことができる．このことから$G\times (0,T)$における初期値問題を解くことで
-随伴場$p^*(\fat{x},t)$が得られる．その際，ソース項である式(\ref{eqn:YYY_dm_chi1})
-において$p^{0}(\fat{y}_i,t)$には観測データ${\cal D}$を用い，
-$p(\fat{x},t)$には，現時点での$\fat{m}$の推定値を用いて順問題
-$L(p,\fat{m})=0$を解いて得られた圧力場$p(\fat{x},t)$を用いる．
-その結果得られる勾配$\nabla_m\chi \delta \fat{m}$から
-得られるコスト関数の下降方向へモデルパラメータ$\delta \fat{m}$を繰り返し修正すれば，
-最終的に未知のモデルパラメータを決定することができる．
-このような方法はフルウェーブインバージョンと呼ばれる．
-ここでは，フルウェーブインバージョンのような反復は行わず，一回の計算で散乱体の
-形状を再構成することを考える．
-そこで，モデルパラメータの初期値を
+として扱うことができる．従って，$B\times (0,T)$における
+初期値-境界値問題を解くことで随伴場$p^*(\fat{x},t)$を得ることができる．
+その際，ソース項(\ref{eqn:YYY_11})において，$p^{0}_i(t)$には観測データ
+を用い，$p(\fat{x},t)$には，現時点で推定されている$\fat{m}$に対する
+順問題$L(p,\fat{m})=0$の解を用いる．
+このようにして，$p(\fat{x},t)$と$p^*(\fat{x},t)$を与えれば，
+式(\ref{eqn:YYY_gradX0})より 任意の$\delta \fat{m}$について，
+コスト関数の勾配を求めることができる．
+そこで，コスト関数の最急下降方向に$\delta \fat{m}$をとり，
+へモデルパラメータを
 \begin{equation}
-	\fat{m}=\left(\rho_0^{-1},\, \lambda_0^{-1} \right)
+	\fat{m}\rightarrow \fat{m}+ \delta \fat{m}
+	\label{eqn:}
+\end{equation}
+と修正すれば，観測波形をより正確に再現するモデルパラメータに近づくと
+考えられる．このような修正を適当な初期値$\fat{m}_0$から繰り返し行い，
+最終的に未知のモデルパラメータを決定する方法は
+フルウェーブインバージョンと呼ばれる．\\
+
+ここでは，フルウェーブインバージョンのような反復を行わず，
+一度の計算で散乱体形状を推定することを考える．そのために，
+\begin{equation}
+	\fat{m}_0=\left(\rho_0^{-1},\, \lambda_0^{-1} \right)
 	\label{eqn:YYY_16}
 \end{equation}
-と均質材として与える．この場合，随伴方程式のソース項に含まれる
-順問題の圧力場は入射場$p^{in}(\fat{x},t)$意味し，
-$p(\fat{x},t)-p^{0}(\fat{x},t)$は，散乱波$p^{sc}(\fat{x},t)$を時間反転した
+として，均質材を初期推定モデルとして与える．
+これは，散乱体が存在しないことを意味するため，
+\begin{equation}
+	L(p,\fat{m}_0)=0
+	\label{eqn:}
+\end{equation}
+の解は，入射場$p^{in}(\fat{x},t)$を与える．
+観測波形$p_i(t)$は全波動場だから，$p_i(t)-p^{in}(\fat{x},t)$は
+散乱波成分を意味する．従って，ソース項(\ref{eqn:YYY_dm_chi1})は
+時間反転した散乱波形$p^{sc}(\fat{x},t)$を用いて
 \begin{equation}
 	-\nabla_p\chi_1 = 
-	-\sum_{i=1}^M p^{sc}(\fat{x},T-t)\delta(\fat{x}-\fat{y}_i)
+	-\sum_{i=1}^M p^{sc}(\fat{x},T-t)\delta(\fat{x}-\fat{x}_i)
 	\label{eqn:YYY_17}
 \end{equation}
-となる．従って、観測した散乱波形を時間反転して媒体に入力することで励起される波動場が
-，随伴場の物理的な意味になる．
-最後に，式(\ref{eqn:YYY_gradX0})を計算し易い形に書き直す．式(\ref{eqn:YYY_gradX0})において
+と表すことができる．この結果は，観測から得た散乱波形を，時間反転して
+物体力項として入力したときに励起される波動場が随伴場となることを意味している．
+
+最後に，式(\ref{eqn:YYY_gradX0})を計算し易い形に書き直す．
+式(\ref{eqn:YYY_gradX0})において
 演算子の部分を具体的に書けば,
 \begin{equation}
 	\left< p^*  \cdot L(p,\delta \fat{m}) \right> 
@@ -414,33 +445,36 @@ $p(\fat{x},t)-p^{0}(\fat{x},t)$は，散乱波$p^{sc}(\fat{x},t)$を時間反転
 	\left< p^*  \nabla\cdot \left( \delta \beta \nabla p \right)\right> 
 	\label{eqn:YYY_18}
 \end{equation}
-で,右辺の項を終端条件(\ref{eqn:YYY_TC_rep})と境界条件(\ref{eqn:YYY_BC_p})を考慮して部分積分によって
-変形すれば，
+で,右辺の項を終端条件(\ref{eqn:YYY_12})と境界条件(\ref{eqn:YYY_12})を考慮し，
+部分積分を行って変形すると，
 \begin{equation}
 	\left< \alpha p^*  \ddot{p} \right> 
-	=\int_G \left( \int_0^T \dot{p}\dot{p}^* dt \right) \delta \alpha  d\fat{x}
+	=-\int_B \left( \int_0^T \dot{p}\dot{p}^* dt \right) \delta \alpha  d\fat{x}
 	\label{eqn:YYY_19}
 \end{equation}
 \begin{equation}
-	-\left< p^*  \nabla\cdot \left( \delta \beta \nabla p \right)\right> 
+	\left< p^*  \nabla\cdot \left( \delta \beta \nabla p \right)\right> 
 	=
-	\int_G \left( \int_0^T \nabla p\cdot \nabla p^* dt \right) \delta \beta  d\fat{x}
+	-
+	\int_B \left( \int_0^T \nabla p\cdot \nabla p^* dt \right) \delta \beta  d\fat{x}
 	\label{eqn:YYY_20}
 \end{equation}
 が得られる．そこで，
 \begin{equation}
-	K_\alpha(\fat{x})=-\int_0^T \dot{p}\dot{p}^* dt 
+	K_\alpha(\fat{x})=\int_0^T \dot{p}\dot{p}^* dt 
 	\label{eqn:YYY_Ka}
 \end{equation}
 \begin{equation}
-	K_\beta(\fat{x})=-\int_0^T \nabla p\cdot \nabla p^* dt 
+	K_\beta(\fat{x})=\int_0^T \nabla p\cdot \nabla p^* dt 
 	\label{eqn:YYY_Kb}
 \end{equation}
 とおけば，$K_\alpha(\fat{x})$と$K_\beta(\fat{x})$が，それぞれ
-$\rho$と$\lambda$の推定値を修正すべき方向であることが分かる．
-従って，$K_\alpha(\fat{x})$や$K_\beta(\fat{x})$，あるいはその組み合わせを
-画像化関数として用いれば，密度や弾性係数差の変動を推定することにより
-散乱体の像合成を行うことができる．特に，式(\ref{eqn:YYY_Ix_trev})において
+$\rho$と$\lambda$の推定値を修正すべき最急降下方向となることが分かる．
+従って，$K_\alpha(\fat{x})$や$K_\beta(\fat{x})$，あるいは両者の
+組み合わせを画像化関数として用いれば，$\Delta \rho(\fat{x})$や
+$\Delta \lambda(\fat{x})$の推定を通じて散乱体の像合成を行うことができる．
+
+さらに，式(\ref{eqn:YYY_Ix_trev})において
 $U(\fat{x})=\dot{p}$であると考えれば，$K_\alpha(\fat{x})$は，発見的な方法で
 導かれた時間反転法による再構成式を与えることに気付く．
 随伴方程式法では形状再構成を行う散乱体は点散乱体である必要は無い．

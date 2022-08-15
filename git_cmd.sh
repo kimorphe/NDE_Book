@@ -1,4 +1,4 @@
-git add index.html
+git add *.html
 git add git_cmd.sh
 git add README.txt
 
