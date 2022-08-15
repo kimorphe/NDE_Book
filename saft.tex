@@ -1497,11 +1497,54 @@ $G^-(\fat{x},\fat{y},t)$の区別を必要としない場合は$G(\fat{x},\fat{y
 \end{equation}
 とすれば，開口合成法の画像化関数に帰着される．
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{開口合成法の一般化}
+これまでにみたように，開口合成法は時間反転法の特殊なケースと見ることが
+できる．しかしながら，時間反転法の画像化関数自体が，根拠無くから開口合成
+\begin{equation}
+	I(\fat{x})=\sum_{i,j} a_{ij}(t_{ij})w_{ij}, \ \ t_{ij}=\frac{r_i+r_j}{c}
+	\label{eqn:}
+\end{equation}
+$t_i(\fat{x})=r_i(\fat{x})/c$
+\begin{eqnarray}
+	I(\fat{x}) &=&
+	\sum_{i,j} 
+	\left< \delta\left(t-t_i(\fat{x})\right),\, a_{ij}(t+t_j(\fat{x})) \right> w_{ij}
+	\\ 
+	&=& 
+	\sum_{i,j} 
+	\left< \delta\left(t-t_i(\fat{x})\right),\, \delta(t+t_j(\fat{x}))*a_{ij}(t) \right>w_{ij}
+	\label{eqn:}
+\end{eqnarray}
+$w_{ij}=\frac{\xi_{ij}}{r_ir_j}$
+\begin{equation}
+	I(\fat{x}) =
+	\sum_{i,j} 
+	\left< G^+(\fat{x},\fat{x}_i,t),\, G^{-}(\fat{x},\fat{x}_j,t)*a_{ij}(t)\right>
+	\xi_{ij}
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	{\cal F}\left\{ G^{\pm}\right\}(\fat{x},\fat{y},t)=\tilde G(\fat{x},\fat{y},\omega)
+	, \ \ 
+	{\cal F}\left\{ a_{ij}(t)\right\} =A_{ij}(\omega)
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	A_{ij}=S_i^*(\omega)R_j(\omega)
+	I(\fat{x}) =
+	\frac{1}{2\pi} \sum_{i,j} 
+	\left< \tilde{G}^+(\fat{x},\fat{x}_i,\omega),\, 
+	\tilde{G}^-(\fat{x},\fat{x}_j,\omega)*A_{ij}(\omega)\right>
+	=
+	\frac{1}{2\pi} \sum_{i,j} 
+	\left< S(\omega)\tilde{G}^+(\fat{x},\fat{x}_i,\omega),\, 
+	\tilde{G}^-(\fat{x},\fat{x}_j,\omega)*A_{ij}(\omega)\right>
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\label{eqn:}
+\end{equation}
 \input{adj.tex}
 \input{poffis.tex}
 \end{document}
-
-
-
-
 
