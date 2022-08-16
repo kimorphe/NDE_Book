@@ -1498,13 +1498,20 @@ $G^-(\fat{x},\fat{y},t)$の区別を必要としない場合は$G(\fat{x},\fat{y
 とすれば，開口合成法の画像化関数に帰着される．
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{開口合成法の一般化}
-これまでにみたように，開口合成法は時間反転法の特殊なケースと見ることが
-できる．しかしながら，時間反転法の画像化関数自体が，根拠無くから開口合成
+開口合成法の画像化関数を一般化し，時間反転法の画像化関数としてどのような
+ものが考えられるかについて検討する．はじめに，
 \begin{equation}
-	I(\fat{x})=\sum_{i,j} a_{ij}(t_{ij})w_{ij}, \ \ t_{ij}=\frac{r_i+r_j}{c}
+	t_i(\fat{x})=\frac{r_i(\fat{x})}{c}=\frac{|\fat{x}-\fat{x}_i|}{c}
 	\label{eqn:}
 \end{equation}
-$t_i(\fat{x})=r_i(\fat{x})/c$
+として，開口合成法の画像化関数を
+\begin{equation}
+	I(\fat{x})
+	=\sum_{i,j} a_{ij}(t_{ij})w_{ij}
+	=\sum_{i,j} a_{ij}(t_i+t_j)w_{ij}
+	\label{eqn:XXX_Ix_titj}
+\end{equation}
+と書く．次に，デルタ関数との内積として，式(\ref{eqn:XXX_Ix_titj})を次のように書き直す．
 \begin{eqnarray}
 	I(\fat{x}) &=&
 	\sum_{i,j} 
@@ -1513,37 +1520,63 @@ $t_i(\fat{x})=r_i(\fat{x})/c$
 	&=& 
 	\sum_{i,j} 
 	\left< \delta\left(t-t_i(\fat{x})\right),\, \delta(t+t_j(\fat{x}))*a_{ij}(t) \right>w_{ij}
-	\label{eqn:}
+	\label{eqn:XXX_Ix_dlt}
 \end{eqnarray}
-$w_{ij}=\frac{\xi_{ij}}{r_ir_j}$
+式(\ref{eqn:XXX_Ix_dlt})に含まれるデルタ関数の項を全空間のグリーン関数を用いて表すと，
 \begin{equation}
 	I(\fat{x}) =
 	\sum_{i,j} 
 	\left< G^+(\fat{x},\fat{x}_i,t),\, G^{-}(\fat{x},\fat{x}_j,t)*a_{ij}(t)\right>
-	\xi_{ij}
+	r_ir_jw_{ij}
 	\label{eqn:}
 \end{equation}
+が得られる．これを，
 \begin{equation}
-	{\cal F}\left\{ G^{\pm}\right\}(\fat{x},\fat{y},t)=\tilde G(\fat{x},\fat{y},\omega)
-	, \ \ 
-	{\cal F}\left\{ a_{ij}(t)\right\} =A_{ij}(\omega)
+	\tilde f(\omega) = {\cal F} \left\{ f(t)\right\}
 	\label{eqn:}
 \end{equation}
+として周波数領域で表現すると，
 \begin{equation}
-	A_{ij}=S_i^*(\omega)R_j(\omega)
 	I(\fat{x}) =
-	\frac{1}{2\pi} \sum_{i,j} 
-	\left< \tilde{G}^+(\fat{x},\fat{x}_i,\omega),\, 
-	\tilde{G}^-(\fat{x},\fat{x}_j,\omega)*A_{ij}(\omega)\right>
-	=
-	\frac{1}{2\pi} \sum_{i,j} 
-	\left< S(\omega)\tilde{G}^+(\fat{x},\fat{x}_i,\omega),\, 
-	\tilde{G}^-(\fat{x},\fat{x}_j,\omega)*A_{ij}(\omega)\right>
-	\label{eqn:}
+	\frac{1}{2\pi}
+	\sum_{i,j} 
+	\left< \tilde G^+(\fat{x},\fat{x}_i,\omega),\, \tilde G^{-}(\fat{x},\fat{x}_j,\omega)\tilde a_{ij}(\omega)\right>
+	r_ir_jw_{ij}
+	\label{eqn:XXX_Ix_w}
 \end{equation}
+が得られる．以上は，何ら追加の仮定をおくことなく変形を行った結果として得られたもので，開口合成法の画像化関数に関する別表現である．
+
+これまで観測波形$a_{ij}(t)$は，スカラー波動場$u(\fat{x}_j,t;\fat{x}_i)$そのものと仮定してきた．
+しかしながら，実際の計測では，この仮定はなりたたない．
+例えば，$u(\fat{x},t)$が圧力場であったとしても，トランスデューサを使って圧力場の計測を
+行った結果として得られる波形$a_{ij}(t)$は圧力波形そのものではない．
+通常，$a_{ij}(t)$は，$u(\fat{x}_j,t;\fat{x}_i)$が線形時不変(LTI)システムで変換された
+結果であると考えてモデル化を行う．LTIシステムの応答は，周波数域では，周波数応答関数を用いて
+記述できる．ここでは，$\tilde a_{ij}(\omega)$を，次のような3つの周波数
+応答関数の積で表現する．
 \begin{equation}
-	\label{eqn:}
+	\tilde a_{ij}(\omega) = \tilde r_j(\omega) \tilde W_D(\fat{x}_j,\fat{x}_i,\omega) \tilde s_i(\omega)
+	\label{eqn:XXX_aij_model}
 \end{equation}
+ここで，$\tilde s_i(\omega)$と$\tilde r_j(\omega))$は，送信および受信子の周波数応答関数をそれぞれ表す．
+また，$\tilde W_D(\fat{x},\fat{y};\omega)$は，領域$B\setminus D$における波動場のグリーン関数
+を表す．グリーン関数$\tilde W_D(\fat{x},\fat{y};\omega)$そのものは，領域$D$が未知であることから，
+実際には求めることのできないものである．
+式(\ref{eqn:XXX_aij_model})を式(\ref{eqn:XXX_Ix_w})に代入して整理することで次式が得られる．
+\begin{eqnarray}
+	I(\fat{x}) 
+	&=&
+	\frac{1}{2\pi} \sum_{i,j} 
+	\left< 
+	\tilde{G}^+(\fat{x},\fat{x}_i,\omega)
+	,\, 
+	\tilde{G}^-(\fat{x},\fat{x}_j,\omega)\tilde r_j(\omega) \tilde W_D(\fat{x}_j,\fat{x}_i,\omega) \tilde{s}_i(\omega)
+	\right> r_ir_jw_{ij}
+	\label{eqn:XXX_Ix_TR}
+\end{eqnarray}
+式(\ref{eqn:XXX_Ix_TR})において，$G^+$に関する項は入射場を，
+$G^-$の項は時間反転場であることから，これは時間反転法の画像化関数になっている．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \input{adj.tex}
 \input{poffis.tex}
 \end{document}
