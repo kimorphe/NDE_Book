@@ -55,46 +55,46 @@
 超音波の伝搬や散乱挙動は波動方程式を適切な初期条件，境界条件のもとで解くことによって
 調べることができる．
 波動問題の初期値-境界値問題は一般に連立偏微分方程式になり，解析的に解くことができるのは
-ごく限られた場合だけである。そのため、超音波探傷試験のモデル化を始め、
-工学的な応用における波動方程式の解析は、コンピュータを使った数値解析法によって行われる。
-波動問題の解析に用いられる代表的な数値解析法には、有限要素法、有限差分法、境界要素法が挙げられる。
-本節では、このうち有限差分法を取り上げ、その基本的な考え方について述べる。
-コンピュータを用いた数値解析では、有限な桁数で表された有限個の変数に対し、
-有限回の演算を行って答えを求める近似解法である。
-従って、数値解析の実施にあたり、元々は位置や時間といった連続変数の関数として表されている未知量を
-有限個のデータで表現する必要がある。例えば、
-$0<x<2\pi$上の周期関数$f(x)$は、フーリエ級数を用いて
+ごく限られた場合だけである．そのため，超音波探傷試験のモデル化を始め，
+工学的な応用における波動方程式の解析は，コンピュータを使った数値解析法によって行われる．
+波動問題の解析に用いられる代表的な数値解析法には，有限要素法，有限差分法，境界要素法が挙げられる．
+本節では，このうち有限差分法を取り上げ，その基本的な考え方について述べる．
+コンピュータを用いた数値解析では，有限な桁数で表された有限個の変数に対し，
+有限回の演算を行って答えを求める近似解法である．
+従って，数値解析の実施にあたり，元々は位置や時間といった連続変数の関数として表されている未知量を
+有限個のデータで表現する必要がある．例えば，
+$0<x<2\pi$上の周期関数$f(x)$は，フーリエ級数を用いて
 \begin{equation}
 	f(x)=\sum_{k=-\infty}^{\infty} \hat{f}_ke^{ikx}
 	\label{eqn:}
 \end{equation}
-と展開することができる。
-これを、適当な項数で打ち切って
+と展開することができる．
+これを，適当な項数で打ち切って
 \begin{equation}
 	f(x) \simeq \tilde f(x) :=\sum_{k=-N}^{N} \hat{f}_ke^{ikx}
 	\label{eqn:}
 \end{equation}
-と近似すれば、関数$f(x)$を$\tilde f (x)$すなわち有限な数のデータ$\{ \hat{f}_k\}_{k=-N}^{N}$で表現することができる。
-あるいは、$0<x<2\pi $上に$N$個の点$\{ x_1,x_2, \cdots x_N \}$をとり,これらの点における
+と近似すれば，関数$f(x)$を$\tilde f (x)$すなわち有限な数のデータ$\{ \hat{f}_k\}_{k=-N}^{N}$で表現することができる．
+あるいは，$0<x<2\pi $上に$N$個の点$\{ x_1,x_2, \cdots x_N \}$をとり,これらの点における
 関数値$f(x_i)=f_i$を得ることができれば，$N$が十分に大いとき$\{f_i\}_{i=1}^N$で$f(x)$の形状を
-十分正確に表現することができるであろう。$\{ f_i \}_`{i=1}^N$から任意の位置$x$における$f(x)$を与えるためには、
+十分正確に表現することができるであろう．$\{ f_i \}_{i=1}^N$から任意の位置$x$における$f(x)$を与えるためには，
 離散点の間を直線で結ぶなどして得られる関数を$f(x)$の近似関数$\tilde f(x)$とすればよい．
-逆に、関数$f(x)$が未知で、$f(x)$を与えられた条件から求めたい場合、$f(x)$そのものではなく
-その離散的な表現$\{\hat{f}_k\}$や$\{f_i\}$を求めることを考えれば良い。
-ただし、そのためには$f(x)$が満足すべき条件を$\{\hat{f}_k\}$や$\{f_i\}$に関する条件へ
-書き直す必要がある。例えば、$f(x)$がある微分方程式の解である場合、この作業は微分方程式を元に、
-$\{\hat{f}_k\}$や$\{f_i\}$が満たすべき代数方程式を得ることを意味する。
-勿論、$N$を大きくすれば、それだけ$\tilde f(x)$が$f(x)$のより正確な近似となるような
-書き換えであることが必要で、通常、$N\rightarrow \infty$では、
+逆に，関数$f(x)$が未知で，$f(x)$を与えられた条件から求めたい場合，$f(x)$そのものではなく
+その離散的な表現$\{\hat{f}_k\}$や$\{f_i\}$を求めることを考えれば良い．
+ただし，そのためには$f(x)$が満足すべき条件を$\{\hat{f}_k\}$や$\{f_i\}$に関する条件へ
+書き直す必要がある．例えば，$f(x)$がある微分方程式の解である場合，この作業は微分方程式を元に，
+$\{\hat{f}_k\}$や$\{f_i\}$が満たすべき代数方程式を得ることを意味する．
+勿論，$N$を大きくすれば，それだけ$\tilde f(x)$が$f(x)$のより正確な近似となるような
+書き換えであることが必要で，通常，$N\rightarrow \infty$では，
 $\tilde f(x)$は$f(x)$に収束することが要求される．
-FEM,FDM,BEMともこの条件を満足する数値解析法であるため、同じ問題を解くことができる。
-ただし、各々未知関数や微分方程式の離散化方法が異なる。
-従って、計算精度や効率、アルゴリズムの複雑さは互いに異なり、
-それぞれの手法とも利点、欠点がある。
-問題に応じて適切な数値解析法を選択して利用するためには、各々の数値解析法が
-どのような考え方に基づいて解を近似するかをよく理解していることが重要である。
+FEM,FDM,BEMともこの条件を満足する数値解析法であるため，同じ問題を解くことができる．
+ただし，各々未知関数や微分方程式の離散化方法が異なる．
+従って，計算精度や効率，アルゴリズムの複雑さは互いに異なり，
+それぞれの手法とも利点，欠点がある．
+問題に応じて適切な数値解析法を選択して利用するためには，各々の数値解析法が
+どのような考え方に基づいて解を近似するかをよく理解していることが重要である．
 \subsection{差分近似}
-差分法の基本的な考え方を理解するために簡単な初期値問題を考える。
+差分法の基本的な考え方を理解するために簡単な初期値問題を考える．
 \begin{equation}
 	\frac{d f}{d t} =f, \ \ t>0, \ \ f(0)=A
 	\label{eqn:ODE1}
@@ -103,93 +103,93 @@ FEM,FDM,BEMともこの条件を満足する数値解析法であるため、同
 \begin{equation}
 	f(t)=Ae^{t}
 \end{equation}
-で与えられることは明らかであろう．ここでは、この答えを差分法を用いてどの
-程度正確に計算することができるか調べてみる。
+で与えられることは明らかであろう．ここでは，この答えを差分法を用いてどの
+程度正確に計算することができるか調べてみる．
 差分法では離散点$\{t_i\}$(ここでは時間ステップ)における
-未知関数の値$f(t_i)$を用いて与えられた微分方程式を離散化する。
-簡単のため、離散点は時間軸上に等間隔$\Delta t$で配置され，
-全部で$N$点あるものとする。
+未知関数の値$f(t_i)$を用いて与えられた微分方程式を離散化する．
+簡単のため，離散点は時間軸上に等間隔$\Delta t$で配置され，
+全部で$N$点あるものとする．
 \begin{equation}
 	t_k=k\Delta t,(k=0,\cdots N)
 	\label{eqn:}
 \end{equation}
-ただし$t_N=T$は一定とする。
-微分方程式の厳密な答えと、差分法による近似解を区別するため、
+ただし$t_N=T$は一定とする．
+微分方程式の厳密な答えと，差分法による近似解を区別するため，
 $t=t_k$における前者を$f(t_k)$後者を$f_k$と表すことにする．
-差分法では$f_k$を用いて、微分方程式に含まれる微分を近似する。
-1変数関数の微分は、幾何学的には関数を表すグラフの勾配だから、
+差分法では$f_k$を用いて，微分方程式に含まれる微分を近似する．
+1変数関数の微分は，幾何学的には関数を表すグラフの勾配だから，
 \begin{equation}
 	\left. \frac{df}{dt} \right|_{t_k} \simeq 
 	\frac{f_k-f_{k-1}}{\Delta t}, \ \ (k=0,\dots N-1)
 	\label{eqn:fd_1st}
 \end{equation}
-としてみる。さらに、式(\ref{eqn:ODE1})右辺の$f(t_k)$を$f_k$
-に置き換えると、
+としてみる．さらに，式(\ref{eqn:ODE1})右辺の$f(t_k)$を$f_k$
+に置き換えると，
 \begin{equation}
 	\frac{f_{k+1}-f_k}{\Delta t} = A f_k, \ \ (k=0,\cdots N-1)
 	\label{eqn:fdeq1}
 \end{equation}
-と離散化される．このような離散点でのデータで表現された方程式を差分方程式と呼ぶ。
-差分法方程式を満足するように$f_k$を決めれば，微分方程式の近似解が得られたことになる。
-ここで、未知数は$N$個(${f_k}_0^N$)個に対し、差分方程式が$N-1$式，初期条件が一式
-のため、未知数の数と同じだけの条件がある。ただし、ここでは連立方程式を解く
-作業は必要でなく、式(\ref{eqn:fdeq1})を変形して
+と離散化される．このような離散点でのデータで表現された方程式を差分方程式と呼ぶ．
+差分法方程式を満足するように$f_k$を決めれば，微分方程式の近似解が得られたことになる．
+ここで，未知数は$N$個($\left\{f_k\right\}_0^N$)個に対し，差分方程式が$N-1$式，初期条件が一式
+のため，未知数の数と同じだけの条件がある．ただし，ここでは連立方程式を解く
+作業は必要でなく，式(\ref{eqn:fdeq1})を変形して
 \begin{equation}
 	f_{k+1}=(1+\Delta t) f_k
 	\label{eqn:}
 \end{equation}
-とすれば、$f_{k}$に関する漸化式が得られ、初期条件より$f_0=A$とすれば、その初項が決まり
-任意の$k>0$に対する$f_k$を順次求めることができる．この場合は単なる等比級数だから、
+とすれば，$f_{k}$に関する漸化式が得られ，初期条件より$f_0=A$とすれば，その初項が決まり
+任意の$k>0$に対する$f_k$を順次求めることができる．この場合は単なる等比級数だから，
 \begin{equation}
 	f_k=A(1+\Delta t)^k, \ \ (k=0,\cdots N)
 	\label{eqn:}
 \end{equation}
-となる。この結果は、$\Delta t= \frac{T}{N}, t_k=k\Delta t$より
+となる．この結果は，$\Delta t= \frac{T}{N}, t_k=k\Delta t$より
 \begin{equation}
 	f_k=A\left(1+ \Delta t\right)^{\frac{t_k}{\Delta t}}
 	\label{eqn:}
 \end{equation}
-だから、$t_k=k\Delta t$一定のものとで$\Delta t \rightarrow 0$の極限をとれば
+だから，$t_k=k\Delta t$一定のものとで$\Delta t \rightarrow 0$の極限をとれば
 $e=\lim_{x\rightarrow 0}(1+x)^{1/x}$より
 \begin{equation}
 	\lim _{\Delta t \rightarrow 0}f_k=Ae^{t_k}=f(t_k)
 	\label{eqn:}
 \end{equation}
-となり、厳密解に収束する． 
-つまり、$\Delta t$を十分に小さくとれば、所定の精度で$f(t_k)$が得られる。
-$\Delta t>0$のときには誤差がある。この誤差は、微分を差分近似したことに
-端を発している。そのため、微分の近似方法を改善することができれば、
-同じ$\Delta t$に対して、より精度の高い結果が得られると期待できる。
-そこで、二番目の方法として、$\frac{df}{dt}$を次のように近似してみる。
+となり，厳密解に収束する． 
+つまり，$\Delta t$を十分に小さくとれば，所定の精度で$f(t_k)$が得られる．
+$\Delta t>0$のときには誤差がある．この誤差は，微分を差分近似したことに
+端を発している．そのため，微分の近似方法を改善することができれば，
+同じ$\Delta t$に対して，より精度の高い結果が得られると期待できる．
+そこで，二番目の方法として，$\frac{df}{dt}$を次のように近似してみる．
 \begin{equation}
 	\left. \frac{df}{dt} \right|_{t_k} \simeq 
 	\frac{f_{k+1}-f_{k-1}}{2\Delta t}, \ \ (k=1,\dots N-1)
 	\label{eqn:fd_2nd}
 \end{equation}
-この場合、差分方程式からは
+この場合，差分方程式からは
 \begin{equation}
 	f_{k+1}= 2\Delta t f_k +f_{k-1}, \ \ (k=1,\cdots N)
 	\label{eqn:fdeq2}
 \end{equation}
-と、3項の漸化式が得られる．
-この式からは初期条件を用いても、$f_1$を求めることはできない。
-そこで、$f_1$だけを式(\ref{eqn:fdeq1})から求め，$k>1$のときは
-式(\ref{eqn:fdeq2})によって$f_k$を求めるとする。
-これを、以下の条件で計算機を使って評価してみる。
+と，3項の漸化式が得られる．
+この式からは初期条件を用いても，$f_1$を求めることはできない．
+そこで，$f_1$だけを式(\ref{eqn:fdeq1})から求め，$k>1$のときは
+式(\ref{eqn:fdeq2})によって$f_k$を求めるとする．
+これを，以下の条件で計算機を使って評価してみる．
 \[
 	f(0)=A=1, \ \ T=1, \ \ N=100
 \]
-このとき，$f(t_N)=f(T)=e$が厳密解で、これと$f_N$を比較すると
+このとき，$f(t_N)=f(T)=e$が厳密解で，これと$f_N$を比較すると
 
-となり、式(\ref{eqn:fdeq2})の方が精度が良い。この理由は次のように説明できる。
-$f(t)$は十分に滑らかであると仮定すれば、$t=s$においてテーラー展開は
+となり，式(\ref{eqn:fdeq2})の方が精度が良い．この理由は次のように説明できる．
+$f(t)$は十分に滑らかであると仮定すれば，$t=s$においてテーラー展開は
 \begin{equation}
 	f(t)=f(s)+f'(s)(t-s)+\frac{f''(s)}{2}(t-s)^2+\cdots =\sum_{n=0}^\infty \frac{f^{(n)}(s)}{n!}(t-s)^n
 	\label{eqn:Taylor}
 \end{equation}
-と表すことができる。
-ただし、$f^{(n)}(t)=\frac{d^nf}{dt^n}$である．
-そこで、$t=t_{k\pm 1}, s=t_k$とすれば、
+と表すことができる．
+ただし，$f^{(n)}(t)=\frac{d^nf}{dt^n}$である．
+そこで，$t=t_{k\pm 1}, s=t_k$とすれば，
 \begin{equation}
 	f(t_{k\pm 1})=f(t_k)+f'(t_k)\Delta t+\frac{f''(t_k)}{2}\Delta t ^2+\cdots 
 	=\sum_{n=0}^\infty \frac{f^{(n)}(t_k)}{n!}\Delta t^n
@@ -203,51 +203,51 @@ $f(t)$は十分に滑らかであると仮定すれば、$t=s$においてテー
 	+O(\Delta t), \  (\Delta t \rightarrow 0) 
 	\label{eqn:}
 \end{equation}
-ただし、$O$は漸近挙動のオーダーを表す記号で、
+ただし，$O$は漸近挙動のオーダーを表す記号で，
 \begin{equation}
 	h(x)=O(g(x)), x\rightarrow 0  \ \   \rightarrow \ \ \lim_{x\rightarrow 0} \frac{f(x)}{g(x)}=C(定数)
 	\label{eqn:}
 \end{equation}
-を意味する。例えば、
+を意味する．例えば，
 \begin{equation}
 	\lim_{x\rightarrow 0} \frac{\sin x}{x}=1
 	\label{eqn:}
 \end{equation}
-なので、
+なので，
 \begin{equation}
 	\sin x = O(x), \ \ (x\rightarrow 0)
 	\label{eqn:}
 \end{equation}
-と書くことができる。従って、式(\ref{eqn:fd_1st})の差分近似は、$f_k, f_{k+1}$に正確な値を
-用いるとして、$\Delta t \rightarrow 0$へ近づけるとき、誤差は$O(\Delta t)$すなわち
-$\Delta t$の1乗のオーダーで0に近づく。このことから、式(\ref{eqn:fd_1nd})の差分近似や
+と書くことができる．従って，式(\ref{eqn:fd_1st})の差分近似は，$f_k, f_{k+1}$に正確な値を
+用いるとして，$\Delta t \rightarrow 0$へ近づけるとき，誤差は$O(\Delta t)$すなわち
+$\Delta t$の1乗のオーダーで0に近づく．このことから，式(\ref{eqn:fd_1st})の差分近似や
 それに基づく差分方程式(\ref{eqn:fdeq1})は1次精度であるという．
-これに対して、式(\ref{eqn:fd_2nd})の差分近似は、式(\ref{eqn:Taylor})より$\Delta t$の
+これに対して，式(\ref{eqn:fd_2nd})の差分近似は，式(\ref{eqn:Taylor})より$\Delta t$の
 項が相殺され
 \begin{equation}
 	\frac{f(t_{k+1})-f(t_{k-1})}{2\Delta t}=f''(t_k) + O(\Delta t^2)
 	\label{eqn:}
 \end{equation}
-となることが示される．すなわち、$\Delta t \rightarrow 0$のとき、近似誤差は
-$O(\Delta t^2)$のオーダーで減少して0に近づく。
-これは、式(\ref{eqn:fd_2nd})の2次精度の近似であり、式(\ref{eqn:fd_1st})よりも
-早く誤差が0に収束することを意味する。
+となることが示される．すなわち，$\Delta t \rightarrow 0$のとき，近似誤差は
+$O(\Delta t^2)$のオーダーで減少して0に近づく．
+これは，式(\ref{eqn:fd_2nd})の2次精度の近似であり，式(\ref{eqn:fd_1st})よりも
+早く誤差が0に収束することを意味する．
 $e$の値を差分法で計算した結果が式(\ref{eqn:fdeq2})の方が一貫してよい結果であった
-理由は、式(\ref{eqn:fdeq1})が1次精度、式(\ref{eqn:fdeq2})が2次精度で
-後者の方が収束が速い方法であるためであったことが分かる。
-1次精度の差分方程式は、精度や計算効率の面で不十分なことが多く、通常は2次精度以上の
-差分方程式が数値解析に用いられる。
-ただし、2次よりも高次の差分方程式は、境界条件や物性値が不連続に変化する
-位置での取扱は、低次の精度のスキームよりも面倒であることから、
-2次あるいは4次程度までの差分公式が用いられることが多い。
-本書では、波動問題に適用したときに精度と効率のバランスが良いと考えられる
-2次精度の差分法のみを扱う。
+理由は，式(\ref{eqn:fdeq1})が1次精度，式(\ref{eqn:fdeq2})が2次精度で
+後者の方が収束が速い方法であるためであったことが分かる．
+1次精度の差分方程式は，精度や計算効率の面で不十分なことが多く，通常は2次精度以上の
+差分方程式が数値解析に用いられる．
+ただし，2次よりも高次の差分方程式は，境界条件や物性値が不連続に変化する
+位置での取扱は，低次の精度のスキームよりも面倒であることから，
+2次あるいは4次程度までの差分公式が用いられることが多い．
+本書では，波動問題に適用したときに精度と効率のバランスが良いと考えられる
+2次精度の差分法のみを扱う．
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.5\linewidth]{Figs/fig1.pdf} 
 	%\includepdf[pages=-,noautoscale=true,scale=0.6]{Figs/fig1.pdf}
 	\end{center}
-	\caption{離散化幅(時間$\Delta t$)と絶対誤差($\left| f_N-f(t_N)\right|$)の関係.} 
+	\caption{離散化時間幅$\Delta t$と絶対誤差$\left| f_N-f(t_N)\right|$の関係.} 
 	\label{fig:fig1}
 \end{figure}
 \begin{figure}[h]
@@ -260,69 +260,69 @@ $e$の値を差分法で計算した結果が式(\ref{eqn:fdeq2})の方が一貫
 \end{figure}
 \\
 
-工学の問題では2階の微分方程式がしばしば現れる。そこで、次に、2階の微分方程式
-を差分法を用いて解く方法について検討する。簡単のため、ここでは次の単振動
-の微分方程式を例に取り上げる。
+工学の問題では2階の微分方程式がしばしば現れる．そこで，次に，2階の微分方程式
+を差分法を用いて解く方法について検討する．簡単のため，ここでは次の単振動
+の微分方程式を例に取り上げる．
 \begin{equation}
 	m\frac{d^2u }{dt^2}=-k u, \ \ , u(0)=\alpha,\, \dot u(0)=0
 	\label{eqn:ODE2}
 \end{equation}
-ここに$u(t)$は質点の中立位置からの変位を、$m$は質量を、$k$はバネ定数を表す。
+ここに$u(t)$は質点の中立位置からの変位を，$m$は質量を，$k$はバネ定数を表す．
 この方程式も厳密解は容易に求められ
 \begin{equation}
 	u(t)=u_0 \cos (\omega_0 t), \ \ \left( \omega_0:=\sqrt{\frac{k}{m}}\right)
 	\label{eqn:exact}
 \end{equation}
-となる。ここで、2階の導関数$\frac{d^2u}{dt^2}$を
+となる．ここで，2階の導関数$\frac{d^2u}{dt^2}$を
 \begin{equation}
-	\left. \frac{du}{dt^2} \right|_{t_k} \simeq 
+	\left. \frac{d^2u}{dt^2} \right|_{t_k} \simeq 
 	\frac{u_{k+1}-2u_k +u_{k-1}}{\Delta t^2}
 	\label{eqn:du2fd}
 \end{equation}
-のように差分近似する。これは、テイラー展開に基づく式(\ref{eqn:Taylor})を用いれば
-2次精度であることが示される。式(\ref{eqn:dfu2fd})で式(\ref{eqn:ODE2})の微分を置き換え、
-$u(t_k)=u_k$とすれば、次の差分方程式が得られる。
+のように差分近似する．これは，テイラー展開に基づく式(\ref{eqn:Taylor})を用いれば
+2次精度であることが示される．式(\ref{eqn:dfu2fd})で式(\ref{eqn:ODE2})の微分を置き換え，
+$u(t_k)=u_k$とすれば，次の差分方程式が得られる．
 \begin{equation}
 	u_{k+1}=-u_{k-1}+(2-\omega_0^2\Delta t^2)u_k, \ \ (k=1,2,\cdots)
 	\label{eqn:fdeq_harmonic}
 \end{equation}
-変位の初期条件より$u_0$は$u_0=\alpha$とすることができる。
-速度の初期条件は式(\ref{eqn:fdeq_harmonic})に直接設定することができない。
+変位の初期条件より$u_0$は$u_0=\alpha$とすることができる．
+速度の初期条件は式(\ref{eqn:fdeq_harmonic})に直接設定することができない．
 この問題を回避するためには速度の初期条件:
 \begin{equation}
 	v(0)= \left. \frac{du}{dt} \right|_{0}=0
 	\label{eqn:IC_v0}
 \end{equation}
-を差分近似し、$v(0)$を$u_k$で表せばよい。例えば、前進差分を用いれば
+を差分近似し，$v(0)$を$u_k$で表せばよい．例えば，前進差分を用いれば
 式(\ref{eqn:IC_v0})は
 \begin{equation}
 	v(0)\simeq \frac{u_1-u_{0}}{\Delta t}=0
 	\label{eqn:}
 \end{equation}
-と書けるので$u_1=u_0=\alpha$として$u_1$を与えればよいことが分かる。
-以上の方法で、実際に微分方程式(\ref{eqn:ODE2})の解を求めてみる。
-例として、次の条件で計算を行う。
-$\omega_0$は自由振動の角周波数を表し、自然周期$T_0$とは$\omega_0T_0=2\pi$
-の関係にある。そこで、$T_0=1, \Delta t=T_0/50$とし$\alpha=1$の場合について
-$0<t\leq 4T_0$の間の応答を求めると、図**のような結果が得られる。
+と書けるので$u_1=u_0=\alpha$として$u_1$を与えればよいことが分かる．
+以上の方法で，実際に微分方程式(\ref{eqn:ODE2})の解を求めてみる．
+例として，次の条件で計算を行う．
+$\omega_0$は自由振動の角周波数を表し，自然周期$T_0$とは$\omega_0T_0=2\pi$
+の関係にある．そこで，$T_0=1, \Delta t=T_0/50$とし$\alpha=1$の場合について
+$0<t\leq 4T_0$の間の応答を求めると，図**のような結果が得られる．
 
 
-このように、数値解析の結果は解析解と良好に一致している。
-ただし、数値解析解に誤差が無い訳ではなく、通常、時間ステップが進むにつれて
-数値解析解の精度は低下し誤差が大きくなる。単振動の問題ではどのように誤差が
-生じるかを次のような簡単な方法で調べることができる。
+このように，数値解析の結果は解析解と良好に一致している．
+ただし，数値解析解に誤差が無い訳ではなく，通常，時間ステップが進むにつれて
+数値解析解の精度は低下し誤差が大きくなる．単振動の問題ではどのように誤差が
+生じるかを次のような簡単な方法で調べることができる．
 
-単振動の方程式の一般解は、厳密解は式(\ref{eqn:exact})からも明らかなように、
-角周波数$\omega_0$の周期関数である。しかしながら、数値解析解では
-周期解の角周波数が厳密に$\omega_0$に一致することは期待できない。
-そこで、差分方程式(\ref{eqn:fdeq_harmonic})の一般解を
+単振動の方程式の一般解は，厳密解は式(\ref{eqn:exact})からも明らかなように，
+角周波数$\omega_0$の周期関数である．しかしながら，数値解析解では
+周期解の角周波数が厳密に$\omega_0$に一致することは期待できない．
+そこで，差分方程式(\ref{eqn:fdeq_harmonic})の一般解を
 \begin{equation}
 	u_k=Ae^{i \omega t_k}
 	\label{eqn:uk_gen}
 \end{equation}
-とおき，$\omega$を求めてみる。ただし、$i$は虚数単位を
-$A$は時間に依存しない定数を意味する。式(\ref{eqn:uk_gen})を式(\ref{eqn:fdeq_harmonic})に代入し、
-$t=k\Delta t$であることを用いて整理すれば、簡単な計算により
+とおき，$\omega$を求めてみる．ただし，$i$は虚数単位を
+$A$は時間に依存しない定数を意味する．式(\ref{eqn:uk_gen})を式(\ref{eqn:fdeq_harmonic})に代入し，
+$t=k\Delta t$であることを用いて整理すれば，簡単な計算により
 \begin{equation}
 	2\left( \cos \omega \Delta t -1\right) =- \omega_0^2 \Delta t^2
 	\label{eqn:}
@@ -332,85 +332,200 @@ $t=k\Delta t$であることを用いて整理すれば、簡単な計算によ�
 	\sin \left( \frac{\omega \Delta t }{2} \right) = \pm \frac{\omega_0 \Delta t}{2} 
 	\label{eqn:}
 \end{equation}
-の関係が得られる。
-この結果より、$\frac{\omega_0\Delta t}{2}>1$のときは$\omega$が複素数になることが分かる。
-$\omega$の虚部が正の場合、一般解は振動しながら減衰し、負の場合は増加する。
-このような挙動は、元の微分方程式の解の挙動にないものであることから、
-式(\ref{eqn:fdeq_harmonic})を用いる際、$\frac{\omega_0 \Delta t}{2}<1$となるように
-$\Delta t$を選ぶ必要がある。特に、$\omega$の虚部が負の場合には、
-数値解析解は時間の経過に伴い指数関数的に増加するため,誤差は上限を持たない。
-このように、誤差がどこまでも増加するようなスキームのことを不安定なスキームと呼び、
-そうでない場合を安定であるという。また、安定なスキームとなるための離散化の条件を
-安定条件という。ここでは、
+の関係が得られる．
+この結果より，$\frac{\omega_0\Delta t}{2}>1$のときは$\omega$が複素数になることが分かる．
+$\omega$の虚部が正の場合，一般解は振動しながら減衰し，負の場合は増加する．
+このような挙動は，元の微分方程式の解の挙動にないものであることから，
+式(\ref{eqn:fdeq_harmonic})を用いる際，$\frac{\omega_0 \Delta t}{2}<1$となるように
+$\Delta t$を選ぶ必要がある．特に，$\omega$の虚部が負の場合には，
+数値解析解は時間の経過に伴い指数関数的に増加するため,誤差は上限を持たない．
+このように，誤差がどこまでも増加するようなスキームのことを不安定なスキームと呼び，
+そうでない場合を安定であるという．また，安定なスキームとなるための離散化の条件を
+安定条件という．ここでは，
 \begin{equation}
 	\frac{\omega_0 \Delta t}{2} < 1
 	\label{eqn:}
 \end{equation}
-が、式(\ref{eqn:fdeq_harmonic})の安定条件を与える。
-安定条件を満足する場合も、数値解析解の角周波数$\omega$と厳密な角周波数$\omega_0$は
-一致せず、$\left| \omega\right|  > \omega_0$で、
-両者は$\Delta \rightarrow 0$の極限でのみ一致する。
-つまり、数値解析の結果では角周波数は実際よりも大きく見積もられ、
-時間の経過に伴い、位相誤差が大きくなる。このことは、誤差の上限が存在することと
-は必ずしも十分な精度の計算ができることを意味しないという点で重要である。
+が，式(\ref{eqn:fdeq_harmonic})の安定条件を与える．
+安定条件を満足する場合も，数値解析解の角周波数$\omega$と厳密な角周波数$\omega_0$は
+一致せず，$\left| \omega\right|  > \omega_0$で，
+両者は$\Delta t \rightarrow 0$の極限でのみ一致する．
+つまり，数値解析の結果では角周波数は実際よりも大きく見積もられ，
+時間の経過に伴い，位相誤差が大きくなる．このことは，誤差の上限が存在することと
+は必ずしも十分な精度の計算ができることを意味しないという点で重要である．
 \subsection{1次元波動方程式}
+1次元波動方程式の初期値-境界値問題を考える．支配法定式である波動方程式は，
+位相速度を$c$として，次の式で与えられる．
 \begin{equation}
-	\frac{\partial^2 u}{\partial x^2} =\frac{1}{c^2}\frac{\partial^2 u}{\partial t^2}
+	\frac{\partial^2 u}{\partial x^2} =\frac{1}{c^2}\frac{\partial^2 u}{\partial t^2}, \ \ \left(x\in (0,X), t>0 \right)
+	\label{eqn:wveq1d}
+\end{equation}
+なお，ここでは簡単のため$c$は一定とする．
+初期条件は，一般に$U(x)$と$V(x)$を既知の関数として次のように表される．
+\begin{equation}
+	u(x,0)=U(x), \ \ \dot{u}(x,0)=V(x)
 	\label{eqn:}
 \end{equation}
-初期条件:
-\begin{equation}
-	u(x,0)=u_0(x), \ \ \dot{u}(x,0)=v_0(t)
-	\label{eqn:}
-\end{equation}
-境界条件:
+基本的な境界条件のタイプには, ディリクレ条件とノイマン条件の2種類がある．
+そこで，$x=0$と$X$において
 \begin{equation}
 	u(0,t)=\alpha(t), \ \ \frac{\partial u}{\partial x}(X,t)=\beta(t)
 	\label{eqn:}
 \end{equation}
-差分格子:
+として，二種類の境界条件を指定する．なお，$\alpha(t)$と$\beta(t)$は既知の境界値を表す．
+時間および空間に関する導関数を差分近似するために，$(x,t)$の時空間平面に，
+一定間隔$(\Delta x, \Delta t)$で配置された差分格子:
 \begin{equation}
 	(x_j,\, t_k)=(j\Delta x,\, k\Delta t)
 	\label{eqn:}
 \end{equation}
-$u$のrestriction
+をとる．ただし，$i,j$は整数とし，その範囲は差分解析で対象とする時空間範囲に応じて与える．
+$(x_j,t)$や格子点$(x_j,\,t_k)$において差分近似された解を
 \begin{equation}
 	u_j(t)=u(x_j,t), \ \ u^k_j=u(x_j,t_k)
 	\label{eqn:}
 \end{equation}
-semi descrete equation:
+とする．このとき，空間関する微分を中央差分で近似すれば，波動方程式は
 \begin{equation}
 	\frac{\partial^2 u_j(t)}{\partial t^2}
 	=\frac{u_{j+1}(t)-2u_j(t)+u_{j-1}(t)}{\Delta x^2}
 	\label{eqn:}
 \end{equation}
-full discrete equation
+となる．時間に関する微分も同様に中央差分で近似すれば，離散化された波動方程式が
+次のように得られる．
 \begin{equation}
 	\frac{\partial^2 u_j(t_k)}{\partial t^2}
 	=\frac{u_{j}^{k+1}-2u^k_j+u^{k-1}_j}{\Delta t^2}
 	=\frac{u_{j+1}^k-2u_j^k+u_{j-1}^k}{\Delta x^2}
 	\label{eqn:}
 \end{equation}
+これを，$u^{k+1}_j$について解けば，
 \begin{equation}
 	u^{k+1}_j = 2u^k_j- u^{k-1}_j
-	+C^2 \left( 
-		u_{j+1}^k-2u_j^k +u_{j-1})^k
+	+C_r^2 \left( 
+		u_{j+1}^k-2u_j^k +u_{j-1}^k
 	\right) 
-	\label{eqn:}
+	\label{eqn:fd2nd}
 \end{equation}
-where 
+となる．ただし，
 \begin{equation}
 	C_r=\frac{c \Delta t}{\Delta x}
 	\label{eqn:}
 \end{equation}
-
-
-単振動の微分方程式を次のような1階の微分方程式系に書き直す。
+とした．式(\ref{eqn:fd2nd})において$k=0$とすれば
+\begin{eqnarray}
+	u^{1}_j 
+	&=& 
+	u^0_j+\left(u^0_j- u^{-1}_j\right)
+	+C_r^2 \left( 
+		u_{j+1}^0-2u_j^0 +u_{j-1}^0
+	\right) \\ 
+	&=&
+	U_j+V_j\Delta t +C_r^2 \left( 
+		U_{j+1}-2U_j +U_{j-1}
+	\right) 
+	\label{eqn:fd2nd_k0}
+\end{eqnarray}
+$k=1$とすれば，
+\begin{eqnarray}
+	u^{2}_j 
+	&=& 
+	2u^1_j- u^{0}_j
+	+C_r^2 \left( 
+		u_{j+1}^1-2u_j^1 +u_{j-1}^1
+	\right)\\ 
+	&=&
+	2u^1_j- U_j
+	+C_r^2 \left( 
+		u_{j+1}^1-2u_j^1 +u_{j-1}^1
+	\right) 
+	\label{eqn:fd2nd_k0}
+\end{eqnarray}
+が得られる．ただし，
+\begin{equation}
+	U_j=U(x_j), \ \ V_j=V(x_j)
+	\label{eqn:}
+\end{equation}
+を表し，$u^0_j-u^{-1}_j$は前進差分近似を用いて$V_j$で近似した．
+これら$k=0$および1の式からはじめて，$k$について順次
+$u^k_j$を求めることで，任意の格子点$(x_j,\,t_k)$おける差分近似された解が得られる．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{2次元波動方程式}
+矩形領域
+\begin{equation}
+	R=\left\{
+		(\fat{x}=(x,y))
+		\left|
+		0< x <X, \,  0 < y < Y
+		\right.
+	\right\}
+	\label{eqn:}
+\end{equation}
+における2次元スカラー場$u(\fat{x},t)$を考える．
+波動方程式は，位相速度を$c$として
+\begin{equation}
+	\frac{\partial^2 u}{\partial x^2}
+	+
+	\frac{\partial^2 u}{\partial y^2}
+	=
+	\frac{1}{c^2}
+	\frac{\partial^2 u}{\partial t^2}
+	\label{eqn:wveq2D}
+\end{equation}
+と表される．初期条件は一般に
+\begin{equation}
+	u(\fat{x},0)=U(\fat{x}), \ \ 
+	\dot{u}(\fat{x},0)=V(\fat{x})
+	\label{eqn:IC_2D}
+\end{equation}
+と表され，ここでは簡単ため$U(\fat{x})\equiv 0, \, V(\fat{x})\equiv 0$とする．
+境界条件はディリクレ条件:
+\begin{equation}
+	u(\fat{x},t) = \alpha (\fat{x},t), \ \ (\fat{x}\in \partial R_D,\, t>0)
+	\label{eqn:}
+\end{equation}
+あるいはノイマン条件:
+\begin{equation}
+	\frac{\partial u}{\partial n}(\fat{x},t) = \beta (\fat{x},t), \ \ (\fat{x}\in \partial R_N,\, t>0)
+	\label{eqn:}
+\end{equation}
+が基本的である。ただし，$\partial R_D$と$\partial R_N$は境界$\partial R$の一部で，
+\begin{equation}
+	\partial R
+	=
+	\partial R_D \cup \partial R_N 
+	, \ \ 
+	\left(
+		\partial R_D \cap \partial R_N =\phi
+	\right)
+	\label{eqn:}
+\end{equation}
+であるとする．$R$は矩形領域だから，実際には法線ベクトル$\fat{n}$は
+$\fat{n}=(\pm 1,\, 0 )$あるいは$\fat{n}=(0,\, \pm 1)$である．
+ここでは，$x=0$と$x=X$でディリクレ条件を，$y=0$と$y=Y$でノイマン条件を課すことに
+すれば，
+\begin{equation}
+	u(0,y,t)=\alpha_l(y,t), \ \ u(x,0,t)=\alpha_r(x,t)
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	\frac{\partial u}{\partal y}(0,y,t)=\beta_x(y,t), \ \ u(x,0,t)=\alpha(x,t)
+	\label{eqn:}
+\end{equation}
+が満足すべき境界条件となる．
+以上の初期値-境界値問題を差分法で解析する方法を述べる．
+これまでと同様、2階の導関数を中央差分で離散化すれば、
+\begin{equation}
+	\frac{u_{i+1,j}}{\Delta x}
+	\label{eqn:}
+\end{equation}
+\end{document}
+単振動の微分方程式を次のような1階の微分方程式系に書き直す．
 \begin{equation}
 	\frac{dv}{dt} = -\omega_0^2  u, \ \ \frac{du}{dt}=v
 	\label{eqn:}
 \end{equation}
-これを次のように差分近似する。
+これを次のように差分近似する．
 \begin{equation}
 	\frac{v_{k+\frac{1}{2}}-v_{k-\frac{1}{2}}}{\Delta t}=-\omega_0^2 u_{k}, \ \ 
 	\frac{u_{k+1}-u_k}{\Delta t}=v_{k+\frac{1}{2}}

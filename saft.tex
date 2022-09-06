@@ -661,9 +661,9 @@ Aスキャン波形を表した．連続波を送受信する場合は，周波�
 	\right\} 
 	\label{eqn:XXX_Iwt}
 \end{equation}
-が得られる．ここに，$\omega_{ij}^*$は式(\ref{eqn:wij_model})で与え，
+が得られる．ここに，$\omega_{ij}^*$は式(\ref{eqn:XXX_wij_model})で与え，
 連続波から得られる画像であることを明示するために$I(\fat{x})=I_\omega(\fat{x})$と表した．
-式(\ref{eqn:eqn:XXX_Iwt})の指数関数の項は，振動する関数で，
+式(\ref{eqn:XXX_Iwt})の指数関数の項は，振動する関数で，
 位相
 \begin{equation}
 	\phi_{ij}(\fat{x})=k 
@@ -707,9 +707,9 @@ $|\fat{y}_i|=R$だから，画像化関数は次のようになる．
 	\label{eqn:XXX_PSF_cont}
 \end{equation}
 この実部が単一周波の連続波を用いてパルスエコー法で計測した
-場合のPSFを与える．いま，式(\ref{eqn:XXX_psf_cont})を，
+場合のPSFを与える．いま，式(\ref{eqn:XXX_PSF_cont})を，
 観測点数$M=10$および20で計算すると，
-図\ref{fig:XXX_PSF_mono}のような像が得られる．
+図\ref{fig:XXX_psf_cont}のような像が得られる．
 \begin{figure}[h]
 	\begin{center}
 	%\includegraphics[width=0.9\linewidth]{Figs/psf_cont.eps} 
@@ -729,7 +729,7 @@ $|\fat{y}_i|=R$だから，画像化関数は次のようになる．
 	観測点数は(a)$M=10$, (b)$M=20$で，波長2の連続波を用いた場合.}
 	\label{fig:XXX_psf_profile_cont}
 \end{figure}
-これら二つのPSFの，$y=0$における断面は図\ref{fig:ZZ_psf_profile_cont}のようである．
+これら二つのPSFの，$y=0$における断面は図\ref{fig:XXX_psf_profile_cont}のようである．
 このように，観測点数の少ない$M=10$のケースでは顕著なグレーティングローブが発生している．
 一方で，単周波数成分の波を用いた場合にも，全周方向からの計測を行った場合には，
 原点に明確なメインローブが現れることが分かる．
@@ -770,7 +770,7 @@ PSFを積分を使って次のように表すことができる．
 	d\theta
 	\label{eqn:XXX_PSF_int}
 \end{equation}
-ここで，$R\gg |\fat{x}|$として光軸近似
+ここで，$R\gg |\fat{x}|$として近軸近似
 \begin{equation}
 	r_i=R-\fat{x}\cdot \hat{\fat{y}}
 	\label{eqn:}
@@ -864,24 +864,6 @@ $w_l$は画像化システムの分解能とみなすことができるが，
 特に散乱体の数が以前に分からない存在する場合には，誤検出や見落とし
 の原因となるため十分なメインローブ高さが得られ程度に，位相が正確に
 調整されていることが重要である．
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
-	\begin{center}
-	%\includegraphics[width=0.6\linewidth]{Figs/psf_cont_delay.eps} 
-	\includegraphics[width=0.6\linewidth]{Figs/psf_cont_delay.pdf} 
-	\end{center}
-	\caption{位相遅れのある入射波を用いたときの点拡がり関数.} 
-	\label{fig:XXX_psf_cont_delay}
-\end{figure}
-\begin{figure}[h]
-	\begin{center}
-	%\includegraphics[width=0.5\linewidth]{Figs/1D_prb.eps} 
-	\includegraphics[width=0.5\linewidth]{Figs/1D_prb.pdf} 
-	\end{center}
-	\caption{反射壁の開口合成イメージング(1次元問題).} 
-	\label{fig:XXX_1D_prb}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[h]
 	\begin{center}
@@ -1015,7 +997,7 @@ Aスキャン波形$a_0(t)$は，
 観測ノイズのために，全ての周波数で正確に評価することは出来ない．
 そのため，実際に得られる$\tilde a_{11}$は劣化したデルタ関数となる．
 例えば，周波数帯域が$(-\omega_b,\, \omega_b)$に制限されるとき，
-帯域内でノイズが無いと仮定しても，式\ref{eqn:XXX_at_dcnv}のフーリエ逆変換は
+帯域内でノイズが無いと仮定しても，式(\ref{eqn:XXX_at_dcnv})のフーリエ逆変換は
 \begin{equation}
 	\tilde a(t)= 
 	\int_{-\omega_b}^{\omega_b} 
@@ -1352,16 +1334,15 @@ $G^-(\fat{x},\fat{y},t)$の区別を必要としない場合は$G(\fat{x},\fat{y
 対しても厳密に成り立つ表現である．
 しかしながら，欠陥$D$と$\partial D$上の場が未知である以上，右辺第二項を
 計算することはできない．特に，因果的なグリーン関数$H^+(\fat{x},\fat{y},t)$
-を用いる場合，散乱波の発生源は$\partial D$であるため，
-この項が計算できない以上，散乱場の評価として意味のある結果は得られない．
-一方，$H^-(\fat{x},\fat{y},t)$を用いるときには，時間を遡る方向に
-影響が及ぶため，境界$\partial B$における$u^{sc}(\fat{x},\fat{y},t)$
-の原因となる過去の時間における散乱場の様子を，計算可能な式(\ref{})
-式()右辺第一項は，境界変位の原因となる媒体内部の過去の散乱場を与え，
-右辺第二項は、散乱波を励起する原因となった場を再構成する役割を果たす．
-従って，第二項を無視したとしても，表面$\partial B$で観測された
-散乱波が媒体内部でどのように伝播したかを調べることができる．そこで，
-第二項を無視し，
+を用いる場合，散乱波の発生源は$\partial D$で，この項が計算できない以上，
+散乱場の評価として意味のある結果は得られない．
+一方，$H^-(\fat{x},\fat{y},t)$を用いるならば，時間を遡る方向に
+影響が及ぶため，境界$\partial B$で観測された$u^{sc}(\fat{x},\fat{y},t)$
+の原因となる過去の時間における散乱場の様子を調べることができる．
+また，式(\ref{eqn:XXX_usc_int})の右辺第二項は、散乱波を励起する
+原因となった場を再構成するために必要な項であるため，この項を無視したとしても
+表面$\partial B$で観測された散乱波が媒体内部でどのように伝播したかを調べる上で
+は差し支えない．そこで，第二項を無視し，
 \begin{equation}
 	u^{sc}(\fat{x},t) 
 	=
@@ -1369,7 +1350,7 @@ $G^-(\fat{x},\fat{y},t)$の区別を必要としない場合は$G(\fat{x},\fat{y
 	\int_{\partial B} H^-(\fat{x},\fat{y},t) * u^{sc}(\fat{x},t)dS_x 
 	\label{eqn:XXX_usc_trev}
 \end{equation}
-として，用いれば，既知の境界における場の量だけが含まれる式となる．
+とすれば，既知の境界における場の量だけが含まれる式となる．
 勿論，(\ref{eqn:XXX_usc_trev})は，欠陥の存在を無視しているため，
 この式が与える散乱場は，$\partial B$において捉えることのできる散乱場
 の原因となった一部の散乱場であり，また，それが$\partial D$と相互作用
