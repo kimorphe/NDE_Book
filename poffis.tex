@@ -285,8 +285,8 @@ $u(\fat{x})$や$t(\fat{x})$は，求めるべき$\gamma(\fat{x})$や$V(\fat{x})$
 必要があり一般に計算コストが高い．そこで，$u(\fat{x})$や$t(\fat{x})$を既知量で
 近似して方程式を線形化し，反復法を用いることなくフーリエ変換で
 散乱体形状の再構成を行う．以下，そのための手順を体積散乱体に対する結果を
-式(\ref{eqn:ZZZ_U_vol})から導き，表面散乱体についても同様にして再構成公式が得られることを示す．\\
-
+式(\ref{eqn:ZZZ_U_vol})から導き，表面散乱体についても同様にして再構成公式が得られることを示す．
+\subsubsection{体積散乱体}
 $u^{\infty}(k\hat{\fat{y}})$は入射場$u^{in}(\fat{x})$に依存する．
 ここでは，次のような平面波が散乱体に入射する場合について考える．
 \begin{equation}
@@ -388,6 +388,105 @@ $k,\hat{\fat{y}},\hat{\fat{p}}$を様々に変化させ，できるだけ広い�
 	\caption{波数ベクトル空間におけるEvaldおよびEvald limitting sphere.} 
 	\label{fig:ZZZ_Evald}
 \end{figure}
+\subsubsection{表面散乱体}
+表面散乱体の場合は，散乱場を高周波近似(Kirchhoff近似)を用いて表すことにより，
+特異関数$\gamma_D(\fat{x})$に関する再構成式を得ることができる．
+ここでも，入射波は式(\ref{eqn:ZZZ_17})の平面波とすれば，式(\ref{eqn:ZZZ_08})
+と式(\ref{eqn:ZZZ_09})は，散乱振幅$u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})$
+を与える．Kirchhoff近似では，散乱体表面おける散乱波成分を，平面波の反射
+係数$R$を用いて，
+\begin{equation}
+	\left. u^{sc}\right|_{\partial D} \simeq \left. R u^{in}\right|_{\partial D}
+	,\\
+	\left. t^{sc}\right|_{\partial D} \simeq \left. R t^{in}\right|_{\partial D}
+	\label{eqn:ZZZ_Kirch}
+\end{equation}
+と表す．ただし，$t^{in}$と$t^{sc}$は$\frac{\partial u}{\partial n}$の
+入射および散乱波成分を意味し，
+\begin{equation}
+	t^{in}(\fat{x}) = ik\hat{\fat{p}}\cdot \hat{\fat{n}} e^{ik\hat{\fat{p}}\cdot \hat{\fat{x}}}
+	\label{eqn:ZZZ_tin}
+\end{equation}
+である．
+\begin{equation}
+	R=\left\{
+	\begin{array}{cc}
+		-1 & ({\rm Dirichlet}) \\
+		 1 & ({\rm Neumann})
+	\end{array}
+	\right.
+	\label{eqn:ZZZ_Rcoef}
+\end{equation}
+\begin{equation}
+	\fat{n}^*= \frac{
+		\hat{\fat{p}}- \hat{\fat{y}}
+		}{
+		\left|
+		\hat{\fat{p}}- \hat{\fat{y}}
+		\right|
+		}
+	\label{eqn:}
+\end{equation}
+\begin{equation}
+	u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})
+	\simeq
+	2ik \left(\hat{\fat{p}}\cdot \fat{n}^*\right)
+	\int_{ \partial_D }
+	e^{ik( \hat{\fat{p}} - \hat{\fat{y}})\cdot\fat{x}}
+	, \ \ ({\rm Dirichlet})
+	\label{eqn:ZZZ_uinf_D}
+\end{equation}
+\begin{equation}
+	u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})
+	\simeq
+	-2ik \left(\hat{\fat{y}}\cdot \fat{n}^*\right)
+	\int_{ \partial_D }
+	e^{ik( \hat{\fat{p}} - \hat{\fat{y}})\cdot\fat{x}}
+	, \ \ ({\rm Neumann})
+	\label{eqn:ZZZ_uinf_N}
+\end{equation}
+$\fat{k}=k(\hat{\fat{p}}-\hat{\fat{y}})$を波数ベクトル，
+$\gamma_D(\fat{x})$のフーリエ変換を$\tilde{\gamma}_D(\fat{k})$
+\begin{equation}
+	\tilde{\gamma}_D(\fat{k}) = 
+	\frac{
+		u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})
+	}{
+		2ik\left(\hat{\fat{p}}\cdot \fat{n}^*\right)
+	}
+	\label{eqn:ZZZ_gmmk_D}
+\end{equation}
+\begin{equation}
+	\tilde{\gamma}_D(\fat{k}) = 
+	\frac{
+		u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})
+	}{
+		-2ik\left(\hat{\fat{y}}\cdot \fat{n}^*\right)
+	}
+	\label{eqn:ZZZ_gmmk_N}
+\end{equation}
+\begin{equation}
+	\gamma_D(\fat{x}) = 
+	\frac{1}{(2\pi)^3}\int
+	\frac{
+		u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})
+	}{
+		2ik\left(\hat{\fat{p}}\cdot \fat{n}^*\right)
+	}e^{-i\fat{k}\cdot\fat{x}}
+	d^3\fat{k}, \ \ ({\rm Dirichlet})
+	\label{eqn:ZZZ_gmmx_D}
+\end{equation}
+\begin{equation}
+	\gamma_D(\fat{x}) = 
+	\frac{1}{(2\pi)^3}\int
+	\frac{
+		u^{\infty}(\hat{\fat{y}};\hat{\fat{p}})
+	}{
+		-2ik\left(\hat{\fat{y}}\cdot \fat{n}^*\right)
+	}e^{-i\fat{k}\cdot\fat{x}}
+	d^3\fat{k}, \ \ ({\rm Neumann})
+	\label{eqn:ZZZ_gmmx_N}
+\end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{時間領域における再構成式}
 式(\ref{eqn:ZZZ_Vx})で与えられる再構成公式が，観測波形に対してどのような
@@ -409,7 +508,7 @@ $k,\hat{\fat{y}},\hat{\fat{p}}$を様々に変化させ，できるだけ広い�
 式として表すと，以下のように開口合成法の画像化関数と同じ形式を持つことが明らかになる．
 ただし，式(\ref{eqn:ZZZ_Vx})の積分を評価するにあたり，微小体積要素$d^3\fat{k}$を$k$や$\hat{\fat{y}},\hat{\fat{p}}$で，
 具体的に表現する必要がある． そのためには，送受信方向についての条件を設定する必要があるため，
-ここでは次の二つのケースを考える．
+ここでは次の二つのケースを考える． 
 %波数ベクトル$\fat{k}$は入射波の送信方向$\fat{p}$，散乱波の観測方向$\hat{\fat{y}}$と
 %角周波数$\omega$に依存する．従って，波数ベクトルに関するフーリエ変換を観測波形を
 %使って評価する際には，観測条件に応じた積分変数を取る必要がある．
