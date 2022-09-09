@@ -489,7 +489,7 @@ $\gamma_D(\fat{x})$のフーリエ変換を$\tilde{\gamma}_D(\fat{k})$
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{時間領域における再構成式}
-式(\ref{eqn:ZZZ_Vx})で与えられる再構成公式が，観測波形に対してどのような
+式(\ref{eqn:ZZZ_Vx})で与えられる再構成公式が観測波形に対してどのような
 処理を行うことを意味するか調べる．そのために,散乱振幅を
 \begin{equation}
 	u^{\infty}(\hat{\fat{y}};\hat{\fat{p}}) 
@@ -497,31 +497,35 @@ $\gamma_D(\fat{x})$のフーリエ変換を$\tilde{\gamma}_D(\fat{k})$
 	4\pi |\fat{y}|e^{-ik|\fat{y}|} u^{sc}(\fat{y})
 	\label{eqn:ZZZ_21}
 \end{equation}
-として式(\ref{eqn:ZZZ_Vx})を
+として，式(\ref{eqn:ZZZ_Vx})を
 \begin{equation}
-	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} yu^{sc}(\fat{y})
-	e^{i\fat{k}\cdot \fat{x}-iky}d^3\fat{k}, 
+	V(\fat{x}) =\frac{1}{2\pi^2} \int k_0^{-2} |\fat{y}|u^{sc}(\fat{y})
+	e^{i\fat{k}\cdot \fat{x}-ik |\fat{y}|}d^3\fat{k}, 
 	\ \ (\fat{k}=k(\hat{\fat{y}}-\hat{\fat{p}}))
 	\label{eqn:ZZZ_Vx_usc}
 \end{equation}
-と書き直す.この再構成式において, 周波数$\omega$に関する積分を行って時間領域波形に関する
-式として表すと，以下のように開口合成法の画像化関数と同じ形式を持つことが明らかになる．
-ただし，式(\ref{eqn:ZZZ_Vx})の積分を評価するにあたり，微小体積要素$d^3\fat{k}$を$k$や$\hat{\fat{y}},\hat{\fat{p}}$で，
-具体的に表現する必要がある． そのためには，送受信方向についての条件を設定する必要があるため，
-ここでは次の二つのケースを考える． 
+と書き直す.この再構成式において, 周波数$\omega$に関する積分を行って
+時間領域波形に関する式にすれば，開口合成法の画像化関数と同じ形式を
+持つことが明らかになる．ただし，式(\ref{eqn:ZZZ_Vx})の積分を評価するにあたり，
+微小体積要素$d^3\fat{k}$を$k$や$\hat{\fat{y}},\hat{\fat{p}}$で
+具体的に表現する必要がある． そのためには，送受信方向についての条件を
+設定する必要があることから，ここでは次の二つのケースを考える． 
 %波数ベクトル$\fat{k}$は入射波の送信方向$\fat{p}$，散乱波の観測方向$\hat{\fat{y}}$と
 %角周波数$\omega$に依存する．従って，波数ベクトルに関するフーリエ変換を観測波形を
 %使って評価する際には，観測条件に応じた積分変数を取る必要がある．
 %では微小体積要素$d^3\fat{k}$を書き下すことができる．
 \begin{enumerate}
 \item
-	入射(観測)方向$\hat{\fat{p}}(\hat{\fat{y}})$を固定し，
-	観測(入射)方向$\hat{\fat{y}}(\hat{\fat{p}})$を変化させる場合
+	入射(あるいは観測)方向$\hat{\fat{p}}(\hat{\fat{y}})$を固定し，
+	観測(あるいは入射)方向$\hat{\fat{y}}(\hat{\fat{p}})$を変化させる場合
 		(図\ref{fig:ZZZ_101}-(i)および(i')).
-	入射あるいは観測，いずれの方向を固定した場合もここでの議論は
-	ほとんど差がないため，以下では入射方向を固定した場合について述べる．
+	入射方向，観測方向のいずれの方向を固定した場合も以下の議論に
+	実質的な差はないため，ここでは入射方向を固定した場合を取り上げる．
 \item
-	入射方向と観測方向の成す角度を一定に保って同時に変化させる場合(図\ref{fig:ZZZ_101}-(ii)).
+	入射方向と観測方向の成す角度を一定に保って同時に変化させる場合
+	(図\ref{fig:ZZZ_101}-(ii)). 入射方向と観測方向を
+	$\hat{\fat{p}}=-\hat{\fat{y}}$と反対方向にとれば，
+	パルス-エコー法による計測となる．
 \end{enumerate}
 \subsubsection{
 	入射方向$\hat{\fat{p}}$を固定し，観測方向$\hat{\fat{y}}$を変化させる場合
@@ -588,7 +592,7 @@ $\gamma_D(\fat{x})$のフーリエ変換を$\tilde{\gamma}_D(\fat{k})$
 \end{figure}
 パルスエコー法(一探触子法)による計測は，式(\ref{eqn:ZZZ_30})において
 $2\delta=\pi$とした特別なケースとして表現される．
-\subsubsection{時間領域における再構成}
+\subsubsection{体積散乱体}
 以上より，$d^3\fat{k}$は，2つの送受信モードをまとめて，
 \begin{equation}
 	d^3\fat{k}=k^2\hat{J}(\theta,\phi) dkd\theta d\phi
@@ -676,8 +680,9 @@ $\theta$と$\varphi$について離散化すれば，積分は次のような和
 送信点を$\fat{z}$とし，$|\fat{x}|\ll 1$における近軸近似を用い，入射波を
 \begin{equation}
 	u^{in}(\fat{x})
-	=\frac{e^{ik|\fat{x}-\fat{z}|}}{4\pi |\fat{x}-\fat{z}|}
+	=F(\omega)\frac{e^{ik|\fat{x}-\fat{z}|}}{4\pi |\fat{x}-\fat{z}|}
 	\simeq 
+	F(\omega)
 	\frac{e^{ik|\fat{z}|}}{4\pi |\fat{z}|}
 	e^{-ik\hat{\fat{z}}\cdot\fat{x}}
 	\label{eqn:ZZZ_39}
@@ -689,14 +694,14 @@ $\theta$と$\varphi$について離散化すれば，積分は次のような和
 	\frac{e^{ik(|\fat{y}|+|\fat{z}|-(\hat{\fat{z}}+\hat{\fat{y}})\cdot \fat{x})}}{16\pi^2 |\fat{y}| |\fat{z}|}
 	F(\omega)
 	u^{\infty}(\hat{\fat{y}};-\hat{\fat{z}}) 
-	\label{eqn:}
+	\label{eqn:ZZZ_usc_far}
 \end{equation}
 となる．これを式(\ref{eqn:ZZZ_Vx})へ代入すれば，
 \begin{equation}
 	V(\fat{x}) =\frac{2}{\pi c} \int \frac{|\fat{y}||\fat{z}|u^{sc}(\fat{y})}{F(\omega)}
 	e^{-ik(|\fat{y}|+|\fat{z}|-(\hat{\fat{y}}+\hat{\fat{z}})\cdot\fat{x}) }
 	\hat{J} d\omega d\phi d\theta	
-	\label{eqn:ZZZ_}
+	\label{eqn:ZZZ_39}
 \end{equation}
 が得られ，角周波数$\omega$について積分を行うとともに，$\theta,\varphi$で離散化すれば，
 \begin{equation}
@@ -705,7 +710,7 @@ $\theta$と$\varphi$について離散化すれば，積分は次のような和
 	\sum_{\fat{y},\fat{z}} 
 	a\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) 
 	|\fat{y}| |\fat{z}|\hat{J} \Delta \theta \Delta \phi
-	\label{eqn:ZZZ_38}
+	\label{eqn:ZZZ_40}
 \end{equation}
 となる．ただし，伝播時間$t_{in}$と$t_{sc}$はこの場合
 \begin{equation}
@@ -719,3 +724,39 @@ $\theta$と$\varphi$について離散化すれば，積分は次のような和
 	\label{eqn:ZZZ_41}
 \end{equation}
 である．
+\subsubsection{表面散乱体}
+表面散乱体の場合も時間領域における再構成式を，体積散乱体の場合と同様にして導くことができる．
+ここでも，位置$fat{z}$におかれた周波数スペクトル$F(\omega)$の点波源からの入射波を用いた
+とすれば，散乱波は式(\ref{eqn:ZZZ_usc_far})と表すことができる．ただし，散乱振幅は
+式(\ref{eqn:ZZZ_gmmx_D})あるいは式(\ref{eqn:ZZZ_gmmx_N})で与られる．
+式(\ref{eqn:ZZZ_usc_far})を$u^{\infty}(\hat{\fat{y};\hat{\fat{p}}})$について解き，
+ディリクレ散乱体の再構成式(\ref{eqn:ZZZ_usc_far})に用いれば，
+\begin{equation}
+	\gamma_D(\fat{x}) = -\frac{1}{\pi c^2} \int 
+	i\omega
+	\frac{|\fat{y}||\fat{z}|u^{sc}(\fat{y})}
+	{F(\omega) (\hat{\fat{p}}\cdot\fat{n}^*) }
+	e^{-ik(|\fat{y}|+|\fat{z}|-(\hat{\fat{y}}+\hat{\fat{z}})\cdot\fat{x}) }
+	\hat{J} d\omega d\phi d\theta	
+	\label{eqn:ZZZ_42}
+\end{equation}
+となる．時間領域波形を式(\ref{eqn:ZZZ_36})で定義し，式(\ref{eqn:ZZZ_42})の$\omega$に関する
+積分を行えば，
+\begin{equation}
+	\gamma_D(\fat{x}) =\frac{1}{4\pi^2c^2} \int \dot{a}
+	\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) \frac{|\fat{y}| |\fat{z}|}{\hat{\fat{p}}\cdot\fat{n}^*} 
+	\hat{J}
+	d\theta d\phi, \ \ ({\rm Dirichlet})
+	\label{eqn:ZZZ_43}
+\end{equation}
+Neumann散乱体の場合は，同じ手順に従って次のように得られる．
+\begin{equation}
+	\gamma_D(\fat{x}) =\frac{1}{4\pi^2c^2} \int \dot{a}
+	\left(\fat{y}, \fat{z}, t_{in}+t_{sc} \right) \frac{|\fat{y}| |\fat{z}|}{-\hat{\fat{y}}\cdot\fat{n}^*} 
+	\hat{J}
+	d\theta d\phi, \ \ ({\rm Neumann})
+	\label{eqn:ZZZ_44}
+\end{equation}
+以上の式(\ref{eqn:ZZZ_43})と(\ref{eqn:ZZZ_44})において，$t_{in}$と$t_{sc}$は
+式(\ref{eqn:ZZZ_41})で表される通りで，再構成式の積分を離散化すれば開口合成法の
+形式に帰着されることも体積散乱体の場合と同様である．
