@@ -1,11 +1,12 @@
 all: fdm.pdf wavebook.pdf
 wavebook.pdf: wavebook.dvi
 	dvipdfmx -p a4 wavebook.dvi
-wavebook.dvi: wavebook.tex saft.tex adj.tex poffis.tex\
+wavebook.dvi: wavebook.tex saft.tex adj.tex poffis.tex imaging.tex\
        	Figs/measurement.pdf Figs/cloud.pdf Figs/wvfm2.pdf Figs/locii.pdf\
        	Figs/saftM2.pdf Figs/psf_pulse.pdf Figs/1D_prb.pdf Figs/setup.pdf\
        	Figs/Evald.pdf Figs/pulse_echo.pdf Figs/blind_sum.pdf Figs/psf_aptlim.pdf\
-       	Figs/psf_profile.pdf Figs/psf_cont.pdf Figs/psf_profile_cont.pdf Figs/psf_cont_delay.pdf
+       	Figs/psf_profile.pdf Figs/psf_cont.pdf Figs/psf_profile_cont.pdf Figs/psf_cont_delay.pdf\
+	Figs/model.pdf Figs/FDgrid_x.pdf Figs/FDgrid_t.pdf Figs/array.pdf Figs/cavity.pdf Figs/crack.pdf
 	uplatex wavebook.tex
 
 fdm.pdf: fdm.dvi
@@ -51,4 +52,15 @@ Figs/Evald.pdf: Figs/Evald.svgz
 Figs/pulse_echo.pdf: Figs/pulse_echo.svgz
 	inkscape Figs/pulse_echo.svgz --export-pdf=Figs/pulse_echo.pdf -D --export-text-to-path
 
-
+Figs/model.pdf: Figs/model.svgz
+	inkscape Figs/model.svgz --export-pdf=Figs/model.pdf -D --export-text-to-path
+Figs/FDgrid_x.pdf: Figs/FDgrid_x.svgz
+	inkscape Figs/FDgrid_x.svgz --export-pdf=Figs/FDgrid_x.pdf -D --export-text-to-path
+Figs/FDgrid_t.pdf: Figs/FDgrid_t.svgz
+	inkscape Figs/FDgrid_t.svgz --export-pdf=Figs/FDgrid_t.pdf -D --export-text-to-path
+Figs/array.pdf: Figs/array.svgz
+	inkscape Figs/array.svgz --export-pdf=Figs/array.pdf -D --export-text-to-path
+Figs/cavity.pdf: Figs/cavity.svgz
+	inkscape Figs/cavity.svgz --export-pdf=Figs/cavity.pdf -D --export-text-to-path
+Figs/crack.pdf: Figs/crack.svgz
+	inkscape Figs/crack.svgz --export-pdf=Figs/crack.pdf -D --export-text-to-path
