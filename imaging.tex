@@ -1,13 +1,88 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{形状再構成問題の数値計算例}
 \subsection{はじめに}
+本節では、有限な大きさの散乱体を対象として，これまでに示した
+方法に基づいて散乱体の形状再構成を行う．
+散乱体は円形空洞と割れの２つをとりあげ，いくつかの異なる
+画像化式によってイメージングを行い結果を比較する．
+これらのイメージングには，数値シミュレーションによって
+合成した散乱波の時間波形を用いる．
+イメージングは開口合成法の一種とみなすことのできる
+画像化関数を用い，全て時間領域における計算によって行う．
 \subsection{問題設定}
+図\ref{fig:imaging_problem}に，2次元イメージングを行う
+2つのモデルを示す．この図の(a)は円形空洞を，(b)は
+緩やかに曲がった割れを含む半無限領域を示している．
+ここでは，半無限領域の表面に設置したリニアアレイ探触子から
+面外波を送受信して散乱波形を取得し，これら2つの欠陥
+のイメージングを行うことを考える．
+その際，送受信は全素子の組み合わせで行い，
+その結果得られた波形の全て，あるいは，一部を使って
+イメージングを行う．
+なお，図\ref{fig:imaging_problem}の寸法は，後にも
+述べる通り，送信波の波長で無次元化したものである．
+また，図中の破線で示した範囲は画像化を行う領域を表す．
+図\ref{fig:linear_array}はリニアアレイ探触子の
+素子配置を示す．この図では，アレイ探触子を構成する
+素子数を$M$とし，半無限媒体の表面において，第$i$番目の
+アレイ素子が占める箇所を$e_i$として示している．
+なお，各素子の幅$w$と，隣接する素子の間隔であるピッチ$p$は
+一定としている．このとき，アレイ探触子の開口(aperture)$a_p$は
+次式で与えられる．
+\begin{equation}
+	a_p=p(M-1)+w
+	\label{eqn:aperture}
+\end{equation}
+図\ref{fig:imaging_problem}では，これらリニアアレイ探触子の
+諸元を
+\[
+	p=1, w=0.5, M=32, (a_p=32)
+\]
+とし，アレイ探触子の中心が欠陥の直上に来るように設置する．
+図\ref{fig:imaging_problem}では，このようにして配置した
+アレイ素子の位置を，媒体表面($x_2=30$)上に
+ある黒の点で表している．
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=1.0\linewidth]{Figs/model.pdf} 
 	\end{center}
 	\caption{ 形状再構成問題のための数値計算モデル.}
-	\label{fig:}
+	\label{fig:imging_problem}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.6\linewidth]{Figs/array.pdf} 
+	\end{center}
+	\caption{リニアアレイセンサーを模擬した送受信領域の設定.} 
+	\label{fig:linear_array}
 \end{figure}
 \subsection{散乱波形の合成}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.6\linewidth]{Figs/FDgrid_t.pdf} 
+	\end{center}
+	\caption{リープフロッグ法による時間に関する離散化.} 
+	\label{fig:leapfrog}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=1.0\linewidth]{Figs/FDgrid_x.pdf} 
+	\end{center}
+	\caption{FDTD法における差分格子の空間配置.} 
+	\label{fig:staggered}
+\end{figure}
 \subsection{画像化結果}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=1.0\linewidth]{Figs/cavity.pdf} 
+	\end{center}
+	\caption{画像化結果(円形空洞の場合).} 
+	\label{fig:cavity}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=1.0\linewidth]{Figs/crack.pdf} 
+	\end{center}
+	\caption{画像化結果(サイン波状の割れの場合).} 
+	\label{fig:crack}
+\end{figure}
