@@ -147,9 +147,10 @@ FDTD法では，式(\ref{eqn:WWW_002})と，式(\ref{eqn:WWW_003})の両辺を�
 
 %\subsection{時間に関する離散化}
 \subsection{時間微分の差分近似}
-時間の関数$f(t)$を中央差分で離散化する．
+時間の関数$y=f(t)$を中央差分で離散化する．
 そのために，時間ステップ長を$\Delta t$, $t=0$を基準に，第$k$番目の時間ステップ
-を$t^k=k\Delta t$とする．$t=t^k$における$f(t)$の値を$f(t^{k})=f^k$とすれば，
+を$t^k=k\Delta t$とする．図\ref{fig:leapfrog}に示すように，
+$t=t^k$における$f(t)$の値を$f(t^{k})=f^k$とすれば，
 半整数時間ステップ$t^{k+\frac{1}{2}}=(k+\frac{1}{2})\Delta t$における
 $f(t)$の微分は$\dot f(t^{k+\frac{1}{2}})$は，中央差分近似により
 \begin{equation}
@@ -187,7 +188,8 @@ $f(t)$の微分は$\dot f(t^{k+\frac{1}{2}})$は，中央差分近似により
 	\frac{\rho}{\Delta t} \left\{
 	(\sigma_{31,1})^{l+\frac{1}{2}} + (\sigma_{31,2})^{l+\frac{1}{2}}
 	\right\} 
-	\label{eqn:WWW_011}\\
+	\label{eqn:WWW_011}
+	\\
 	(\sigma_{3\alpha})^{k+1} &=& 
 	(\sigma_{3\alpha})^{k} 
 	+
@@ -225,47 +227,171 @@ $t^{k+\frac{1}{2}}$における速度から$t^{k+1}$における応力が求め�
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%5%
 \subsection{空間微分の差分近似}
-式(\ref{eqn:WWW_012})と式(\ref{eqn::WWW_014})の右辺には空間に関する微分
+式(\ref{eqn:WWW_012})と式(\ref{eqn:WWW_014})の右辺には空間に関する微分
 \[
 	v_{3,1}=\frac{\partial v_3}{\partial x_1},\,
 	v_{3,2}=\frac{\partial v_3}{\partial x_2}, \,
 	\sigma_{31,1}=\frac{\partial \sigma_{31}}{\partial x_1},\,
 	\sigma_{32,2}=\frac{\partial \sigma_{32}}{\partial x_2}
 \]
-が含まれる．これらの空間微分を差分近似するために，図\ref{fig:staggered}
-にあるように，空間を幅$\Delta x_1$,高さ$\Delta x_2$のセルに区切り，
-媒体が占める領域$V$を，これら小さなセルの集まりで近似する．
-セルの頂点は
-$(x_1)_i=i\Delta x_1$
-$(x_2)_j=j\Delta x_2$
+が含まれる．これらの微分を差分近似するために，図\ref{fig:staggered}
+の中央に示すように，空間を幅$\Delta x_1$,高さ$\Delta x_2$の
+セルに区切り，媒体が占める領域$V$をこれら小さなセルの集まりで近似する．
+セルの頂点は，原点から数えて$x_1$方向へ$i$番目，$x_2$方向へ
+$j$番目の位置にあるものを，インデックスの対$(i,j)$で参照し，
+その位置を
+\[
+	(x_1)_i=i\Delta x_1, \, (x_2)_j=j\Delta x_2, 
+\]
+と表す．さらに，位置の関数$f(x_1, x_2)$の
+$(i,j)$における値を
+\[
+	f_{i,j}=f\left((x_1)_i, (x_2)_j\right)
+\]
+と，下付きのインデックスを用いて書くことにする．
+同様にして，セル中央の点を
+\[
+	\left( 
+	(x_1)_{i+\frac{1}{2},j+\frac{1}{2}}, (x_2)_{i+\frac{1}{2},j+\frac{1}{2}}
+	\right)
+	=
+	\left(
+	\left(i+\frac{1}{2} \right)\Delta x_1, 
+	\left(j+\frac{1}{2} \right)\Delta x_2, 
+	\right)
+\]
+として，この位置における$f(x_1,x_2)$を$f_{i+\frac{1}{2},j+\frac{1}{2}}$と表す．
+さらに，時間に関する離散化についての表記を踏まえ，
+時間と空間の双方について離散的な点での値を示す際には，
+時間ステップを上付きの，空間位置を下付きの添字を用いて
+\[
+	f\left((x_1)_i,(x_2)_j,t^k\right) =f^k_{i,j}
+\]
+などと表す．
 
-
-スタガード格子の$x_i$軸方向の間隔を
-$\Delta x_i,(i=1,2)$とし，その間隔は一定とする．
-この間隔で時空間内に配置された差分格子における関数$f(\fat{x},t)$の値を$f^k_{i,j}$と書くことにする．ただし，$k$は時間ステッ
-プを，$i,\, j$は$x_1$および$x_2$方向の格子位置を表す番号を意味する．このとき，中央差分で時間微分を近似すれば，
+ここで，速度$v_3$を評価するための点をセル中央にとれば，
+式(\ref{eqn:WWW_014})は，$(i+\frac{1}{2}, j+\frac{1}{2})$の点
+で評価されることとなるため，この式は
 \begin{equation}
-        \dot{f}^{k+\frac{1}{2}} \approx \frac{ (f)^{k+1}-(f)^k}{\Delta t}
-        \label{eqn:dfdt}
+	(v_3)_{i+\frac{1}{2},j+\frac{1}{2}}^{k+\frac{1}{2}} 
+	= 
+	(v_3)_{i-\frac{1}{2},j+\frac{1}{2}}^{k-\frac{1}{2}} 
+	+
+	\frac{\rho}{\Delta t} \left\{
+		(\sigma_{31,1})_{i+\frac{1}{2},j+\frac{1}{2}}^{k} 
+		+
+		(\sigma_{32,2})_{i+\frac{1}{2},j+\frac{1}{2}}^{k} 
+	\right\} 
+	\label{eqn:WWW_015}
 \end{equation}
-となり，後に示すように，整数時間ステップ$k$で$f^k$を，半整数時間ステップ$t^{k+\frac{1}{2}}$において$\dot f$を，初期値$f^0, \dot f^{\frac{1}{2}}$から交互に求める蛙飛び差分(リープフロッグ)法による差分方程式が得られる．一方，空間微分$\nabla f$は
+として用いることになる．
+従って、空間微分$\sigma_{31,1}$と$\sigma_{32,2}$は，セル中央で
+評価する必要がある．これらの微分を中央差分で近似するためには，
+$\sigma_{31}$の評価点はセル左右の返に位置する$(i,j+\frac{1}{2})$に，
+$\sigma_{32}$はセル上下の返に位置する$(i+\frac{1}{2},j)$にとり，
 \begin{eqnarray}
-        \left( \frac{\partial f}{\partial x_1}\right)
-        _{i+\frac{1}{2}, \, j+\frac{1}{2}}
-        & \approx &
-                \frac{\left(f\right)_{i+1,j+\frac{1}{2}} -\left(f\right)_{i,\, j+\frac{1}{2}}}
-                {\Delta x_1}
-        \label{eqn:dfdx1}
-        \\
-        \left( \frac{\partial f}{\partial x_2}\right)
-        _{i+\frac{1}{2}, \, j+\frac{1}{2}}
-        & \approx &
-        \frac{\left(f\right)_{i+\frac{1}{2},j+1} -\left(f\right)_{i+\frac{1}{2},\, j}}{\Delta x_2}
-        \label{eqn:dfdx2}
+	( \sigma_{31,1})_{i+\frac{1}{2}, j+\frac{1}{2}} 
+	&\approx& 
+	\frac{(\sigma_{31})_{i+1,j+\frac{1}{2}} - (\sigma_{31})_{i,j+\frac{1}{2}} }{\Delta x_1}
+	\label{eqn:WWW_016}
+	\\
+	( \sigma_{32,2})_{i+\frac{1}{2}, j+\frac{1}{2}} 
+	&\approx& 
+	\frac{(\sigma_{32})_{i+\frac{1}{2},j+1} - (\sigma_{32})_{i+\frac{1}{2},j} }{\Delta x_2}
+	\label{eqn:WWW_017}
 \end{eqnarray}
-と近似する．このような差分化を行うためには，関数$f$とその勾配$\nabla f$の計算格子がスタガード格子を形成するように配置して
-おけばよい．
+とすればよい．
+このとき，式(\ref{eqn:WWW_012})は，$\sigma_{3\alpha}$の評価点の位置を考慮すれば
+\begin{eqnarray}
+	(\sigma_{31})^{k+1}_{i,j+\frac{1}{2}} &=& 
+	(\sigma_{31})^{k} _{i,j+\frac{1}{2}}
+	+
+	\mu \Delta t (v_{3,1})^{k+\frac{1}{2}}_{i,j+\frac{1}{2}}
+	\label{eqn:WWW_018}
+	\\
+	(\sigma_{32})^{k+1}_{i+\frac{1}{2},j} &=& 
+	(\sigma_{32})^{k}_{i+\frac{1}{2},j} 
+	+
+	\mu \Delta t (v_{3,2})^{k+\frac{1}{2}}_{i+\frac{1}{2},j}
+	\label{eqn:WWW_019}
+\end{eqnarray}
+と考えることになる．
+これらの式に現れる$v_3$に関する微分は，セル中央での値を用いて次のように中央差分で
+近似できる．
+\begin{eqnarray}
+	(v_{3,1})_{i,j+\frac{1}{2}}
+	&\approx & 
+	\frac{
+		(v_3)_{i+\frac{1}{2},j+\frac{1}{2}} 
+		-
+		(v_3)_{i-\frac{1}{2},j+\frac{1}{2}} 
+	}{\Delta x_1}
+	\label{eqn:WWW_020}
+	\\
+	(v_{3,2})_{i+\frac{1}{2},j}
+	&\approx & 
+	\frac{
+		(v_3)_{i+\frac{1}{2},j+\frac{1}{2}} 
+		-
+		(v_3)_{i+\frac{1}{2},j-\frac{1}{2}} 
+	}{\Delta x_2}
+	\label{eqn:WWW_021}
+\end{eqnarray}
 
+以上より，式(\ref{eqn:WWW_016}),(\ref{eqn:WWW_017})を式(\ref{eqn:WWW_014})に，
+式(\ref{eqn:WWW_020}),(\ref{eqn:WWW_021})を式(\ref{eqn:WWW_012})にそれぞれ代入すれば，
+以下のような離散化された方程式系が得られる．
+\begin{eqnarray}
+	(\sigma_{31})^{k+1}_{i,j+\frac{1}{2}} &=& 
+	(\sigma_{31})^{k} _{i,j+\frac{1}{2}}
+	+
+	\mu \Delta t 
+	\frac{
+		(v_3)_{i+\frac{1}{2},j+\frac{1}{2}}^{k+\frac{1}{2}}
+		-
+		(v_3)_{i-\frac{1}{2},j+\frac{1}{2}}^{k+\frac{1}{2}} 
+	}{\Delta x_1}
+	\label{eqn:WWW_022}
+	\\
+	(\sigma_{32})^{k+1}_{i+\frac{1}{2},j} &=& 
+	(\sigma_{32})^{k}_{i+\frac{1}{2},j} 
+	+
+	\mu \Delta t 
+	\frac{
+		(v_3)_{i+\frac{1}{2},j+\frac{1}{2}}^{k+\frac{1}{2}} 
+		-
+		(v_3)_{i+\frac{1}{2},j-\frac{1}{2}}^{k+\frac{1}{2}} 
+	}{\Delta x_2}
+	\label{eqn:WWW_023}
+	\\
+	(v_3)_{i+\frac{1}{2},j+\frac{1}{2}}^{k+\frac{1}{2}} 
+	&=& 
+	(v_3)_{i-\frac{1}{2},j+\frac{1}{2}}^{k-\frac{1}{2}} 
+	+
+	\frac{\rho}{\Delta t} \left\{
+		\frac{(\sigma_{31})^k_{i+1,j+\frac{1}{2}} - (\sigma_{31})^k_{i,j+\frac{1}{2}} }{\Delta x_1}
+		+
+		\frac{(\sigma_{32})^k_{i+\frac{1}{2},j+1} - (\sigma_{32})^k_{i+\frac{1}{2},j} }{\Delta x_2}
+	\right\} 
+	\label{eqn:WWW_024}
+\end{eqnarray}
+これらの式を$k=0$から順次計算することで，速度と応力が，半時間ステップの間隔で交互に求められる．
+なお，境界条件の与え方は，領域を矩形セルの集合としてどのように近似するかに依存する．
+超音波探傷の数値シミュレーションでは，式(\ref{eqn:WWW_004})にもあるように，
+トラクションが指定された条件を扱うことが多い．この場合，セルの境界を領域境界に
+あわせるように領域を近似する．
+その結果，計算領域の境界は階段状になるため，法線ベクトルは$\pm x_1$あるいは$\pm x_2$
+方向に限定される．
+従って，トラクションベクトルは応力成分に一致し，
+\[
+	\fat{n}=(\pm 1, 0) \rightarrow t^{n}=\pm \sigma_{3,1}, \ \ 
+	\fat{n}=(0, \pm1 ) \rightarrow t^{n}=\pm \sigma_{3,2}
+	\label{eqn:}
+\]
+となるので，境界上に位置する$(\sigma_{31})_{i,j+\frac{1}{2}},(\sigma_{32})_{i+\frac{1}{2},j}$
+に，指定された境界値を代入すればよい．
+$x_1$や$x_2$軸に対して傾いた境界と境界値の設定を厳密に行うことはできないが，
+FDTD法ではこのような方法で与えられた境界条件を考慮して問題を数値的に解く．
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=1.0\linewidth]{Figs/FDgrid_x.pdf} 
@@ -273,9 +399,9 @@ $\Delta x_i,(i=1,2)$とし，その間隔は一定とする．
 	\caption{FDTD法における差分格子の空間配置.} 
 	\label{fig:staggered}
 \end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{画像化結果}
+\subsection{数値解析例}
+以上に述べた方法で合成した波形データの一例を示す．
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=1.0\linewidth]{Figs/cavity.pdf} 
