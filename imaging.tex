@@ -59,34 +59,163 @@
 	\label{eqn:WWW_001}
 \end{equation}
 ただし$v_3(\fat{x},t)$は，$(\fat{x},t)$における面外方向粒子速度を表す．
-面外波の励起開始時刻を$t=0$にとり，それ以前には媒体は静止した状態にある
-とすれば，ここで考える面外波動場の支配方程式系は，以下のように表される．
+いま，送信素子の番号を$i$，送信開始時刻を$t=0$とし，それ以前には媒体は
+静止した状態にあるとする．
+半無限領域を$B$，その中で欠陥が占める領域を$D$とすれば，
+面外波動場の支配方程式系は，以下のように表される．
 \begin{equation}
-	\rho \dot v_3 = \sigma_{31,1}+\sigma_{32,2}
-	\label{eqn:}
+	\rho \dot v_3 = \sigma_{31,1}+\sigma_{32,2}, 
+	\ \ (\fat{x} \in B \setminus \bar{D},\, t>0)
+	\label{eqn:WWW_002}
 \end{equation}
 \begin{equation}
-	\sigma_{3\alpha}=\mu u_{3,\alpha}
-	\label{eqn:}
+	\sigma_{3\alpha}=\mu u_{3,\alpha}, 
+	\ \ (\fat{x} \in B \setminus \bar{D},\, t>0)
+	\label{eqn:WWW_003}
 \end{equation}
 \begin{equation}
-	u_3(\fat{x},0)=0, v_3(\fat{x},0)=0
-	\label{eqn:}
+	u_3(\fat{x},0)=0, v_3(\fat{x},0)=0, \ \ (\fat{x} \in B \setminus \bar{D})
+	\label{eqn:WWW_003}
 \end{equation}
 \begin{equation}
-	t_3^{(n)}(\fat{x},t)=0,
-	\label{eqn:}
+	t_3^{(n)}(\fat{x},t)=
+	\left\{
+	\begin{array}{cc}
+		0, & \left(\fat{x}\in (\partial H \setminus e_i ) \cup \partial D,\,  t>0 \right) \\
+		\bar{t}_3(t), & \left(\fat{x}\in (\partial H\setminus e_i)  \cup \partial D,\, t>0 \right)\\
+	\end{array}
+	\right.
+	\label{eqn:WWW_004}
 \end{equation}
-ただし，$\fat{x}=(x_1,\, x_2)$，$u_3(\fat{x},t)$は面外変位を，
-$t^{(n)}_3$は，
+ただし，$\fat{x}=(x_1,x_2)$，$u_3(\fat{x},t)$は面外変位を，$\mu$はせん断剛性を
+表し，$t^{(n)}_3$は，
 \begin{equation}
 	t^{(n)}_3= \sigma_{3\beta}n_\beta
-	\label{eqn:}
+	\label{eqn:WWW_004}
 \end{equation}
-で与えられる表面力ベクトルの面外方向成分である．
-また，指標$\alpha,\beta$は1または2とする．
+で与えられる表面力ベクトルの面外方向成分である．なお，2次元問題のため，指標$\alpha,\beta$は
+1または2をとる．
+ここでは，送信波形を次のようにRicker波で与える．
+\begin{equation}
+	\bar{t}_3(t)=\left\{ 1-2\left(\pi f_0t\right)^2 \right\}\exp\left\{-(\pi f_0 t)^2\right\}
+	\label{eqn:WWW_005}
+\end{equation}
+なお，$f_0$はピーク周波数を表し，式(\ref{eqn:WWW_005})のRicker波とその周波数スペクトルを
+描くと図\ref{fig:Ricker}のようになる．
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{Figs/ricker.pdf} 
+	\end{center}
+	\caption{入射波を励起するトラクション波形に用いる(a)Ricker波と
+	(b)その周波数スペクトル.} 
+	\label{fig:ricker}
+\end{figure}
+横波の位相速度$c_T$は，密度$\rho$とせん断剛性$\mu$を用いて，$c_T=\sqrt{\frac{\mu}{\rho}}$
+で与えられ，周波数$f_0$における波長は
+\begin{equation}
+	\lambda_0 = c_T/f_0
+	\label{eqn:WWW_006}
+\end{equation}
+で得られる．本節では，長さに関する量は波長$\lambda_0$で，時間に関する量は
+周期$T_0=1/f_0$規格化して示す．このことは，図\ref{fig:imaging_problem}に
+示した領域の大きさについても同様である．
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{散乱波形の合成}
+\subsection{散乱波形の合成 (FDTD法)}
+イメージングに用いる波形$\left\{ a_{ij}(t)\left|i,j=1,2,\dots M\right.\right\}$は，
+式(\ref{eqn:WWW_002})-(\ref{eqn:WWW_004})の初期値−境界値問題を
+FDTD(finite-difference time-domain)法で解き，
+式(\ref{eqn:WWW_001})に従って合成する．
+FDTD法は有限差分法の一種で，構造格子上で方程式の離散化を行うため，
+領域形状を正確に表現することはできない．その一方で，有限要素法や
+境界要素法に比べて実装は簡単であり，計算効率も高い．
+そのため，超音波探傷試験のシミュレーションのように，あまり高い
+計算精度が要求されない問題には非常に使いやすい．
+従って超音波イメージングの数値シミュレーションを目的とした
+波形合成に有用であるため，以下，均質媒体における2次元面外波について，
+FDTD法による離散化についての基本的な事柄を述べておく．
+
+FDTD法では，式(\ref{eqn:WWW_002})と，式(\ref{eqn:WWW_003})の両辺を時間で微分して
+得られる
+\begin{equation}
+	\dot \sigma_{3\alpha}=\mu v_{3,\alpha}
+	\label{eqn:WWW_007}
+\end{equation}
+を連立した，1階の偏微分方程式系を$v_3,\sigma_{31}$および$\sigma_{32}$を
+求めるべき未知の波動場として離散化する．
+その際，時間に関してはリープフロッグ法を適用し，空間に関しては
+スタガード格子を用い，いずれも中央差分で偏微分を近似する．
+
+%\subsection{時間に関する離散化}
+\subsection{時間微分の差分近似}
+時間の関数$f(t)$を中央差分で離散化する．
+そのために，時間ステップ長を$\Delta t$, $t=0$を基準に，第$k$番目の時間ステップ
+を$t^k=k\Delta t$とする．$t=t^k$における$f(t)$の値を$f(t^{k})=f^k$とすれば，
+半整数時間ステップ$t^{k+\frac{1}{2}}=(k+\frac{1}{2})\Delta t$における
+$f(t)$の微分は$\dot f(t^{k+\frac{1}{2}})$は，中央差分近似により
+\begin{equation}
+	\dot{f}(t^{k+\frac{1}{2}})
+	=\dot{f}^{k+\frac{1}{2}} \approx \frac{ f^{k+1}-f^k}{\Delta t}
+	\label{eqn:WWW_008}
+\end{equation}
+とすることができる．
+従って，式(\ref{eqn:WWW_008})を式(\ref{eqn:WWW_002})と式(\ref{eqn:WWW_007})に
+あてはめると，
+\begin{equation}
+	\rho \frac{ (v_3)^{l+1}-(v_3)^l}{\Delta t}
+	=
+	(\sigma_{31,1})^{l+\frac{1}{2}}
+	+
+	(\sigma_{31,2})^{l+\frac{1}{2}}, 
+	\ \ (k=0,\pm 1, \pm 2\dots )
+	\label{eqn:WWW_009}
+\end{equation}
+と，
+\begin{equation}
+	\frac{ (\sigma_{3\alpha})^{k+1}-(\sigma_{3\alpha})^k}{\Delta t}
+	=
+	\mu (v_{3,\alpha})^{k+\frac{1}{2}},
+	\ \ (k=0,\pm 1, \pm 2\dots )
+	\label{eqn:WWW_010}
+\end{equation}
+を得る．ただしこれらの式では，近似であることを意味する$\simeq$ではなく
+通常の等号($=$)を用いている．
+式(\ref{eqn:WWW_009})と(\ref{eqn:WWW_010})を変形すると，
+\begin{eqnarray}
+	(v_3)^{l+1} &=& 
+	(v_3)^l
+	+
+	\frac{\rho}{\Delta t} \left\{
+	(\sigma_{31,1})^{l+\frac{1}{2}} + (\sigma_{31,2})^{l+\frac{1}{2}}
+	\right\} 
+	\label{eqn:WWW_011}\\
+	(\sigma_{3\alpha})^{k+1} &=& 
+	(\sigma_{3\alpha})^{k} 
+	+
+	\mu \Delta t (v_{3,\alpha})^{k+\frac{1}{2}}
+	\label{eqn:WWW_012}
+\end{eqnarray}
+となるので，速度$v_3$に関する時間微分を近似するための時間ステップ$l$と，
+応力$\sigma_{3\alpha}$のための時間ステップ$k$を
+\begin{equation}
+	l=k-\frac{1}{2} \Rightarrow t^k=t^l+\frac{\Delta t}{2}
+	\label{eqn:WWW_013}
+\end{equation}
+と，互いに$\Delta t/2$だけずらして設定すれば，式(\ref{eqn:WWW_011})は
+\begin{equation}
+	(v_3)^{k+\frac{1}{2}} = (v_3)^{k-\frac{1}{2}}
+	+
+	\frac{\rho}{\Delta t} \left\{
+	(\sigma_{31,1})^{k} + (\sigma_{31,2})^{k}
+	\right\} 
+	\label{eqn:WWW_014}
+\end{equation}
+となる．
+従って，整数時間ステップ$t^k$での応力を用いて，半整数時間ステップ$t^{k+\frac{1}{2}}$
+における速度が求められる．一方，式(\ref{eqn:WWW_012})では，
+$t^{k+\frac{1}{2}}$における速度から$t^{k+1}$における応力が求められるので，
+式(\ref{eqn:WWW_012})と式(\ref{eqn:WWW_014})を交互に用いることで，
+応力と速度を順次初期値から更新して求められることが分かる．
+このような時間ステッピングの方法をリープフロッグ法と呼ぶ．
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=0.6\linewidth]{Figs/FDgrid_t.pdf} 
@@ -94,6 +223,49 @@ $t^{(n)}_3$は，
 	\caption{リープフロッグ法による時間に関する離散化.} 
 	\label{fig:leapfrog}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%5%
+\subsection{空間微分の差分近似}
+式(\ref{eqn:WWW_012})と式(\ref{eqn::WWW_014})の右辺には空間に関する微分
+\[
+	v_{3,1}=\frac{\partial v_3}{\partial x_1},\,
+	v_{3,2}=\frac{\partial v_3}{\partial x_2}, \,
+	\sigma_{31,1}=\frac{\partial \sigma_{31}}{\partial x_1},\,
+	\sigma_{32,2}=\frac{\partial \sigma_{32}}{\partial x_2}
+\]
+が含まれる．これらの空間微分を差分近似するために，図\ref{fig:staggered}
+にあるように，空間を幅$\Delta x_1$,高さ$\Delta x_2$のセルに区切り，
+媒体が占める領域$V$を，これら小さなセルの集まりで近似する．
+セルの頂点は
+$(x_1)_i=i\Delta x_1$
+$(x_2)_j=j\Delta x_2$
+
+
+スタガード格子の$x_i$軸方向の間隔を
+$\Delta x_i,(i=1,2)$とし，その間隔は一定とする．
+この間隔で時空間内に配置された差分格子における関数$f(\fat{x},t)$の値を$f^k_{i,j}$と書くことにする．ただし，$k$は時間ステッ
+プを，$i,\, j$は$x_1$および$x_2$方向の格子位置を表す番号を意味する．このとき，中央差分で時間微分を近似すれば，
+\begin{equation}
+        \dot{f}^{k+\frac{1}{2}} \approx \frac{ (f)^{k+1}-(f)^k}{\Delta t}
+        \label{eqn:dfdt}
+\end{equation}
+となり，後に示すように，整数時間ステップ$k$で$f^k$を，半整数時間ステップ$t^{k+\frac{1}{2}}$において$\dot f$を，初期値$f^0, \dot f^{\frac{1}{2}}$から交互に求める蛙飛び差分(リープフロッグ)法による差分方程式が得られる．一方，空間微分$\nabla f$は
+\begin{eqnarray}
+        \left( \frac{\partial f}{\partial x_1}\right)
+        _{i+\frac{1}{2}, \, j+\frac{1}{2}}
+        & \approx &
+                \frac{\left(f\right)_{i+1,j+\frac{1}{2}} -\left(f\right)_{i,\, j+\frac{1}{2}}}
+                {\Delta x_1}
+        \label{eqn:dfdx1}
+        \\
+        \left( \frac{\partial f}{\partial x_2}\right)
+        _{i+\frac{1}{2}, \, j+\frac{1}{2}}
+        & \approx &
+        \frac{\left(f\right)_{i+\frac{1}{2},j+1} -\left(f\right)_{i+\frac{1}{2},\, j}}{\Delta x_2}
+        \label{eqn:dfdx2}
+\end{eqnarray}
+と近似する．このような差分化を行うためには，関数$f$とその勾配$\nabla f$の計算格子がスタガード格子を形成するように配置して
+おけばよい．
+
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=1.0\linewidth]{Figs/FDgrid_x.pdf} 
