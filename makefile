@@ -7,7 +7,7 @@ wavebook.dvi: wavebook.tex saft.tex adj.tex poffis.tex imaging.tex\
        	Figs/Evald.pdf Figs/pulse_echo.pdf Figs/blind_sum.pdf Figs/psf_aptlim.pdf\
        	Figs/psf_profile.pdf Figs/psf_cont.pdf Figs/psf_profile_cont.pdf Figs/psf_cont_delay.pdf\
 	Figs/model.pdf Figs/FDgrid_x.pdf Figs/FDgrid_t.pdf Figs/array.pdf Figs/cavity.pdf Figs/crack.pdf\
-	Figs/ricker.pdf
+	Figs/ricker.pdf Figs/Bscan_cavity.pdf Figs/Bscan_crack.pdf Figs/snapshot.pdf
 	uplatex wavebook.tex
 
 fdm.pdf: fdm.dvi
@@ -67,3 +67,10 @@ Figs/crack.pdf: Figs/crack.svgz
 	inkscape Figs/crack.svgz --export-pdf=Figs/crack.pdf -D --export-text-to-path
 Figs/ricker.pdf: Figs/ricker.svgz
 	inkscape Figs/ricker.svgz --export-pdf=Figs/ricker.pdf -D --export-text-to-path
+
+Figs/Bscan_cavity.pdf: Figs/Bscan_cavity.svgz
+	inkscape Figs/Bscan_cavity.svgz --export-pdf=Figs/Bscan_cavity.pdf -D --export-text-to-path
+Figs/Bscan_crack.pdf: Figs/Bscan_crack.svgz
+	inkscape Figs/Bscan_crack.svgz --export-pdf=Figs/Bscan_crack.pdf -D --export-text-to-path
+Figs/snapshot.pdf: Figs/snapshot.svgz
+	inkscape Figs/snapshot.svgz --export-pdf=Figs/snapshot.pdf -D --export-text-to-path

@@ -384,8 +384,8 @@ $\sigma_{32}$はセル上下の返に位置する$(i+\frac{1}{2},j)$にとり，
 方向に限定される．
 従って，トラクションベクトルは応力成分に一致し，
 \[
-	\fat{n}=(\pm 1, 0) \rightarrow t^{n}=\pm \sigma_{3,1}, \ \ 
-	\fat{n}=(0, \pm1 ) \rightarrow t^{n}=\pm \sigma_{3,2}
+	\fat{n}=(\pm 1, 0) \rightarrow t_3^{(n)}=\pm \sigma_{31}, \ \ 
+	\fat{n}=(0, \pm1 ) \rightarrow t_3^{(n)}=\pm \sigma_{32}
 	\label{eqn:}
 \]
 となるので，境界上に位置する$(\sigma_{31})_{i,j+\frac{1}{2}},(\sigma_{32})_{i+\frac{1}{2},j}$
@@ -401,7 +401,44 @@ FDTD法ではこのような方法で与えられた境界条件を考慮して�
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{数値解析例}
-以上に述べた方法で合成した波形データの一例を示す．
+以上に述べた方法で行った波動解析結果の一例を図\ref{fig:snapshot}に示す．
+この図は，$M=32$素子からなるアレイ探触子の，13番目の素子($i=13$)から
+送信した場合の波動場の進展を，3つの異なる時間におけるスナップショット
+として示したものである．左側(a)-(c)は，領域内部に空洞を含むモデル，
+右側(d)-(f)は割れを含むモデルでの計算結果である．
+時刻$t$は送信素子を表現するトラクションの加振周期$T_0$で，
+空間座標は波長$\lambda_0=c_TT_0$で，それぞれ無次元化されている．
+アレイ素子の位置は黒の点で示した通りであり，送信兼受信素子となる
+13番目のものだけが白の丸で描かれている．
+アレイ素子は有限な幅をもち点源にはなっていないが，
+ほぼ円筒波状の入射場が励起されており，素子端部での回折波の影響
+はほとんど見られない．
+
+素子幅は
+波長よりも短く，素子端部での回折波
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=1.0\linewidth]{Figs/snapshot.pdf} 
+	\end{center}
+	\caption{面外波動場のスナップショット(アレイ素子13から送信した場合の結果).} 
+	\label{fig:snapshot}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{Figs/Bscan_cavity.pdf} 
+	\end{center}
+	\caption{FDTD法で合成したアレイ観測波形.(a)走時波形, (b)Aスキャン波形. 
+	空洞を含むモデルでアレイ素子13から送信した場合の結果.} 
+	\label{fig:bscan_cavity}
+\end{figure}
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{Figs/Bscan_crack.pdf} 
+	\end{center}
+	\caption{FDTD法で合成したアレイ観測波形.(a)走時波形, (b)Aスキャン波形. 
+	割れを含むモデルでてアレイ素子13から送信した場合の結果.} 
+	\label{fig:bscan_crack}
+\end{figure}
 \begin{figure}[h]
 	\begin{center}
 	\includegraphics[width=1.0\linewidth]{Figs/cavity.pdf} 
