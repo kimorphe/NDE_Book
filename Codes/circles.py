@@ -22,13 +22,24 @@ class Ellip:
         
         x3=self.a*np.cos(th)+self.Y0[0]
         y3=self.b*np.sin(th)+self.Y0[1]
-        ax.plot(x3,y3)
+        ax.plot(x3,y3,"-k")
 
 
 if __name__=="__main__":
+
+    #------------------------------
+
+    # Distant layout
     Y1=np.array([-1,1])
+    Y2=np.array([2,1])
+    fnout="Gmmij_far.png"
+
+    # Close layout
     Y1=np.array([1,1])
     Y2=np.array([2,1])
+    fnout="Gmmij_near.png"
+
+    #------------------------------
 
     el1=Ellip()
     el2=Ellip()
@@ -49,13 +60,13 @@ if __name__=="__main__":
     ax.set_ylim([-2,1.2])
     fsz=14
     ax.tick_params(labelsize=fsz)
-    ax.set_xlabel("x",fontsize=fsz)
-    ax.set_ylabel("y",fontsize=fsz)
+    #ax.set_xlabel("x",fontsize=fsz)
+    #ax.set_ylabel("y",fontsize=fsz)
     ax.set_aspect(1.0)
     msz=8
-    ax.plot(Y1[0],Y1[1],"ok",markersize=msz)
-    ax.plot(Y2[0],Y2[1],"ok",markersize=msz)
-    ax.plot(0,0,"ok",markersize=msz,markerfacecolor="w")
-    fig.savefig("crves.png",bbox_inches="tight")
+    ax.plot(Y1[0],Y1[1],"ok",markersize=msz,markerfacecolor="w")
+    ax.plot(Y2[0],Y2[1],"ok",markersize=msz,markerfacecolor="w")
+    ax.plot(0,0,"ok",markersize=msz) #,markerfacecolor="w")
+    fig.savefig(fnout,bbox_inches="tight")
     plt.show()
 

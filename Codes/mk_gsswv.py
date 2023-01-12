@@ -20,8 +20,8 @@ arg=(tt-tb2)/sig
 arg*=arg
 a2=np.exp(-arg*0.5)
 
-ax1.plot(tt,a1)
-ax2.plot(tt,a2)
+ax1.plot(tt,a1,"-k",linewidth=3)
+ax2.plot(tt,a2,"-k",linewidth=3)
 
 ax1.set_xlim([-5,10])
 ax2.set_xlim([-5,10])

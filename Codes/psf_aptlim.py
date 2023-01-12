@@ -23,11 +23,12 @@ class IMG:
         self.ylim=np.array([y1,y2])
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
-        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="jet",interpolation="none")
+        Amax=np.max(self.Amp[:])
+        im=ax.imshow(self.Amp/Amax,extent=ext,origin="lower",cmap="gray",interpolation="none",vmin=0,vmax=0.8)
         ax.set_aspect(1.0)
         fsz=14
-        ax.set_xlabel("x",fontsize=fsz)
-        ax.set_ylabel("y",fontsize=fsz)
+        #ax.set_xlabel("x",fontsize=fsz)
+        #ax.set_ylabel("y",fontsize=fsz)
         ax.tick_params(labelsize=fsz)
         ax.grid(True)
 
@@ -61,6 +62,7 @@ class IMG:
 
 if __name__=="__main__":
     fig=plt.figure(figsize=[8,8])
+    plt.tight_layout()
 
     ax11=fig.add_subplot(221)
     ax12=fig.add_subplot(222)

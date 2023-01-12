@@ -26,8 +26,8 @@ class IMG:
         im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="gray",interpolation="none")
         ax.set_aspect(1.0)
         fsz=14
-        ax.set_xlabel("x",fontsize=fsz)
-        ax.set_ylabel("y",fontsize=fsz)
+        #ax.set_xlabel("x",fontsize=fsz)
+        #ax.set_ylabel("y",fontsize=fsz)
         ax.tick_params(labelsize=fsz)
         ax.grid(True)
 
@@ -69,11 +69,16 @@ if __name__=="__main__":
     im.set_xlim(-3,5)
     im.set_ylim(-2,1.0)
 
-    #Y1=np.array([ 1,1])
+    # ------------------------
 
+    fnout="img_far.png"
     Y1=np.array([-1,1])
-
     Y2=np.array([ 2,1])
+
+    fnout="img_near.png"
+    Y1=np.array([ 1,1])
+    Y2=np.array([ 2,1])
+    # ------------------------
 
 
     im.draw(Y1,Y1)
@@ -84,5 +89,5 @@ if __name__=="__main__":
     ax.plot(Y2[0],Y2[1],"ko",markersize=12,markerfacecolor="w")
     ax.set_ylim([-2,1.2])
 
-    fig.savefig("img1.png",bbox_inches="tight")
+    fig.savefig(fnout,bbox_inches="tight")
     plt.show()

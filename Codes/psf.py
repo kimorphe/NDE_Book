@@ -26,11 +26,12 @@ class IMG:
         self.ycod=np.linspace(y1,y2,self.Nx)
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
-        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="jet",interpolation="none")
+        Amax=np.max(self.Amp[:])
+        im=ax.imshow(self.Amp/Amax,extent=ext,origin="lower",cmap="gray",interpolation="none",vmin=0,vmax=0.8)
         ax.set_aspect(1.0)
         fsz=14
-        ax.set_xlabel("x",fontsize=fsz)
-        ax.set_ylabel("y",fontsize=fsz)
+        #ax.set_xlabel("x",fontsize=fsz)
+        #ax.set_ylabel("y",fontsize=fsz)
         ax.tick_params(labelsize=fsz)
         ax.grid(True)
 
@@ -63,8 +64,10 @@ class IMG:
         self.Amp+=np.exp(-arg/sig*0.5)
 
 if __name__=="__main__":
-    fig=plt.figure()
-    ax=fig.add_subplot(111)
+    fig1=plt.figure()
+    fig2=plt.figure()
+    ax=fig1.add_subplot(111)
+    bx=fig2.add_subplot(111)
 
     Nx=100
     Ny=100
@@ -73,10 +76,9 @@ if __name__=="__main__":
     im.set_ylim(-3,3)
 
 
-
-
-    M=10
     R=2.0
+    #--------------------- M=10------------------------
+    M=10
     dth=2*np.pi/M
     for k in range(M):
         th=dth*k
@@ -89,18 +91,16 @@ if __name__=="__main__":
     im.show(ax)
     #ax.set_ylim([-2,1.2])
 
-    fig.savefig("psf.png",bbox_inches="tight")
-
-
-    fig2=plt.figure()
-    bx=fig2.add_subplot(111)
+    fig1.savefig("psf_M10.png",bbox_inches="tight")
     N2=int(Nx/2)
-    bx.plot(im.xcod,im.Amp[N2,:]/M,"b",label="M=10")
+    bx.plot(im.xcod,im.Amp[N2,:]/M,"k",label="M=10")
     bx.grid(True)
 
+    #--------------------- M=20------------------------
+
     im.clear()
+
     M=20
-    R=2.0
     dth=2*np.pi/M
     for k in range(M):
         th=dth*k
@@ -108,18 +108,18 @@ if __name__=="__main__":
         Y1[0]=R*np.cos(th)
         Y1[1]=R*np.sin(th)
         im.draw(Y1,Y1)
-        #ax.plot(Y1[0],Y1[1],"ko",markersize=6,markerfacecolor="w")
+        ax.plot(Y1[0],Y1[1],"ko",markersize=6,markerfacecolor="w")
 
-    #im.show(ax)
+    im.show(ax)
+    fig1.savefig("psf_M20.png",bbox_inches="tight")
     bx.plot(im.xcod,im.Amp[N2,:]/M,"k--",label="M=20")
     bx.grid(True)
     fsz=14
-    bx.set_xlabel("x",fontsize=fsz)
-    bx.set_ylabel("I(x)",fontsize=fsz)
+    #bx.set_xlabel("x",fontsize=fsz)
+    #bx.set_ylabel("I(x)",fontsize=fsz)
     ax.tick_params(labelsize=fsz-2)
     bx.tick_params(labelsize=fsz-2)
-    bx.legend()
-
+    #bx.legend()
 
     fig2.savefig("psf_profile.png",bbox_inches="tight")
 

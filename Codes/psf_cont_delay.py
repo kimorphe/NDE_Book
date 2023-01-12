@@ -139,18 +139,22 @@ if __name__=="__main__":
     fig=plt.figure()
     ax=fig.add_subplot(111)
 
-    dlts=[0,0.2,0.4,0.6]
+    dlts=[0,0.2,0.4] #,0.6]
+    k=0
+    styl=["-k","--k","-.k"]
     for dlt in dlts:
         im.SAFT(M,R,Lmb,delay=dlt)
-        im.show_profile(ax,Ycut=0)
+        im.show_profile(ax,Ycut=0,lstyl=styl[k])
         im.clear()
+        k+=1
     ax.grid(True)
 
     fsz=14
-    ax.set_xlabel("x",fontsize=fsz)
-    ax.set_ylabel("I(x)",fontsize=fsz)
+    #ax.set_xlabel("x",fontsize=fsz)
+    #ax.set_ylabel("I(x)",fontsize=fsz)
     ax.tick_params(labelsize=fsz-2)
-    ax.legend()
+    ax.set_xlim([-3,3])
+    #ax.legend()
     fig.savefig("psf_cont_delay.png",bbox_inches="tight")
 
     plt.show()

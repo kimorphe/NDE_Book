@@ -22,11 +22,13 @@ class IMG:
         self.ylim=np.array([y1,y2])
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
-        im=ax.imshow(self.Amp,extent=ext,origin="lower",cmap="gray",interpolation="none")
+        Amax=np.max(self.Amp[:])
+        im=ax.imshow(self.Amp/Amax,extent=ext,origin="lower",cmap="gray",interpolation="none",vmin=0,vmax=0.9)
+        ax.contour(self.Amp/Amax,extent=ext,origin="lower",colors="k",levels=[0.6,0.8],linewidths=1,linestyles="dashed")
         ax.set_aspect(1.0)
         fsz=14
-        ax.set_xlabel("x",fontsize=fsz)
-        ax.set_ylabel("y",fontsize=fsz)
+        #ax.set_xlabel("x",fontsize=fsz)
+        #ax.set_ylabel("y",fontsize=fsz)
         ax.tick_params(labelsize=fsz)
         ax.grid(True)
 

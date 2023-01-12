@@ -26,11 +26,12 @@ class IMG:
         self.ycod=np.linspace(y1,y2,self.Nx)
     def show(self,ax):
         ext=[self.xlim[0],self.xlim[1],self.ylim[0],self.ylim[1]]
-        im=ax.imshow(np.real(self.Amp),extent=ext,origin="lower",cmap="jet",interpolation="none")
+        Amax=np.max(np.abs(self.Amp[:]))
+        im=ax.imshow(np.real(self.Amp)/Amax,extent=ext,origin="lower",cmap="gray",interpolation="none",vmin=-0.8,vmax=0.8)
         ax.set_aspect(1.0)
         fsz=14
-        ax.set_xlabel("x",fontsize=fsz)
-        ax.set_ylabel("y",fontsize=fsz)
+        #ax.set_xlabel("x",fontsize=fsz)
+        #ax.set_ylabel("y",fontsize=fsz)
         ax.tick_params(labelsize=fsz)
         ax.grid(True)
 
@@ -142,7 +143,7 @@ if __name__=="__main__":
 
     fig2=plt.figure()
     bx=fig2.add_subplot(111)
-    im.show_profile(bx,Ycut=0,lstyl="b-")
+    im.show_profile(bx,Ycut=0,lstyl="k-")
 
     im.clear()
     ax.clear()
@@ -159,11 +160,11 @@ if __name__=="__main__":
     bx.grid(True)
 
     fsz=14
-    bx.set_xlabel("x",fontsize=fsz)
-    bx.set_ylabel("I(x)",fontsize=fsz)
+    #bx.set_xlabel("x",fontsize=fsz)
+    #bx.set_ylabel("I(x)",fontsize=fsz)
     ax.tick_params(labelsize=fsz-2)
     bx.tick_params(labelsize=fsz-2)
-    bx.legend()
+    #bx.legend()
 
     fig2.savefig("psf_cont_profile.png",bbox_inches="tight")
 
